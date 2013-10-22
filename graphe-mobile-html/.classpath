@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/graphe-mobile"/>
+	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/graphe-mobile/libs/gdx-sources.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gdx-backend-gwt.jar" sourcepath="war/WEB-INF/lib/gdx-backend-gwt-sources.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gdx-backend-gwt-sources.jar"/>
+	<classpathentry kind="lib" path="/graphe-mobile/libs/bodyeditor-loader.jar" sourcepath="/graphe-mobile/libs/bodyeditor-loader-sources.jar"/>
+	<classpathentry kind="lib" path="/graphe-mobile/libs/bodyeditor-loader-sources.jar"/>
+	<classpathentry kind="lib" path="/graphe-mobile/libs/tween-engine-api.jar" sourcepath="/graphe-mobile/libs/tween-engine-api-sources.jar"/>
+	<classpathentry kind="lib" path="/graphe-mobile/libs/tween-engine-api-sources.jar"/>
+	<classpathentry kind="lib" path="/graphe-mobile/libs/gdx.jar" sourcepath="/graphe-mobile/libs/gdx-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/Florian/Desktop/libGDX/sources/gdx-sources.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="war/WEB-INF/classes"/>
+</classpath>
