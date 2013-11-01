@@ -20,6 +20,7 @@ public class GrapheScreen implements Screen {
 		multiplexer.addProcessor(uiStage);
 		multiplexer.addProcessor(grapheStage);
 		multiplexer.addProcessor(new GestureDetector(grapheStage.getGestureListener()));
+		//multiplexer.addProcessor(new GestureDetector(uiStage.getGestureListener()));
 		Gdx.input.setInputProcessor(multiplexer);
 		System.out.println("ok");
 	}
