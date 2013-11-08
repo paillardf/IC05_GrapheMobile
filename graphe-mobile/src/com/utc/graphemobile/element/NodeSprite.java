@@ -1,5 +1,7 @@
 package com.utc.graphemobile.element;
 
+import org.gephi.graph.api.Node;
+
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
@@ -9,12 +11,13 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 
-public class Node extends Actor {
+public class NodeSprite extends Actor {
 
 	ShapeRenderer shapeRenderer;
-	private final static float RADIUS = 200;
+	private Node nodeModel;
 
-	public Node() {
+	public NodeSprite(Node n) {
+		this.nodeModel = n;
 		shapeRenderer = new ShapeRenderer();
 		addListener(new ActorGestureListener() {
 	        public boolean longPress (Actor actor, float x, float y) {
@@ -39,18 +42,24 @@ public class Node extends Actor {
 	public Actor hit(float x, float y, boolean touchable) {
 		if (touchable && this.getTouchable() != Touchable.enabled) return null;
 		Vector2 center = new Vector2(getX(), getY());
-		return center.dst(x, y)<RADIUS ? this : null;
+		return center.dst(x, y)<getRadius() ? this : null;
 		
 	};
 	
 
 	public void drawCircle(SpriteBatch batch) {
+		setPosition(nodeModel.getNodeData().x(), nodeModel.getNodeData().y());
 		shapeRenderer.setProjectionMatrix(batch.getProjectionMatrix());
 		shapeRenderer.begin(ShapeType.FilledCircle);
 		shapeRenderer.setColor(getColor()); // last argument is alpha channel
-		shapeRenderer.filledCircle(getX(), getY(), RADIUS);
+		shapeRenderer.filledCircle(getX(), getY(), getRadius());
 		shapeRenderer.end();
 
 	}
 
+	
+	public float getRadius(){
+		return nodeModel.getNodeData().getRadius();
+	}
+	
 }
