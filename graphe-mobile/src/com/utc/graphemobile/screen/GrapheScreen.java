@@ -3,20 +3,14 @@ package com.utc.graphemobile.screen;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
-import java.util.concurrent.TimeUnit;
 
 import org.gephi.graph.api.DirectedGraph;
 import org.gephi.graph.api.GraphController;
 import org.gephi.graph.api.GraphModel;
-import org.gephi.io.generator.plugin.RandomGraph;
 import org.gephi.io.importer.api.Container;
 import org.gephi.io.importer.api.ContainerFactory;
 import org.gephi.io.importer.api.ImportController;
 import org.gephi.io.processor.plugin.DefaultProcessor;
-import org.gephi.layout.plugin.AutoLayout;
-import org.gephi.layout.plugin.force.StepDisplacement;
-import org.gephi.layout.plugin.force.yifanHu.YifanHuLayout;
-import org.gephi.layout.plugin.forceAtlas.ForceAtlasLayout;
 import org.gephi.project.api.ProjectController;
 import org.gephi.project.api.Workspace;
 import org.openide.util.Lookup;
@@ -33,6 +27,8 @@ public class GrapheScreen implements Screen {
 
 	private GrapheStage grapheStage;
 	private UIStage uiStage;
+	
+	
 	private DirectedGraph graph;
 
 	public GrapheScreen() throws FileNotFoundException, URISyntaxException {
@@ -94,7 +90,9 @@ public class GrapheScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
+		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+
 		grapheStage.act(delta);
 		grapheStage.draw();
 		uiStage.act(delta);

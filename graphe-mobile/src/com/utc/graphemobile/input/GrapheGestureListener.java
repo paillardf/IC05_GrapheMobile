@@ -1,11 +1,10 @@
 package com.utc.graphemobile.input;
 
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Vector2;
 
-public class GrapheGestureListener implements GestureListener {
+public class GrapheGestureListener implements GestureListener{
 
 	private OrthographicCamera camera;
 	private float iniZoomCamera = 0;
@@ -43,7 +42,7 @@ public class GrapheGestureListener implements GestureListener {
 	@Override
 	public boolean pan(float x, float y, float deltaX, float deltaY) {
 		//camera.lookAt(x, y, 0);
-		camera.translate(-deltaX, deltaY);
+		camera.translate(-deltaX*camera.zoom, deltaY*camera.zoom);
 		return false;
 	}
 
@@ -62,5 +61,6 @@ public class GrapheGestureListener implements GestureListener {
 		//camera.rotate(pointer1.sub(pointer2).angle());
 		return false;
 	}
+
 
 }

@@ -20,35 +20,39 @@ public class NodeSprite extends Actor {
 		this.nodeModel = n;
 		shapeRenderer = new ShapeRenderer();
 		addListener(new ActorGestureListener() {
-	        public boolean longPress (Actor actor, float x, float y) {
-	                System.out.println("long press " + x + ", " + y);
-	                return true;
-	        }
+			public boolean longPress(Actor actor, float x, float y) {
+				System.out.println("long press " + x + ", " + y);
+				return true;
+			}
 
-	        public void fling (InputEvent event, float velocityX, float velocityY, int button) {
-	        }
+			public void fling(InputEvent event, float velocityX,
+					float velocityY, int button) {
+			}
 
-	        public void zoom (InputEvent event, float initialDistance, float distance) {
-	        }
-	});
+			public void zoom(InputEvent event, float initialDistance,
+					float distance) {
+			}
+		});
 	}
 
 	public void draw(SpriteBatch batch, float parentAlpha) {
-		
+		setPosition(nodeModel.getNodeData().x(), nodeModel.getNodeData().y());
+		setColor(nodeModel.getNodeData().r(), nodeModel.getNodeData().g(),
+				nodeModel.getNodeData().b(), nodeModel.getNodeData().alpha());
 		drawCircle(batch);
 	}
-	
+
 	@Override
 	public Actor hit(float x, float y, boolean touchable) {
-		if (touchable && this.getTouchable() != Touchable.enabled) return null;
+		if (touchable && this.getTouchable() != Touchable.enabled)
+			return null;
 		Vector2 center = new Vector2(getX(), getY());
-		return center.dst(x, y)<getRadius() ? this : null;
-		
+		return center.dst(x, y) < getRadius() ? this : null;
+
 	};
-	
 
 	public void drawCircle(SpriteBatch batch) {
-		setPosition(nodeModel.getNodeData().x(), nodeModel.getNodeData().y());
+
 		shapeRenderer.setProjectionMatrix(batch.getProjectionMatrix());
 		shapeRenderer.begin(ShapeType.FilledCircle);
 		shapeRenderer.setColor(getColor()); // last argument is alpha channel
@@ -57,9 +61,8 @@ public class NodeSprite extends Actor {
 
 	}
 
-	
-	public float getRadius(){
+	public float getRadius() {
 		return nodeModel.getNodeData().getRadius();
 	}
-	
+
 }
