@@ -1,7 +1,6 @@
 package com.utc.graphemobile.element;
 
 import org.gephi.graph.api.Node;
-
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;

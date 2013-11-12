@@ -20,6 +20,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.input.GestureDetector;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.utc.graphemobile.stage.GrapheStage;
 import com.utc.graphemobile.stage.UIStage;
 
@@ -97,6 +98,8 @@ public class GrapheScreen implements Screen {
 		grapheStage.draw();
 		uiStage.act(delta);
 		uiStage.draw();
+		
+		//Table.drawDebug(uiStage);
 	}
 
 	@Override

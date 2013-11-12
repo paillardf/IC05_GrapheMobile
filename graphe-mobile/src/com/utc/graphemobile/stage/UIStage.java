@@ -1,12 +1,24 @@
 package com.utc.graphemobile.stage;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.Button.ButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Scaling;
 import com.utc.graphemobile.input.UIGestureListener;
 
 public class UIStage extends Stage{
@@ -17,36 +29,57 @@ public class UIStage extends Stage{
 	public UIStage() {
 		super();
 		
+		Skin skin = new Skin();
+		
 		table = new Table();
 		table.setFillParent(true);
+		table.left().top();
 		
-		Skin skin1 = new Skin();
+		// Left Menu
+		table.add(leftMenu(skin)).height(this.getHeight()).width((float) (this.getWidth()*0.075));
+		table.add(border(skin)).height(this.getHeight()).width((float) (this.getWidth()*0.005));
 		
-		// Store the default font under the name "default" in the skin
-		skin1.add("default", new BitmapFont());
-		
-		// Configure the default LabelStyle
-		LabelStyle labelStyle1 = new LabelStyle();
-		labelStyle1.font = skin1.getFont("default");
-		labelStyle1.fontColor = Color.GRAY;
-		skin1.add("default", labelStyle1);
-		/* It doesn't overwrite the font but add the labelStyle properties to the "label" default of this skin*/
-		
-		Skin skin2 = new Skin();
-		LabelStyle labelStyle2 = new LabelStyle();
-		skin2.add("default", new BitmapFont());		
-		labelStyle2.font = skin2.getFont("default");
-		labelStyle2.fontColor = Color.RED;
-		skin2.add("default", labelStyle2);
-		
-		table.add(new Label("test 1", skin1));
-		table.add(new Label("test 2", skin2));
-		table.row();
-		table.add(new Label("test 3", skin2));
-		table.add(new Label("test 4", skin1));
 		this.addActor(table);
 		
 		gestureListener = new UIGestureListener();
+	}
+	
+	private Table leftMenu(Skin skin) {
+		Table table = new Table();
+		
+		Pixmap p = new Pixmap(1, 1, Format.RGBA8888);
+		p.setColor(Color.WHITE);
+		p.fill();
+		skin.add("white", new Texture(p));
+		
+		TextureRegion tr = new TextureRegion(new Texture(Gdx.files.internal("ok-icon-md.png")));
+		Image image1 = new Image(tr);
+		image1.setScaling(Scaling.fillX);
+		table.add(image1);
+		
+		table.row();
+		
+		tr = new TextureRegion(new Texture(Gdx.files.internal("Delete All.png")));
+		Image image2 = new Image(tr);
+		image2.setScaling(Scaling.fillX);
+		table.add(image2);
+				
+		table.setBackground(skin.getDrawable("white"));
+		
+		return table;
+	}
+	
+	private Table border(Skin skin) {
+		Table table = new Table();
+		
+		Pixmap p = new Pixmap(1, 1, Format.RGBA8888);
+		p.setColor(Color.GRAY);
+		p.fill();
+		skin.add("gray", new Texture(p));
+		
+		table.setBackground(skin.getDrawable("gray"));
+		
+		return table;
 	}
 
 	public UIGestureListener getGestureListener() {

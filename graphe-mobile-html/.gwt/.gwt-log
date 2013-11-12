@@ -1035,11 +1035,16 @@ java.net.URISyntaxException: Illegal character in path at index 16: file:/C:/Pro
 	at org.eclipse.ui.internal.EarlyStartupRunnable.runEarlyStartup(EarlyStartupRunnable.java:87)
 	at org.eclipse.ui.internal.EarlyStartupRunnable.run(EarlyStartupRunnable.java:73)
 	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+<<<<<<< HEAD
 	at org.eclipse.ui.internal.Workbench$54.run(Workbench.java:2412)
+=======
+	at org.eclipse.ui.internal.Workbench$55.run(Workbench.java:2551)
+>>>>>>> Commit de la mort qui tue
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
 Translatable source found in...
 Found 0 cached/archived units.  Used 0 / 2729 units from cache.
 Compiling...
+<<<<<<< HEAD
    0% complete (ETR: 45 seconds)
    10% complete (ETR: 45 seconds)
    20% complete (ETR: 33 seconds)
@@ -1195,6 +1200,20 @@ Compiling...
    90% complete (ETR: 3 seconds)
    100% complete (ETR: 0 seconds)
    Compilation completed in 31,58 seconds
+=======
+   0% complete (ETR: ?)
+   10% complete (ETR: 130 seconds)
+   20% complete (ETR: 98 seconds)
+   30% complete (ETR: 70 seconds)
+   40% complete (ETR: 53 seconds)
+   50% complete (ETR: 39 seconds)
+   60% complete (ETR: 28 seconds)
+   70% complete (ETR: 18 seconds)
+   80% complete (ETR: 11 seconds)
+   90% complete (ETR: 5 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 75,38 seconds
+>>>>>>> Commit de la mort qui tue
 Removing invalidated units
 Finding entry point classes
 Public resources found in...
@@ -1233,7 +1252,11 @@ java.net.URISyntaxException: Illegal character in path at index 16: file:/C:/Pro
 	at org.eclipse.ui.internal.EarlyStartupRunnable.runEarlyStartup(EarlyStartupRunnable.java:87)
 	at org.eclipse.ui.internal.EarlyStartupRunnable.run(EarlyStartupRunnable.java:73)
 	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+<<<<<<< HEAD
 	at org.eclipse.ui.internal.Workbench$54.run(Workbench.java:2412)
+=======
+	at org.eclipse.ui.internal.Workbench$55.run(Workbench.java:2551)
+>>>>>>> Commit de la mort qui tue
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
 Translatable source found in...
 Found 2729 cached/archived units.  Used 2729 / 2729 units from cache.
@@ -1277,12 +1300,20 @@ java.net.URISyntaxException: Illegal character in path at index 16: file:/C:/Pro
 	at org.eclipse.ui.internal.EarlyStartupRunnable.runEarlyStartup(EarlyStartupRunnable.java:87)
 	at org.eclipse.ui.internal.EarlyStartupRunnable.run(EarlyStartupRunnable.java:73)
 	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+<<<<<<< HEAD
 	at org.eclipse.ui.internal.Workbench$54.run(Workbench.java:2412)
+=======
+	at org.eclipse.ui.internal.Workbench$55.run(Workbench.java:2551)
+>>>>>>> Commit de la mort qui tue
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
 Translatable source found in...
 Found 2729 cached/archived units.  Used 2729 / 2729 units from cache.
 Compiling...
+<<<<<<< HEAD
    Compilation completed in 0,00 seconds
+=======
+   Compilation completed in 0,01 seconds
+>>>>>>> Commit de la mort qui tue
 Removing invalidated units
 Finding entry point classes
 Public resources found in...
@@ -1321,11 +1352,16 @@ java.net.URISyntaxException: Illegal character in path at index 16: file:/C:/Pro
 	at org.eclipse.ui.internal.EarlyStartupRunnable.runEarlyStartup(EarlyStartupRunnable.java:87)
 	at org.eclipse.ui.internal.EarlyStartupRunnable.run(EarlyStartupRunnable.java:73)
 	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+<<<<<<< HEAD
 	at org.eclipse.ui.internal.Workbench$54.run(Workbench.java:2412)
+=======
+	at org.eclipse.ui.internal.Workbench$55.run(Workbench.java:2551)
+>>>>>>> Commit de la mort qui tue
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
 Translatable source found in...
 Found 0 cached/archived units.  Used 0 / 2729 units from cache.
 Compiling...
+<<<<<<< HEAD
    0% complete (ETR: 54 seconds)
    10% complete (ETR: 52 seconds)
    20% complete (ETR: 40 seconds)
@@ -3054,6 +3090,20 @@ Compiling...
    90% complete (ETR: 2 seconds)
    100% complete (ETR: 0 seconds)
    Compilation completed in 32,01 seconds
+=======
+   0% complete (ETR: 71 seconds)
+   10% complete (ETR: 66 seconds)
+   20% complete (ETR: 52 seconds)
+   30% complete (ETR: 36 seconds)
+   40% complete (ETR: 27 seconds)
+   50% complete (ETR: 19 seconds)
+   60% complete (ETR: 14 seconds)
+   70% complete (ETR: 10 seconds)
+   80% complete (ETR: 6 seconds)
+   90% complete (ETR: 3 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 31,21 seconds
+>>>>>>> Commit de la mort qui tue
 Removing invalidated units
 Finding entry point classes
 Public resources found in...
@@ -3092,7 +3142,11 @@ java.net.URISyntaxException: Illegal character in path at index 16: file:/C:/Pro
 	at org.eclipse.ui.internal.EarlyStartupRunnable.runEarlyStartup(EarlyStartupRunnable.java:87)
 	at org.eclipse.ui.internal.EarlyStartupRunnable.run(EarlyStartupRunnable.java:73)
 	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+<<<<<<< HEAD
 	at org.eclipse.ui.internal.Workbench$54.run(Workbench.java:2412)
+=======
+	at org.eclipse.ui.internal.Workbench$55.run(Workbench.java:2551)
+>>>>>>> Commit de la mort qui tue
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
 Translatable source found in...
 Found 2729 cached/archived units.  Used 2729 / 2729 units from cache.
@@ -3136,7 +3190,11 @@ java.net.URISyntaxException: Illegal character in path at index 16: file:/C:/Pro
 	at org.eclipse.ui.internal.EarlyStartupRunnable.runEarlyStartup(EarlyStartupRunnable.java:87)
 	at org.eclipse.ui.internal.EarlyStartupRunnable.run(EarlyStartupRunnable.java:73)
 	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+<<<<<<< HEAD
 	at org.eclipse.ui.internal.Workbench$54.run(Workbench.java:2412)
+=======
+	at org.eclipse.ui.internal.Workbench$55.run(Workbench.java:2551)
+>>>>>>> Commit de la mort qui tue
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
 Translatable source found in...
 Found 2729 cached/archived units.  Used 2729 / 2729 units from cache.
