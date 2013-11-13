@@ -36,6 +36,8 @@ public class GrapheScreen implements Screen {
 		loadGraphe();
 		grapheStage = new GrapheStage(graph);
 		uiStage = new UIStage();
+		uiStage.size();
+		uiStage.drawMenu();
 		InputMultiplexer multiplexer = new InputMultiplexer();
 		multiplexer.addProcessor(uiStage);
 		multiplexer.addProcessor(grapheStage);
@@ -98,8 +100,6 @@ public class GrapheScreen implements Screen {
 		grapheStage.draw();
 		uiStage.act(delta);
 		uiStage.draw();
-		
-		//Table.drawDebug(uiStage);
 	}
 
 	@Override
@@ -108,7 +108,6 @@ public class GrapheScreen implements Screen {
 		grapheStage.getCamera().position.x = 0;
 		grapheStage.getCamera().position.y = 0;
 		uiStage.setViewport(width, height, true);
-		
 	}
 
 	@Override
