@@ -1,10 +1,11 @@
 package com.utc.graphemobile.stage;
 
-import org.gephi.graph.api.DirectedGraph;
 import org.gephi.graph.api.Edge;
+import org.gephi.graph.api.HierarchicalGraph;
 import org.gephi.graph.api.Node;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.utc.graphemobile.element.EdgeSprite;
@@ -14,11 +15,11 @@ import com.utc.graphemobile.input.GrapheGestureListener;
 public class GrapheStage extends Stage{
 
 	private GrapheGestureListener gestureListener;
-	private DirectedGraph graph;
+	private HierarchicalGraph graph;
 
-	public GrapheStage(DirectedGraph graph) {
+	public GrapheStage(HierarchicalGraph graph2) {
 		super();
-		this.graph = graph;
+		this.graph = graph2;
 		gestureListener = new GrapheGestureListener((OrthographicCamera) getCamera());
 		
 		
@@ -38,13 +39,14 @@ public class GrapheStage extends Stage{
 	
 	private void attachObject() {
 		
+		ShapeRenderer shapeRenderer = new ShapeRenderer();
 		for(Edge e : graph.getEdges()) {
-			EdgeSprite eSprite = new EdgeSprite(e);
+			EdgeSprite eSprite = new EdgeSprite(e, shapeRenderer);
 			this.addActor(eSprite);
 		}
 		
 		for(Node n : graph.getNodes()) {
-			NodeSprite nSprite = new NodeSprite(n);
+			NodeSprite nSprite = new NodeSprite(n, shapeRenderer);
 			this.addActor(nSprite);
 		}
 		

@@ -2,22 +2,24 @@ package com.utc.graphemobile.screen;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.net.URISyntaxException;
+import java.net.URL;
 
 import org.gephi.graph.api.DirectedGraph;
-import org.gephi.graph.api.GraphController;
 import org.gephi.graph.api.GraphModel;
-import org.gephi.io.importer.api.Container;
-import org.gephi.io.importer.api.ContainerFactory;
-import org.gephi.io.importer.api.ImportController;
-import org.gephi.io.processor.plugin.DefaultProcessor;
-import org.gephi.project.api.ProjectController;
-import org.gephi.project.api.Workspace;
-import org.openide.util.Lookup;
+import org.gephi.graph.api.HierarchicalGraph;
+import org.gephi.graph.dhns.core.Dhns;
+import org.gephi.graph.dhns.core.GraphViewImpl;
+import org.gephi.graph.dhns.graph.HierarchicalDirectedGraphImpl;
+import org.gephi.graph.dhns.graph.HierarchicalMixedGraphImpl;
+import org.gephi.io.ImportContainerImpl;
+import org.gephi.io.ImporterGEXF;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -30,11 +32,11 @@ public class GrapheScreen implements Screen {
 	private UIStage uiStage;
 	
 	
-	private DirectedGraph graph;
+	private HierarchicalGraph graph;
 
 	public GrapheScreen() throws FileNotFoundException, URISyntaxException {
 		loadGraphe();
-		grapheStage = new GrapheStage(graph);
+		grapheStage = new GrapheStage( graph);
 		uiStage = new UIStage();
 		uiStage.size();
 		uiStage.drawMenu();
@@ -50,16 +52,33 @@ public class GrapheScreen implements Screen {
 	
 	
 	private void loadGraphe() throws URISyntaxException, FileNotFoundException {
-		ProjectController pc = Lookup.getDefault().lookup(ProjectController.class);
-		pc.newProject();
-		Workspace workspace = pc.getCurrentWorkspace();
-		 
 		
-		Container container = Lookup.getDefault().lookup(ContainerFactory.class).newContainer();
+		ImporterGEXF importer = new ImporterGEXF();
+        try {
+        	FileHandle handle = Gdx.files.internal("data/test.gexf");
+           
+            importer.setReader(handle.reader());//FileHandle(handle);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+		
+        ImportContainerImpl container = new ImportContainerImpl();
+        importer.execute(container);
+        graph = importer.process();
+        //importer.getContainer();
+       /* Dhns d = new Dhns();
+        importer.
+        GraphViewImpl imp = new GraphViewImpl(d, 0);
+        imp.s
+        graph = new HierarchicalDirectedGraphImpl(importer.getContainer()., imp);
+        graph.
+		/*
+		 * Container container = Lookup.getDefault().lookup(ContainerFactory.class).newContainer();
+		 
 		ImportController importController = Lookup.getDefault().lookup(ImportController.class);
 		File f = new File(getClass().getResource("/com/utc/graphemobile/test.gexf").toURI());
 		container = importController.importFile(f);
-		
+		*/
 		//Generate a new random graph into a container
 	
 //		RandomGraph randomGraph = new RandomGraph();
@@ -68,14 +87,16 @@ public class GrapheScreen implements Screen {
 //		randomGraph.generate(container.getLoader());
 		 
 		//Append container to graph structure
-		importController.process(container, new DefaultProcessor(), workspace);
+		//importController.process(container, new DefaultProcessor(), workspace);
 		 
 		//See if graph is well imported
-		GraphModel graphModel = Lookup.getDefault().lookup(GraphController.class).getModel();
+		/*
+		 * GraphModel graphModel = Lookup.getDefault().lookup(GraphController.class).getModel();
+		 
 		graph = graphModel.getDirectedGraph();
 		System.out.println("Nodes: " + graph.getNodeCount());
 		System.out.println("Edges: " + graph.getEdgeCount());
-		 
+		 */
 		//Layout for 1 minute - pour les effets
 //		AutoLayout autoLayout = new AutoLayout(1, TimeUnit.MINUTES);
 //		autoLayout.setGraphModel(graphModel);

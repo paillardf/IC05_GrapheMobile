@@ -15,9 +15,11 @@ public class NodeSprite extends Actor {
 	ShapeRenderer shapeRenderer;
 	private Node nodeModel;
 
-	public NodeSprite(Node n) {
+	
+	
+	public NodeSprite(Node n, ShapeRenderer shapeRenderer) {
 		this.nodeModel = n;
-		shapeRenderer = new ShapeRenderer();
+		this.shapeRenderer = shapeRenderer;//new ShapeRenderer();
 		addListener(new ActorGestureListener() {
 			public boolean longPress(Actor actor, float x, float y) {
 				System.out.println("long press " + x + ", " + y);

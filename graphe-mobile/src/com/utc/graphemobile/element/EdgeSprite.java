@@ -14,9 +14,9 @@ public class EdgeSprite extends Actor {
 	ShapeRenderer shapeRenderer;
 	private Edge edgeModel;
 
-	public EdgeSprite(Edge e) {
+	public EdgeSprite(Edge e, ShapeRenderer shapeRenderer2) {
 		this.edgeModel = e;
-		shapeRenderer = new ShapeRenderer();
+		shapeRenderer = shapeRenderer2;
 		
 	}
 

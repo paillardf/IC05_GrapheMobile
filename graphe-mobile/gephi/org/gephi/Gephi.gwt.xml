@@ -1,0 +1,19 @@
+<module>
+
+	<inherits name="com.google.gwt.user.User" />
+	
+	<inherits name="org.gephi.algorithms.Algorithms" />
+	<inherits name="org.gephi.data.Data" />
+	<inherits name="org.gephi.graph.Graph" />
+	<inherits name="org.gephi.layout.Layout" />
+	<inherits name="org.gephi.utils.Utils" />
+	
+	<inherits name="_org.gephi.gwt.Gwt" />
+	
+	<inherits name="org.openide.Openide" />
+	
+	<super-source path="_emu" />	
+	
+	<source path="" />
+	
+</module>
