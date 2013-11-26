@@ -1,20 +1,18 @@
 package com.utc.graphemobile.screen;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.net.URISyntaxException;
-import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
-import org.gephi.graph.api.DirectedGraph;
-import org.gephi.graph.api.GraphModel;
 import org.gephi.graph.api.HierarchicalGraph;
-import org.gephi.graph.dhns.core.Dhns;
-import org.gephi.graph.dhns.core.GraphViewImpl;
-import org.gephi.graph.dhns.graph.HierarchicalDirectedGraphImpl;
-import org.gephi.graph.dhns.graph.HierarchicalMixedGraphImpl;
 import org.gephi.io.ImportContainerImpl;
 import org.gephi.io.ImporterGEXF;
+import org.gephi.layout.plugin.AutoLayout;
+import org.gephi.layout.plugin.force.StepDisplacement;
+import org.gephi.layout.plugin.force.yifanHu.YifanHuLayout;
+import org.gephi.layout.plugin.forceAtlas.ForceAtlasLayout;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
@@ -22,21 +20,29 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.input.GestureDetector;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.utc.graphemobile.element.NodeSprite;
 import com.utc.graphemobile.stage.GrapheStage;
 import com.utc.graphemobile.stage.UIStage;
 
-public class GrapheScreen implements Screen {
+public class GrapheScreen implements Screen , IGrapheScreen{
 
 	private GrapheStage grapheStage;
 	private UIStage uiStage;
 	
+	public enum MODE{
+		NORMAL,
+		EDIT
+		
+	}
+	
+	private MODE mode = MODE.EDIT;
 	
 	private HierarchicalGraph graph;
+	private List<NodeSprite> selectedNodes = new ArrayList<NodeSprite>();
 
 	public GrapheScreen() throws FileNotFoundException, URISyntaxException {
 		loadGraphe();
-		grapheStage = new GrapheStage( graph);
+		grapheStage = new GrapheStage( graph, this);
 		uiStage = new UIStage();
 		uiStage.size();
 		uiStage.drawMenu();
@@ -46,10 +52,10 @@ public class GrapheScreen implements Screen {
 		multiplexer.addProcessor(new GestureDetector(grapheStage.getGestureListener()));
 		//multiplexer.addProcessor(new GestureDetector(uiStage.getGestureListener()));
 		Gdx.input.setInputProcessor(multiplexer);
-		System.out.println("ok");
 	}
 	
 	
+
 	
 	private void loadGraphe() throws URISyntaxException, FileNotFoundException {
 		
@@ -98,15 +104,24 @@ public class GrapheScreen implements Screen {
 		System.out.println("Edges: " + graph.getEdgeCount());
 		 */
 		//Layout for 1 minute - pour les effets
-//		AutoLayout autoLayout = new AutoLayout(1, TimeUnit.MINUTES);
-//		autoLayout.setGraphModel(graphModel);
-//		YifanHuLayout firstLayout = new YifanHuLayout(null, new StepDisplacement(1f));
-//		ForceAtlasLayout secondLayout = new ForceAtlasLayout(null);
-//		AutoLayout.DynamicProperty adjustBySizeProperty = AutoLayout.createDynamicProperty("forceAtlas.adjustSizes.name", Boolean.TRUE, 0.1f);//True after 10% of layout time
-//		AutoLayout.DynamicProperty repulsionProperty = AutoLayout.createDynamicProperty("forceAtlas.repulsionStrength.name", new Double(500.), 0f);//500 for the complete period
-//		autoLayout.addLayout(firstLayout, 0.5f);
-//		autoLayout.addLayout(secondLayout, 0.5f, new AutoLayout.DynamicProperty[]{adjustBySizeProperty, repulsionProperty});
-//		autoLayout.execute();
+        
+        
+		
+		new Thread(new Runnable() {
+			         @Override
+			         public void run() {
+			        	 AutoLayout autoLayout = new AutoLayout(10, TimeUnit.MINUTES);
+			     		autoLayout.setGraphModel(graph.getGraphModel());
+			     		YifanHuLayout firstLayout = new YifanHuLayout(new StepDisplacement(1f));
+			     		ForceAtlasLayout secondLayout = new ForceAtlasLayout();
+			     		AutoLayout.DynamicProperty adjustBySizeProperty = AutoLayout.createDynamicProperty("forceAtlas.adjustSizes.name", Boolean.TRUE, 0.1f);//True after 10% of layout time
+			     		AutoLayout.DynamicProperty repulsionProperty = AutoLayout.createDynamicProperty("forceAtlas.repulsionStrength.name", new Double(500.), 0f);//500 for the complete period
+			     		autoLayout.addLayout(firstLayout, 0.5f);
+			     		autoLayout.addLayout(secondLayout, 0.5f, new AutoLayout.DynamicProperty[]{adjustBySizeProperty, repulsionProperty});
+			     		autoLayout.execute();
+			         }
+			    
+			   }).start();
 		
 	}
 
@@ -161,5 +176,25 @@ public class GrapheScreen implements Screen {
 		uiStage.dispose();
 		
 	}
+
+
+
+	@Override
+	public MODE getMode() {
+		return mode;
+	}
+
+	@Override
+	public void setMode(MODE mode) {
+		this.mode = mode;
+	}
+
+
+	@Override
+	public List<NodeSprite> getSelectedNodes() {
+		return selectedNodes ;
+	}
+	
+	
 
 }

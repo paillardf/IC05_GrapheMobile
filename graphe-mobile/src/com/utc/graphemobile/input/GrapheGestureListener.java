@@ -56,9 +56,6 @@ public class GrapheGestureListener implements GestureListener{
 	@Override
 	public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2,
 			Vector2 pointer1, Vector2 pointer2) {
-		// TODO Auto-generated method stub
-		//System.out.println(pointer1.sub(pointer2).angle());
-		//camera.rotate(pointer1.sub(pointer2).angle());
 		return false;
 	}
 
