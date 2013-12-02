@@ -19,6 +19,8 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.input.GestureDetector;
 import com.utc.graphemobile.element.NodeSprite;
 import com.utc.graphemobile.stage.GrapheStage;
@@ -39,9 +41,14 @@ public class GrapheScreen implements Screen , IGrapheScreen{
 	
 	private HierarchicalGraph graph;
 	private List<NodeSprite> selectedNodes = new ArrayList<NodeSprite>();
+	private BitmapFont font;
 
 	public GrapheScreen() throws FileNotFoundException, URISyntaxException {
 		loadGraphe();
+		font = new BitmapFont();
+		font.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		
+	
 		grapheStage = new GrapheStage( graph, this);
 		uiStage = new UIStage();
 		uiStage.size();
@@ -174,7 +181,7 @@ public class GrapheScreen implements Screen , IGrapheScreen{
 	public void dispose() {
 		grapheStage.dispose();
 		uiStage.dispose();
-		
+		font.dispose();
 	}
 
 
@@ -193,6 +200,14 @@ public class GrapheScreen implements Screen , IGrapheScreen{
 	@Override
 	public List<NodeSprite> getSelectedNodes() {
 		return selectedNodes ;
+	}
+
+
+
+
+	@Override
+	public BitmapFont getFond() {
+		return font;
 	}
 	
 	

@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.gephi.graph.api.Node;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -29,7 +31,6 @@ public class NodeSprite extends Actor {
 	public NodeSprite(Node n, TextureRegion regionCircle, IGrapheScreen mScreen) {
 		this.nodeModel = n;
 		this.screen = mScreen;
-		//this.shapeRenderer = regionCircle;// new ShapeRenderer();
 		this.textureRegion = regionCircle;
 		this.setOrigin(0, 0);
 //		addListener(new InputListener() {
@@ -114,6 +115,9 @@ public class NodeSprite extends Actor {
 				nodeModel.getNodeData().b(), nodeModel.getNodeData().alpha());
 
 		drawCircle(batch);
+		screen.getFond().setColor(Color.BLACK);
+		screen.getFond().setScale(getRadius()/textureRegion.getRegionWidth()*5);
+		screen.getFond().drawMultiLine(batch, nodeModel.getNodeData().getLabel(), getX(), getY()+5,0,HAlignment.CENTER);
 	}
 
 	@Override
