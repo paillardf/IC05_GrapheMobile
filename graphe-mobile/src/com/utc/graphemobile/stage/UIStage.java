@@ -15,7 +15,9 @@ import com.utc.graphemobile.input.UIEventListener;
 public class UIStage extends Stage{
 	
 	private UIEventListener eventListener;
-	private Table table;
+	private Table leftTable;
+	private Table rightTable;
+	private Skin skin;
 	
 	private float widthUI = 0.0f;	
 	private float widthLeftMenu = 0.0f;
@@ -24,64 +26,80 @@ public class UIStage extends Stage{
 	private float widthBorder = 0.0f;
 	
 	private float heightUI = 0.0f;
-	private float heightLeftMenu = 0.0f;
-	private float heightRightMenu = 0.0f;
-	private float heightBorder = 0.0f;
 	
 	public UIStage() {
 		super();
-		
-		heightUI = this.getHeight();
-		widthUI = this.getWidth();
-		
-		widthLeftMenu = (float) (widthUI*0.075);
-		widthRightMenu = (float) (widthUI*0.25);
-		widthBorder = (float) (widthUI*0.005);
-				
 		eventListener = new UIEventListener();
+		skin = new Skin();
+
+		leftTable = new Table();
+		leftTable.left().top();
 		
-		table = new Table();
-		table.left().top();
-
-		table.setWidth(widthUI);
-		table.setHeight(heightUI);
-
-		this.addActor(table);
-	}
-	
-	public void size() {		
-		widthUI = this.getWidth();
-		heightUI = this.getHeight();
-		
-		heightLeftMenu = heightRightMenu = heightUI;
-		heightBorder = heightUI;
-	}
-	
-	public void drawLeftMenu() {
-		Skin skin = new Skin();
-
-		// Left Menu
-		table.add(leftMenu(skin)).height(heightUI).width(widthLeftMenu);
-		table.add(border(skin)).height(heightUI).width(widthBorder);
-	}
-	
-	public void drawRightMenu() {
-		Skin skin = new Skin();
-		
-		// Right Menu
-		table.add().height(heightUI)
-			.width(widthUI - (widthBorder + widthRightMenu + widthLeftMenu));
-		table.add(rightMenu(skin)).height(heightUI).width(widthRightMenu);
-	}
-
-	
-	private Table leftMenu(Skin skin) {
-		Table table = new Table();
+		rightTable = new Table();
+		rightTable.left().top();
 		
 		Pixmap p = new Pixmap(1, 1, Format.RGBA8888);
 		p.setColor(Color.WHITE);
 		p.fill();
 		skin.add("white", new Texture(p));
+		
+		p.setColor(Color.GRAY);
+		p.fill();
+		skin.add("gray", new Texture(p));
+		
+		resize();
+	}
+	
+	public void resize() {		
+		widthUI = this.getWidth();
+		heightUI = this.getHeight();
+		
+		widthLeftMenu = (float) (widthUI*0.075);
+		widthRightMenu = (float) (widthUI*0.25);
+		widthBorder = (float) (widthUI*0.005);
+
+		leftTable.reset();
+		leftTable.setWidth(widthUI);
+		leftTable.setHeight(heightUI);
+		drawLeftMenu();
+
+		rightTable.reset();
+		rightTable.setWidth(widthUI);
+		rightTable.setHeight(heightUI);
+		drawRightMenu();
+	}
+	
+	public void showLeftMenu() {
+		this.addActor(leftTable);
+	}
+	
+	public void showRightMenu() {
+		this.addActor(rightTable);
+	}
+	
+	public void hideLeftMenu() {
+		leftTable.remove();
+	}
+	
+	public void hideRightMenu() {
+		rightTable.remove();
+	}
+	
+	private void drawLeftMenu() {
+		// Left Menu
+		leftTable.add(leftMenu()).height(heightUI).width(widthLeftMenu);
+		leftTable.add(border()).height(heightUI).width(widthBorder);
+	}
+	
+	private void drawRightMenu() {
+		// Right Menu
+		rightTable.add().height(heightUI)
+			.width(widthUI - widthRightMenu);
+		rightTable.add(rightMenu()).height(heightUI).width(widthRightMenu);
+	}
+	
+	private Table leftMenu() {
+		Table table = new Table();
 		
 		float scale = 0.0f;
 		
@@ -91,7 +109,7 @@ public class UIStage extends Stage{
 		image1.setWidth(widthLeftMenu);
 		image1.setHeight((int) (image1.getHeight() * scale));
 		image1.setX(0);
-		image1.setY(heightUI-image1.getHeight());
+		image1.setY(heightUI - image1.getHeight());
 		table.addActor(image1);
 		image1.addListener(eventListener);
 		
@@ -104,7 +122,7 @@ public class UIStage extends Stage{
 		image2.setWidth(widthLeftMenu);
 		image2.setHeight((int) (image2.getHeight() * scale));
 		image2.setX(0);
-		image2.setY(image1.getY()-image2.getHeight()-20);		
+		image2.setY(image1.getY() - image2.getHeight() - 20);		
 		table.addActor(image2);
 		image2.addListener(eventListener);
 						
@@ -113,93 +131,18 @@ public class UIStage extends Stage{
 		return table;
 	}
 	
-	private Table rightMenu(Skin skin) {
+	private Table rightMenu() {
 		Table table = new Table();
 		
-		Pixmap p = new Pixmap(1, 1, Format.RGBA8888);
-		p.setColor(Color.GRAY);
-		p.fill();
-		skin.add("grey", new Texture(p));
-								
-		table.setBackground(skin.getDrawable("grey"));		
-		
-		return table;
-	}
-	
-	private Table border(Skin skin) {
-		Table table = new Table();
-		
-		Pixmap p = new Pixmap(1, 1, Format.RGBA8888);
-		p.setColor(Color.GRAY);
-		p.fill();
-		skin.add("gray", new Texture(p));
+		// TODO Gérer le menu
 		
 		table.setBackground(skin.getDrawable("gray"));
-		
 		return table;
 	}
-
-	public float getWidthUI() {
-		return widthUI;
-	}
-
-	public void setWidthUI(float witdh) {
-		this.widthUI = witdh;
-	}
-
-	public float getWidthLeftMenu() {
-		return widthLeftMenu;
-	}
-
-	public void setWidthLeftMenu(float widthLeftMenu) {
-		this.widthLeftMenu = widthLeftMenu;
-	}
-
-	public float getWidthBorder() {
-		return widthBorder;
-	}
-
-	public void setWidthBorder(float widthBorder) {
-		this.widthBorder = widthBorder;
-	}
-
-	public float getHeightUI() {
-		return heightUI;
-	}
-
-	public void setHeightUI(float height) {
-		this.heightUI = height;
-	}
-
-	public float getHeightLeftMenu() {
-		return heightLeftMenu;
-	}
-
-	public void setHeightLeftMenu(float heightLeftMenu) {
-		this.heightLeftMenu = heightLeftMenu;
-	}
 	
-	public float getWidthRightMenu() {
-		return widthRightMenu;
+	private Table border() {
+		Table table = new Table();
+		table.setBackground(skin.getDrawable("gray"));
+		return table;
 	}
-
-	public void setWidthRightMenu(float widthRightMenu) {
-		this.widthRightMenu = widthRightMenu;
-	}
-
-	public float getHeightRightMenu() {
-		return heightRightMenu;
-	}
-
-	public void setHeightRightMenu(float heightRightMenu) {
-		this.heightRightMenu = heightRightMenu;
-	}
-
-	public float getHeightBorder() {
-		return heightBorder;
-	}
-
-	public void setHeightBorder(float heightBorder) {
-		this.heightBorder = heightBorder;
-	}	
 }

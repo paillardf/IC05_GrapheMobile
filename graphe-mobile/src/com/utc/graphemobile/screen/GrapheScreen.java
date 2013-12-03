@@ -50,9 +50,8 @@ public class GrapheScreen implements Screen , IGrapheScreen{
 	
 		grapheStage = new GrapheStage( graph, this);
 		uiStage = new UIStage();
-		uiStage.size();
-		uiStage.drawLeftMenu();
-		uiStage.drawRightMenu();
+		uiStage.showLeftMenu();
+		uiStage.showRightMenu();
 		InputMultiplexer multiplexer = new InputMultiplexer();
 		multiplexer.addProcessor(uiStage);
 		multiplexer.addProcessor(grapheStage);
@@ -111,6 +110,7 @@ public class GrapheScreen implements Screen , IGrapheScreen{
 		grapheStage.getCamera().position.x = 0;
 		grapheStage.getCamera().position.y = 0;
 		uiStage.setViewport(width, height, true);
+		uiStage.resize();
 	}
 
 	@Override
