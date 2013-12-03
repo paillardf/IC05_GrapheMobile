@@ -34,7 +34,6 @@ public class GrapheScreen implements Screen , IGrapheScreen{
 	public enum MODE{
 		NORMAL,
 		EDIT
-		
 	}
 	
 	private MODE mode = MODE.EDIT;
@@ -52,7 +51,8 @@ public class GrapheScreen implements Screen , IGrapheScreen{
 		grapheStage = new GrapheStage( graph, this);
 		uiStage = new UIStage();
 		uiStage.size();
-		uiStage.drawMenu();
+		uiStage.drawLeftMenu();
+		uiStage.drawRightMenu();
 		InputMultiplexer multiplexer = new InputMultiplexer();
 		multiplexer.addProcessor(uiStage);
 		multiplexer.addProcessor(grapheStage);
@@ -60,9 +60,6 @@ public class GrapheScreen implements Screen , IGrapheScreen{
 		//multiplexer.addProcessor(new GestureDetector(uiStage.getGestureListener()));
 		Gdx.input.setInputProcessor(multiplexer);
 	}
-	
-	
-
 	
 	private void loadGraphe() throws URISyntaxException, FileNotFoundException {
 		
@@ -77,42 +74,7 @@ public class GrapheScreen implements Screen , IGrapheScreen{
 		
         ImportContainerImpl container = new ImportContainerImpl();
         importer.execute(container);
-        graph = importer.process();
-        //importer.getContainer();
-       /* Dhns d = new Dhns();
-        importer.
-        GraphViewImpl imp = new GraphViewImpl(d, 0);
-        imp.s
-        graph = new HierarchicalDirectedGraphImpl(importer.getContainer()., imp);
-        graph.
-		/*
-		 * Container container = Lookup.getDefault().lookup(ContainerFactory.class).newContainer();
-		 
-		ImportController importController = Lookup.getDefault().lookup(ImportController.class);
-		File f = new File(getClass().getResource("/com/utc/graphemobile/test.gexf").toURI());
-		container = importController.importFile(f);
-		*/
-		//Generate a new random graph into a container
-	
-//		RandomGraph randomGraph = new RandomGraph();
-//		randomGraph.setNumberOfNodes(20);
-//		randomGraph.setWiringProbability(0.005);
-//		randomGraph.generate(container.getLoader());
-		 
-		//Append container to graph structure
-		//importController.process(container, new DefaultProcessor(), workspace);
-		 
-		//See if graph is well imported
-		/*
-		 * GraphModel graphModel = Lookup.getDefault().lookup(GraphController.class).getModel();
-		 
-		graph = graphModel.getDirectedGraph();
-		System.out.println("Nodes: " + graph.getNodeCount());
-		System.out.println("Edges: " + graph.getEdgeCount());
-		 */
-		//Layout for 1 minute - pour les effets
-        
-        
+        graph = importer.process();   
 		
 		new Thread(new Runnable() {
 			         @Override
@@ -131,8 +93,6 @@ public class GrapheScreen implements Screen , IGrapheScreen{
 			   }).start();
 		
 	}
-
-
 
 	@Override
 	public void render(float delta) {
@@ -184,8 +144,6 @@ public class GrapheScreen implements Screen , IGrapheScreen{
 		font.dispose();
 	}
 
-
-
 	@Override
 	public MODE getMode() {
 		return mode;
@@ -196,20 +154,13 @@ public class GrapheScreen implements Screen , IGrapheScreen{
 		this.mode = mode;
 	}
 
-
 	@Override
 	public List<NodeSprite> getSelectedNodes() {
 		return selectedNodes ;
 	}
 
-
-
-
 	@Override
 	public BitmapFont getFond() {
 		return font;
 	}
-	
-	
-
 }

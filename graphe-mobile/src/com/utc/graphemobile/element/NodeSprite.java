@@ -33,39 +33,20 @@ public class NodeSprite extends Actor {
 		this.screen = mScreen;
 		this.textureRegion = regionCircle;
 		this.setOrigin(0, 0);
-//		addListener(new InputListener() {
-//			public boolean touchDown(InputEvent event, float x, float y,
-//					int pointer, int button) {
-////				switch (screen.getMode()) {
-////				case NORMAL:
-////					return true;
-////
-////				case EDIT:
-////
-////					return true;
-////				}
-//				return false;
-//			}
-//
-//			public void touchUp(InputEvent event, float x, float y,
-//					int pointer, int button) {
-//
-//			}
-//		});
-		
-		
+
 		ActorGestureListener mActorGestureListener = new ActorGestureListener() {
-			
+
 			@Override
-			
 			public boolean longPress(Actor actor, float x, float y) {
 				switch (screen.getMode()) {
 				case EDIT:
 					List<NodeSprite> selectedNodes = screen.getSelectedNodes();
-					if(!selected){
+					if (!selected) {
 						selectedNodes.add(NodeSprite.this);
-						addAction(Actions.forever(Actions.sequence(Actions.scaleTo(1.1f,1.1f, 0.5f), Actions.scaleTo(1,1, 0.5f))));
-					}else{
+						addAction(Actions.forever(Actions.sequence(
+								Actions.scaleTo(1.1f, 1.1f, 0.5f),
+								Actions.scaleTo(1, 1, 0.5f))));
+					} else {
 						selectedNodes.remove(NodeSprite.this);
 						clearActions();
 					}
@@ -75,49 +56,54 @@ public class NodeSprite extends Actor {
 				default:
 					return false;
 				}
-
 			}
 
 			@Override
 			public void pan(InputEvent event, float x, float y, float deltaX,
 					float deltaY) {
-				if(selected){
+				if (selected) {
 					List<NodeSprite> selectedNodes = screen.getSelectedNodes();
 					for (NodeSprite nodeSprite : selectedNodes) {
-						nodeSprite.nodeModel.getNodeData().setX(nodeSprite.nodeModel.getNodeData().x()+deltaX);
-						nodeSprite.nodeModel.getNodeData().setY(nodeSprite.nodeModel.getNodeData().y()+deltaY);
+						nodeSprite.nodeModel.getNodeData()
+								.setX(nodeSprite.nodeModel.getNodeData().x()
+										+ deltaX);
+						nodeSprite.nodeModel.getNodeData()
+								.setY(nodeSprite.nodeModel.getNodeData().y()
+										+ deltaY);
 					}
 				}
 			}
-					
+
 			public void fling(InputEvent event, float velocityX,
 					float velocityY, int button) {
-				
+
 			}
 
 			public void zoom(InputEvent event, float initialDistance,
 					float distance) {
 			}
 		};
-		mActorGestureListener.getGestureDetector().setLongPressSeconds(0.5f); 
-		addListener( mActorGestureListener);
+		mActorGestureListener.getGestureDetector().setLongPressSeconds(0.5f);
+		addListener(mActorGestureListener);
 	}
 
 	public void draw(SpriteBatch batch, float parentAlpha) {
-		if(selected&&screen.getMode()==MODE.NORMAL) {
+		if (selected && screen.getMode() == MODE.NORMAL) {
 			selected = false;
 			clearActions();
 		}
-		
-		
+
 		setPosition(nodeModel.getNodeData().x(), nodeModel.getNodeData().y());
 		setColor(nodeModel.getNodeData().r(), nodeModel.getNodeData().g(),
 				nodeModel.getNodeData().b(), nodeModel.getNodeData().alpha());
 
 		drawCircle(batch);
 		screen.getFond().setColor(Color.BLACK);
-		screen.getFond().setScale(getRadius()/textureRegion.getRegionWidth()*5);
-		screen.getFond().drawMultiLine(batch, nodeModel.getNodeData().getLabel(), getX(), getY()+5,0,HAlignment.CENTER);
+		screen.getFond().setScale(
+				getRadius() / textureRegion.getRegionWidth() * 5);
+		screen.getFond().drawMultiLine(batch,
+				nodeModel.getNodeData().getLabel(), getX(), getY() + 5, 0,
+				HAlignment.CENTER);
 	}
 
 	@Override
@@ -150,5 +136,4 @@ public class NodeSprite extends Actor {
 	public float getRadius() {
 		return nodeModel.getNodeData().getRadius();
 	}
-
 }
