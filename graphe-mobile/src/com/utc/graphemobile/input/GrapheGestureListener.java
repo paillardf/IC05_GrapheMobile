@@ -58,6 +58,4 @@ public class GrapheGestureListener implements GestureListener{
 			Vector2 pointer1, Vector2 pointer2) {
 		return false;
 	}
-
-
 }

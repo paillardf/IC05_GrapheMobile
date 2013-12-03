@@ -19,10 +19,13 @@ public class UIStage extends Stage{
 	
 	private float widthUI = 0.0f;	
 	private float widthLeftMenu = 0.0f;
+	private float widthRightMenu = 0.0f;
+
 	private float widthBorder = 0.0f;
 	
 	private float heightUI = 0.0f;
 	private float heightLeftMenu = 0.0f;
+	private float heightRightMenu = 0.0f;
 	private float heightBorder = 0.0f;
 	
 	public UIStage() {
@@ -32,35 +35,45 @@ public class UIStage extends Stage{
 		widthUI = this.getWidth();
 		
 		widthLeftMenu = (float) (widthUI*0.075);
+		widthRightMenu = (float) (widthUI*0.25);
 		widthBorder = (float) (widthUI*0.005);
 				
 		eventListener = new UIEventListener();
+		
+		table = new Table();
+		table.left().top();
+
+		table.setWidth(widthUI);
+		table.setHeight(heightUI);
+
+		this.addActor(table);
 	}
 	
 	public void size() {		
 		widthUI = this.getWidth();
 		heightUI = this.getHeight();
 		
-		heightLeftMenu = heightUI;
+		heightLeftMenu = heightRightMenu = heightUI;
 		heightBorder = heightUI;
 	}
 	
-	public void drawMenu() {
+	public void drawLeftMenu() {
 		Skin skin = new Skin();
-		
-		table = new Table();
-		//table.setFillParent(true);
-		table.left().top();
-		table.setWidth(widthLeftMenu);
-		table.setHeight(heightLeftMenu);
-		
+
 		// Left Menu
 		table.add(leftMenu(skin)).height(heightUI).width(widthLeftMenu);
 		table.add(border(skin)).height(heightUI).width(widthBorder);
-		
-		this.addActor(table);
 	}
 	
+	public void drawRightMenu() {
+		Skin skin = new Skin();
+		
+		// Right Menu
+		table.add().height(heightUI)
+			.width(widthUI - (widthBorder + widthRightMenu + widthLeftMenu));
+		table.add(rightMenu(skin)).height(heightUI).width(widthRightMenu);
+	}
+
 	
 	private Table leftMenu(Skin skin) {
 		Table table = new Table();
@@ -96,6 +109,19 @@ public class UIStage extends Stage{
 		image2.addListener(eventListener);
 						
 		table.setBackground(skin.getDrawable("white"));		
+		
+		return table;
+	}
+	
+	private Table rightMenu(Skin skin) {
+		Table table = new Table();
+		
+		Pixmap p = new Pixmap(1, 1, Format.RGBA8888);
+		p.setColor(Color.GRAY);
+		p.fill();
+		skin.add("grey", new Texture(p));
+								
+		table.setBackground(skin.getDrawable("grey"));		
 		
 		return table;
 	}
@@ -152,6 +178,22 @@ public class UIStage extends Stage{
 	public void setHeightLeftMenu(float heightLeftMenu) {
 		this.heightLeftMenu = heightLeftMenu;
 	}
+	
+	public float getWidthRightMenu() {
+		return widthRightMenu;
+	}
+
+	public void setWidthRightMenu(float widthRightMenu) {
+		this.widthRightMenu = widthRightMenu;
+	}
+
+	public float getHeightRightMenu() {
+		return heightRightMenu;
+	}
+
+	public void setHeightRightMenu(float heightRightMenu) {
+		this.heightRightMenu = heightRightMenu;
+	}
 
 	public float getHeightBorder() {
 		return heightBorder;
@@ -159,7 +201,5 @@ public class UIStage extends Stage{
 
 	public void setHeightBorder(float heightBorder) {
 		this.heightBorder = heightBorder;
-	}
-
-	
+	}	
 }

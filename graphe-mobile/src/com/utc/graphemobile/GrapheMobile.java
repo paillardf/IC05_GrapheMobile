@@ -13,17 +13,15 @@ public class GrapheMobile extends Game {
 	private BitmapFont font;
 	private FileChooser fileChooser;
 
-	 public GrapheMobile(FileChooser fileChooser) {
-	      this.fileChooser = fileChooser;
-	 }
-	
+	public GrapheMobile(FileChooser fileChooser) {
+		this.fileChooser = fileChooser;
+	}
+
 	@Override
 	public void create() {
-		//Use LibGDX's default Arial font.
+		// Use LibGDX's default Arial font.
 		font = new BitmapFont();
-		
-		
-		
+
 		try {
 			this.setScreen(new GrapheScreen());
 		} catch (FileNotFoundException e) {
@@ -31,22 +29,17 @@ public class GrapheMobile extends Game {
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
-	
+
 	@Override
 	public void render() {
 		super.render();
 	}
-	
+
 	@Override
 	public void dispose() {
 		super.dispose();
 		font.dispose();
-		
-
 	}
-	
-	
 }

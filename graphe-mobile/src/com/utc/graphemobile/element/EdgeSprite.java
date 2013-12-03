@@ -17,7 +17,7 @@ public class EdgeSprite extends Actor {
 	public EdgeSprite(Edge e, ShapeRenderer shapeRenderer2) {
 		this.edgeModel = e;
 		shapeRenderer = shapeRenderer2;
-		
+
 	}
 
 	public void draw(SpriteBatch batch, float parentAlpha) {
@@ -27,8 +27,6 @@ public class EdgeSprite extends Actor {
 				edgeModel.getEdgeData().b(), edgeModel.getEdgeData().alpha());
 		drawLine(batch);
 	}
-	
-	
 
 	public void drawLine(SpriteBatch batch) {
 		shapeRenderer.setProjectionMatrix(batch.getProjectionMatrix());
@@ -36,10 +34,10 @@ public class EdgeSprite extends Actor {
 		Gdx.gl10.glLineWidth(edgeModel.getWeight());
 		shapeRenderer.setColor(getColor()); // last argument is alpha channel
 		Node target = edgeModel.getTarget();
-		shapeRenderer.line(getX(),getY(), target.getNodeData().x(), target.getNodeData().y());
+		shapeRenderer.line(getX(), getY(), target.getNodeData().x(), target
+				.getNodeData().y());
 		shapeRenderer.end();
 
 	}
 
-	
 }

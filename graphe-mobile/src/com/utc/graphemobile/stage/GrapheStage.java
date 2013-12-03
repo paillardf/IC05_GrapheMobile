@@ -72,6 +72,4 @@ public class GrapheStage extends Stage{
 		textureCircle.dispose();
 		super.dispose();
 	}
-	
-	
 }
