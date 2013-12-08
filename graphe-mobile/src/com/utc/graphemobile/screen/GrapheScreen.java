@@ -149,7 +149,10 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 	@Override
 	public void resume() {
 		// TODO Auto-generated method stub
-
+		uiStage.dispose();
+		uiStage = new UIStage();
+		uiStage.showLeftMenu();
+		uiStage.showRightMenu();
 	}
 
 	@Override

@@ -39,12 +39,8 @@ public class UIStage extends Stage {
 		font = new BitmapFont();
 		
 		leftTable = new Table();
-		leftTable.left().top();
-		leftTable.setFillParent(true);
 
 		rightTable = new Table();
-		rightTable.left().top();
-		rightTable.setFillParent(true);
 
 		Pixmap p = new Pixmap(1, 1, Format.RGBA8888);
 		p.setColor(Color.WHITE);
@@ -68,11 +64,19 @@ public class UIStage extends Stage {
 		widthRightMenu = (float) (widthUI * 0.25);
 		widthBorder = (float) (widthUI * 0.005);
 
+		leftTable.reset();
+		leftTable.left().top();
+		leftTable.setFillParent(true);
 		leftTable.setWidth(widthUI);
 		leftTable.setHeight(heightUI);
+		drawLeftMenu();
 
+		rightTable.reset();
+		rightTable.left().top();
+		rightTable.setFillParent(true);
 		rightTable.setWidth(widthUI);
 		rightTable.setHeight(heightUI);
+		drawRightMenu();
 	}
 
 	public void showLeftMenu() {
@@ -139,7 +143,6 @@ public class UIStage extends Stage {
 
 	private Table rightMenu() {
 		Table table = new Table();
-		table.top().center();
 
 		// TODO Gérer le menu
 		LabelStyle labelStyle = new LabelStyle(font, Color.WHITE);
