@@ -98,10 +98,10 @@ public class NodeSprite extends Actor {
 				nodeModel.getNodeData().b(), nodeModel.getNodeData().alpha());
 
 		drawCircle(batch);
-		screen.getFond().setColor(Color.BLACK);
-		screen.getFond().setScale(
+		screen.getFont().setColor(Color.BLACK);
+		screen.getFont().setScale(
 				getRadius() / textureRegion.getRegionWidth() * 5);
-		screen.getFond().drawMultiLine(batch,
+		screen.getFont().drawMultiLine(batch,
 				nodeModel.getNodeData().getLabel(), getX(), getY() + 5, 0,
 				HAlignment.CENTER);
 	}

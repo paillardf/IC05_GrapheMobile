@@ -22,75 +22,90 @@ import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.input.GestureDetector;
+import com.utc.graphemobile.GrapheMobile;
 import com.utc.graphemobile.element.NodeSprite;
 import com.utc.graphemobile.stage.GrapheStage;
 import com.utc.graphemobile.stage.UIStage;
 
-public class GrapheScreen implements Screen , IGrapheScreen{
+public class GrapheScreen implements Screen, IGrapheScreen {
 
 	private GrapheStage grapheStage;
 	private UIStage uiStage;
-	
-	public enum MODE{
-		NORMAL,
-		EDIT
+	private GrapheMobile game;
+
+	public enum MODE {
+		NORMAL, EDIT
 	}
-	
+
 	private MODE mode = MODE.EDIT;
-	
+
 	private HierarchicalGraph graph;
 	private List<NodeSprite> selectedNodes = new ArrayList<NodeSprite>();
 	private BitmapFont font;
 
-	public GrapheScreen() throws FileNotFoundException, URISyntaxException {
+	public GrapheScreen(GrapheMobile game) throws FileNotFoundException, URISyntaxException {
+		this.game = game;
+		
 		loadGraphe();
 		font = new BitmapFont();
-		font.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
-		
-	
-		grapheStage = new GrapheStage( graph, this);
+		font.getRegion().getTexture()
+				.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+
+		grapheStage = new GrapheStage(graph, this);
 		uiStage = new UIStage();
 		uiStage.showLeftMenu();
 		uiStage.showRightMenu();
 		InputMultiplexer multiplexer = new InputMultiplexer();
 		multiplexer.addProcessor(uiStage);
 		multiplexer.addProcessor(grapheStage);
-		multiplexer.addProcessor(new GestureDetector(grapheStage.getGestureListener()));
-		//multiplexer.addProcessor(new GestureDetector(uiStage.getGestureListener()));
+		multiplexer.addProcessor(new GestureDetector(grapheStage
+				.getGestureListener()));
+		// multiplexer.addProcessor(new
+		// GestureDetector(uiStage.getGestureListener()));
 		Gdx.input.setInputProcessor(multiplexer);
 	}
-	
+
 	private void loadGraphe() throws URISyntaxException, FileNotFoundException {
-		
+
 		ImporterGEXF importer = new ImporterGEXF();
-        try {
-        	FileHandle handle = Gdx.files.internal("data/test.gexf");
-           
-            importer.setReader(handle.reader());//FileHandle(handle);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-		
-        ImportContainerImpl container = new ImportContainerImpl();
-        importer.execute(container);
-        graph = importer.process();   
-		
+		try {
+			FileHandle handle = Gdx.files.internal("data/test.gexf");
+
+			importer.setReader(handle.reader());// FileHandle(handle);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+		ImportContainerImpl container = new ImportContainerImpl();
+		importer.execute(container);
+		graph = importer.process();
+
 		new Thread(new Runnable() {
-			         @Override
-			         public void run() {
-			        	 AutoLayout autoLayout = new AutoLayout(10, TimeUnit.MINUTES);
-			     		autoLayout.setGraphModel(graph.getGraphModel());
-			     		YifanHuLayout firstLayout = new YifanHuLayout(new StepDisplacement(1f));
-			     		ForceAtlasLayout secondLayout = new ForceAtlasLayout();
-			     		AutoLayout.DynamicProperty adjustBySizeProperty = AutoLayout.createDynamicProperty("forceAtlas.adjustSizes.name", Boolean.TRUE, 0.1f);//True after 10% of layout time
-			     		AutoLayout.DynamicProperty repulsionProperty = AutoLayout.createDynamicProperty("forceAtlas.repulsionStrength.name", new Double(500.), 0f);//500 for the complete period
-			     		autoLayout.addLayout(firstLayout, 0.5f);
-			     		autoLayout.addLayout(secondLayout, 0.5f, new AutoLayout.DynamicProperty[]{adjustBySizeProperty, repulsionProperty});
-			     		autoLayout.execute();
-			         }
-			    
-			   }).start();
-		
+			@Override
+			public void run() {
+				AutoLayout autoLayout = new AutoLayout(10, TimeUnit.MINUTES);
+				autoLayout.setGraphModel(graph.getGraphModel());
+				YifanHuLayout firstLayout = new YifanHuLayout(
+						new StepDisplacement(1f));
+				ForceAtlasLayout secondLayout = new ForceAtlasLayout();
+				AutoLayout.DynamicProperty adjustBySizeProperty = AutoLayout
+						.createDynamicProperty("forceAtlas.adjustSizes.name",
+								Boolean.TRUE, 0.1f);// True after 10% of layout
+													// time
+				AutoLayout.DynamicProperty repulsionProperty = AutoLayout
+						.createDynamicProperty(
+								"forceAtlas.repulsionStrength.name",
+								new Double(500.), 0f);// 500 for the complete
+														// period
+				autoLayout.addLayout(firstLayout, 0.5f);
+				autoLayout.addLayout(secondLayout, 0.5f,
+						new AutoLayout.DynamicProperty[] {
+								adjustBySizeProperty, repulsionProperty });
+				autoLayout.execute();
+			}
+
+		}).start();
+
 	}
 
 	@Override
@@ -116,25 +131,25 @@ public class GrapheScreen implements Screen , IGrapheScreen{
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void hide() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void pause() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void resume() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -156,11 +171,11 @@ public class GrapheScreen implements Screen , IGrapheScreen{
 
 	@Override
 	public List<NodeSprite> getSelectedNodes() {
-		return selectedNodes ;
+		return selectedNodes;
 	}
 
 	@Override
-	public BitmapFont getFond() {
+	public BitmapFont getFont() {
 		return font;
 	}
 }

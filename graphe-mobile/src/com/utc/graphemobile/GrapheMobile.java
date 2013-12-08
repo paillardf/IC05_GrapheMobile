@@ -9,7 +9,6 @@ import com.utc.graphemobile.screen.GrapheScreen;
 import com.utc.graphemobile.specific.FileChooser;
 
 public class GrapheMobile extends Game {
-
 	private BitmapFont font;
 	private FileChooser fileChooser;
 
@@ -23,7 +22,7 @@ public class GrapheMobile extends Game {
 		font = new BitmapFont();
 
 		try {
-			this.setScreen(new GrapheScreen());
+			this.setScreen(new GrapheScreen(this));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (URISyntaxException e) {
@@ -33,13 +32,28 @@ public class GrapheMobile extends Game {
 	}
 
 	@Override
+	public void dispose() {
+		super.dispose();
+		font.dispose();
+	}
+
+	@Override
 	public void render() {
 		super.render();
 	}
 
 	@Override
-	public void dispose() {
-		super.dispose();
-		font.dispose();
+	public void resize(int width, int height) {
+		super.resize(width, height);
+	}
+
+	@Override
+	public void pause() {
+		super.pause();
+	}
+
+	@Override
+	public void resume() {
+		super.resume();
 	}
 }
