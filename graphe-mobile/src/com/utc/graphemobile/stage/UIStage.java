@@ -4,9 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -164,17 +165,17 @@ public class UIStage extends Stage {
 		table.addActor(label);
 		*/
 
-//		Skin textFieldSkin = new Skin(Gdx.files.internal("skins/TextField.json"));
-//		TextField textField = new TextField("Test", textFieldSkin);
+		Skin textFieldSkin = new Skin(Gdx.files.internal("skins/TextField.json"));
+		TextField textField = new TextField("Test", textFieldSkin);
 		
-		TextFieldStyle style = new TextFieldStyle();
-		style.font = font;
-		style.fontColor = Color.BLACK;
-		style.cursor = skin.getDrawable("black");
-		style.background = skin.getDrawable("white");
-		style.selection = skin.getDrawable("blue");
-		
-		TextField textField = new TextField("test", style);
+//		TextFieldStyle style = new TextFieldStyle();
+//		style.font = font;
+//		style.fontColor = Color.BLACK;
+//		style.cursor = skin.getDrawable("black");
+//		style.background = skin.getDrawable("white");
+//		style.selection = skin.getDrawable("blue");
+//		
+//		TextField textField = new TextField("test", style);
 		textField.setX(5);
 		textField.setY(heightUI - textField.getHeight() - 5);
 		textField.setWidth(widthRightMenu - 10);
@@ -182,6 +183,7 @@ public class UIStage extends Stage {
 		
 		table.setBackground(skin.getDrawable("gray"));
 		return table;
+		
 	}
 
 	private Table border() {
