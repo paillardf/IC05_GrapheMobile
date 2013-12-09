@@ -166,16 +166,16 @@ public class UIStage extends Stage {
 		*/
 
 		Skin textFieldSkin = new Skin(Gdx.files.internal("skins/TextField.json"));
-		TextField textField = new TextField("Test", textFieldSkin);
+//		TextField textField = new TextField("Test", textFieldSkin);
+
+		TextFieldStyle style = new TextFieldStyle();
+		style.font = textFieldSkin.getFont("default-font");
+		style.fontColor = Color.BLACK;
+		style.cursor = skin.getDrawable("black");
+		style.background = skin.getDrawable("white");
+		style.selection = skin.getDrawable("blue");
 		
-//		TextFieldStyle style = new TextFieldStyle();
-//		style.font = font;
-//		style.fontColor = Color.BLACK;
-//		style.cursor = skin.getDrawable("black");
-//		style.background = skin.getDrawable("white");
-//		style.selection = skin.getDrawable("blue");
-//		
-//		TextField textField = new TextField("test", style);
+		TextField textField = new TextField("test", style);
 		textField.setX(5);
 		textField.setY(heightUI - textField.getHeight() - 5);
 		textField.setWidth(widthRightMenu - 10);
