@@ -1,7 +1,6 @@
 package com.utc.graphemobile.stage;
 
 import org.gephi.graph.api.Edge;
-import org.gephi.graph.api.HierarchicalGraph;
 import org.gephi.graph.api.Node;
 
 import com.badlogic.gdx.Gdx;
@@ -14,27 +13,24 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.utc.graphemobile.element.EdgeSprite;
 import com.utc.graphemobile.element.NodeSprite;
 import com.utc.graphemobile.input.GrapheGestureListener;
-import com.utc.graphemobile.screen.GrapheScreen.MODE;
 import com.utc.graphemobile.screen.IGrapheScreen;
 
 public class GrapheStage extends Stage{
 
 	private GrapheGestureListener gestureListener;
-	private HierarchicalGraph graph;
 	private IGrapheScreen screen;
 	private Texture textureCircle;
 	private TextureRegion regionCircle;
 
-	public GrapheStage(HierarchicalGraph graph2, IGrapheScreen mScreen) {
+	public GrapheStage(IGrapheScreen mScreen) {
 		super();
-		this.graph = graph2;
 		this.screen = mScreen;
 		
 		gestureListener = new GrapheGestureListener((OrthographicCamera) getCamera());
 		textureCircle = new Texture(Gdx.files.internal("grapheTexture.png"));
 		regionCircle = new TextureRegion(textureCircle, 0, 0, 200, 200);
 		
-		attachObject();
+		loadObjects();
 		
 		//screen.setMode(MODE.EDIT);//TODO remove me
 	}
@@ -48,15 +44,18 @@ public class GrapheStage extends Stage{
 		//super.scrolled(amount);
 	};
 	
-	private void attachObject() {
+	public void loadObjects() {
+		if(screen.getGraph()==null)
+			return;
+		getActors().clear();
 		
 		ShapeRenderer shapeRenderer = new ShapeRenderer();
-		for(Edge e : graph.getEdges()) {
+		for(Edge e : screen.getGraph().getEdges()) {
 			EdgeSprite eSprite = new EdgeSprite(e, shapeRenderer);
 			this.addActor(eSprite);
 		}
 		
-		for(Node n : graph.getNodes()) {
+		for(Node n : screen.getGraph().getNodes()) {
 			NodeSprite nSprite = new NodeSprite(n, regionCircle, screen);
 			this.addActor(nSprite);
 		}

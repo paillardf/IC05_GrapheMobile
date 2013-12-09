@@ -651,7 +651,6 @@ public class ImporterGEXF implements FileImporter, LongTask {
 		for (int i = 0; i < nodeList.getLength(); i++) {
 			org.w3c.dom.Node c = nodeList.item(i);
 			String name = c.getNodeName().substring(c.getNodeName().indexOf(":")+1);
-			System.out.println(name);
 			if (ATTVALUE.equalsIgnoreCase(c.getNodeName())) {
 				readNodeAttValue(c, node);
 			} else if (NODE_POSITION.equalsIgnoreCase(name)) {

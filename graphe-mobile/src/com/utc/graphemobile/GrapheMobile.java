@@ -1,20 +1,22 @@
 package com.utc.graphemobile;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.utc.graphemobile.screen.GrapheScreen;
-import com.utc.graphemobile.specific.FileChooser;
+import com.utc.graphemobile.specific.SpecificInterface;
 
 public class GrapheMobile extends Game {
 
 	private BitmapFont font;
-	private FileChooser fileChooser;
+	private SpecificInterface mInterface;
 
-	public GrapheMobile(FileChooser fileChooser) {
-		this.fileChooser = fileChooser;
+	public GrapheMobile(SpecificInterface mInterface) {
+		this.mInterface = mInterface;
 	}
 
 	@Override
@@ -41,5 +43,16 @@ public class GrapheMobile extends Game {
 	public void dispose() {
 		super.dispose();
 		font.dispose();
+	}
+
+	public void openGraphe(File file) {
+		try {
+			((GrapheScreen)getScreen()).loadGraphe(new FileHandle(file));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+		
 	}
 }
