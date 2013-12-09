@@ -52,7 +52,7 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 				.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 
 		grapheStage = new GrapheStage(graph, this);
-		uiStage = new UIStage();
+		uiStage = new UIStage(this);
 		uiStage.showLeftMenu();
 		uiStage.showRightMenu();
 		InputMultiplexer multiplexer = new InputMultiplexer();
@@ -150,7 +150,7 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 	public void resume() {
 		// TODO Auto-generated method stub
 		uiStage.dispose();
-		uiStage = new UIStage();
+		uiStage = new UIStage(this);
 		uiStage.showLeftMenu();
 		uiStage.showRightMenu();
 	}

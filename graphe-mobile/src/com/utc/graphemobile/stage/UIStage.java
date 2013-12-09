@@ -14,10 +14,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.utc.graphemobile.input.UIEventListener;
+import com.utc.graphemobile.screen.*;
 
 public class UIStage extends Stage {
-
+	private GrapheScreen screen;
 	private UIEventListener eventListener;
 	private Table leftTable;
 	private Table rightTable;
@@ -32,11 +35,13 @@ public class UIStage extends Stage {
 
 	private float heightUI = 0.0f;
 
-	public UIStage() {
+	public UIStage(GrapheScreen screen) {
 		super();
+		this.screen = screen;
 		eventListener = new UIEventListener();
 		skin = new Skin();
 		font = new BitmapFont();
+		font.setScale(2f);
 		
 		leftTable = new Table();
 
@@ -50,6 +55,14 @@ public class UIStage extends Stage {
 		p.setColor(Color.GRAY);
 		p.fill();
 		skin.add("gray", new Texture(p));
+
+		p.setColor(Color.BLUE);
+		p.fill();
+		skin.add("blue", new Texture(p));
+
+		p.setColor(Color.BLACK);
+		p.fill();
+		skin.add("black", new Texture(p));
 
 		resize();
 		drawLeftMenu();
@@ -136,7 +149,7 @@ public class UIStage extends Stage {
 		table.addActor(image2);
 		image2.addListener(eventListener);
 
-		table.setBackground(skin.getDrawable("white"));
+		table.setBackground(skin.getDrawable("gray"));
 
 		return table;
 	}
@@ -145,9 +158,27 @@ public class UIStage extends Stage {
 		Table table = new Table();
 
 		// TODO Gérer le menu
+		/*
 		LabelStyle labelStyle = new LabelStyle(font, Color.WHITE);
 		Label label = new Label("Name", labelStyle);
 		table.addActor(label);
+		*/
+
+//		Skin textFieldSkin = new Skin(Gdx.files.internal("skins/TextField.json"));
+//		TextField textField = new TextField("Test", textFieldSkin);
+		
+		TextFieldStyle style = new TextFieldStyle();
+		style.font = font;
+		style.fontColor = Color.BLACK;
+		style.cursor = skin.getDrawable("black");
+		style.background = skin.getDrawable("white");
+		style.selection = skin.getDrawable("blue");
+		
+		TextField textField = new TextField("test", style);
+		textField.setX(5);
+		textField.setY(heightUI - textField.getHeight() - 5);
+		textField.setWidth(widthRightMenu - 10);
+		table.addActor(textField);
 		
 		table.setBackground(skin.getDrawable("gray"));
 		return table;
