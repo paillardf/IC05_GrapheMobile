@@ -17,44 +17,51 @@ import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.input.GestureDetector;
+import com.utc.graphemobile.GrapheMobile;
 import com.utc.graphemobile.element.NodeSprite;
 import com.utc.graphemobile.stage.GrapheStage;
 import com.utc.graphemobile.stage.UIStage;
 
-public class GrapheScreen implements Screen , IGrapheScreen{
+public class GrapheScreen implements Screen, IGrapheScreen {
 
 	private GrapheStage grapheStage;
 	private UIStage uiStage;
-	
-	public enum MODE{
-		NORMAL,
-		EDIT
+	private GrapheMobile game;
+
+	public enum MODE {
+		NORMAL, EDIT
 	}
-	
+
 	private MODE mode = MODE.EDIT;
-	
+
 	private HierarchicalGraph graph;
 	private List<NodeSprite> selectedNodes = new ArrayList<NodeSprite>();
 	private BitmapFont font;
 
-	public GrapheScreen() throws FileNotFoundException, URISyntaxException {
-		font = new BitmapFont();
-		font.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
+
+	public GrapheScreen(GrapheMobile game) throws FileNotFoundException, URISyntaxException {
+		this.game = game;
 		
-	
+		font = new BitmapFont();
+		font.getRegion().getTexture()
+				.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+
 		grapheStage = new GrapheStage(this);
-		uiStage = new UIStage();
+		uiStage = new UIStage(this);
 		uiStage.showLeftMenu();
 		uiStage.showRightMenu();
 		InputMultiplexer multiplexer = new InputMultiplexer();
 		multiplexer.addProcessor(uiStage);
 		multiplexer.addProcessor(grapheStage);
-		multiplexer.addProcessor(new GestureDetector(grapheStage.getGestureListener()));
-		//multiplexer.addProcessor(new GestureDetector(uiStage.getGestureListener()));
+		multiplexer.addProcessor(new GestureDetector(grapheStage
+				.getGestureListener()));
+		// multiplexer.addProcessor(new
+		// GestureDetector(uiStage.getGestureListener()));
 		Gdx.input.setInputProcessor(multiplexer);
 		
 		loadGraphe(Gdx.files.internal("data/test.gexf"));//TODO to REMOVE
 	}
+
 	
 	public void loadGraphe(FileHandle handle) throws URISyntaxException, FileNotFoundException {
 		
@@ -87,6 +94,7 @@ public class GrapheScreen implements Screen , IGrapheScreen{
 //			    
 //			   }).start();
 		
+
 	}
 
 	@Override
@@ -112,25 +120,28 @@ public class GrapheScreen implements Screen , IGrapheScreen{
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void hide() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void pause() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void resume() {
 		// TODO Auto-generated method stub
-		
+		uiStage.dispose();
+		uiStage = new UIStage(this);
+		uiStage.showLeftMenu();
+		uiStage.showRightMenu();
 	}
 
 	@Override
@@ -152,11 +163,11 @@ public class GrapheScreen implements Screen , IGrapheScreen{
 
 	@Override
 	public List<NodeSprite> getSelectedNodes() {
-		return selectedNodes ;
+		return selectedNodes;
 	}
 
 	@Override
-	public BitmapFont getFond() {
+	public BitmapFont getFont() {
 		return font;
 	}
 

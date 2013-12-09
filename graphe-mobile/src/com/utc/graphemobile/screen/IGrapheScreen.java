@@ -16,7 +16,7 @@ public interface IGrapheScreen{
 
 	void setMode(MODE mode);
 	
-	public BitmapFont getFond();
+	public BitmapFont getFont();
 
 	public HierarchicalGraph getGraph();
 }
