@@ -1,24 +1,34 @@
 package com.utc.graphemobile;
 
+import javax.swing.JFileChooser;
+
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.utc.graphemobile.specific.FileChooser;
+import com.utc.graphemobile.specific.SpecificInterface;
 
 public class Main {
+	private static GrapheMobile graphe;
+
 	public static void main(String[] args) {
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 		cfg.title = "graphe-mobile";
 		cfg.useGL20 = false;
-		cfg.width = 480;
-		cfg.height = 320;
+		cfg.width = 580;
+		cfg.height = 420;
 		
-		new LwjglApplication(new GrapheMobile(new FileChooser() {
+		graphe = new GrapheMobile(new SpecificInterface() {
 			
 			@Override
 			public void openFileChooser() {
-				// TODO Auto-generated method stub
-				
+				JFileChooser choix = new JFileChooser();
+				int retour=choix.showOpenDialog(null);
+				if(retour==JFileChooser.APPROVE_OPTION){
+				   // un fichier a été choisi (sortie par OK)
+				   // nom du fichier  choisi 
+					graphe.openGraphe(choix.getSelectedFile());
+				}
 			}
-		}), cfg);
+		});
+		new LwjglApplication(graphe, cfg);
 	}
 }

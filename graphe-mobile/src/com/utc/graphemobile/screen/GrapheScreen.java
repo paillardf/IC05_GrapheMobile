@@ -4,15 +4,10 @@ import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.gephi.graph.api.HierarchicalGraph;
 import org.gephi.io.ImportContainerImpl;
 import org.gephi.io.ImporterGEXF;
-import org.gephi.layout.plugin.AutoLayout;
-import org.gephi.layout.plugin.force.StepDisplacement;
-import org.gephi.layout.plugin.force.yifanHu.YifanHuLayout;
-import org.gephi.layout.plugin.forceAtlas.ForceAtlasLayout;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
@@ -43,15 +38,15 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 	private List<NodeSprite> selectedNodes = new ArrayList<NodeSprite>();
 	private BitmapFont font;
 
+
 	public GrapheScreen(GrapheMobile game) throws FileNotFoundException, URISyntaxException {
 		this.game = game;
 		
-		loadGraphe();
 		font = new BitmapFont();
 		font.getRegion().getTexture()
 				.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 
-		grapheStage = new GrapheStage(graph, this);
+		grapheStage = new GrapheStage(this);
 		uiStage = new UIStage(this);
 		uiStage.showLeftMenu();
 		uiStage.showRightMenu();
@@ -63,48 +58,42 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 		// multiplexer.addProcessor(new
 		// GestureDetector(uiStage.getGestureListener()));
 		Gdx.input.setInputProcessor(multiplexer);
+		
+		loadGraphe(Gdx.files.internal("data/test.gexf"));//TODO to REMOVE
 	}
 
-	private void loadGraphe() throws URISyntaxException, FileNotFoundException {
-
+	
+	public void loadGraphe(FileHandle handle) throws URISyntaxException, FileNotFoundException {
+		
 		ImporterGEXF importer = new ImporterGEXF();
-		try {
-			FileHandle handle = Gdx.files.internal("data/test.gexf");
-
-			importer.setReader(handle.reader());// FileHandle(handle);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-
-		ImportContainerImpl container = new ImportContainerImpl();
-		importer.execute(container);
-		graph = importer.process();
-
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				AutoLayout autoLayout = new AutoLayout(10, TimeUnit.MINUTES);
-				autoLayout.setGraphModel(graph.getGraphModel());
-				YifanHuLayout firstLayout = new YifanHuLayout(
-						new StepDisplacement(1f));
-				ForceAtlasLayout secondLayout = new ForceAtlasLayout();
-				AutoLayout.DynamicProperty adjustBySizeProperty = AutoLayout
-						.createDynamicProperty("forceAtlas.adjustSizes.name",
-								Boolean.TRUE, 0.1f);// True after 10% of layout
-													// time
-				AutoLayout.DynamicProperty repulsionProperty = AutoLayout
-						.createDynamicProperty(
-								"forceAtlas.repulsionStrength.name",
-								new Double(500.), 0f);// 500 for the complete
-														// period
-				autoLayout.addLayout(firstLayout, 0.5f);
-				autoLayout.addLayout(secondLayout, 0.5f,
-						new AutoLayout.DynamicProperty[] {
-								adjustBySizeProperty, repulsionProperty });
-				autoLayout.execute();
-			}
-
-		}).start();
+        try {
+        	//FileHandle handle = Gdx.files.internal("data/test.gexf");
+           
+            importer.setReader(handle.reader());//FileHandle(handle);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+		
+        ImportContainerImpl container = new ImportContainerImpl();
+        importer.execute(container);
+        graph = importer.process();   
+		grapheStage.loadObjects();
+//		new Thread(new Runnable() {
+//			         @Override
+//			         public void run() {
+//			        	 AutoLayout autoLayout = new AutoLayout(10, TimeUnit.MINUTES);
+//			     		autoLayout.setGraphModel(graph.getGraphModel());
+//			     		YifanHuLayout firstLayout = new YifanHuLayout(new StepDisplacement(1f));
+//			     		ForceAtlasLayout secondLayout = new ForceAtlasLayout();
+//			     		AutoLayout.DynamicProperty adjustBySizeProperty = AutoLayout.createDynamicProperty("forceAtlas.adjustSizes.name", Boolean.TRUE, 0.1f);//True after 10% of layout time
+//			     		AutoLayout.DynamicProperty repulsionProperty = AutoLayout.createDynamicProperty("forceAtlas.repulsionStrength.name", new Double(500.), 0f);//500 for the complete period
+//			     		autoLayout.addLayout(firstLayout, 0.5f);
+//			     		autoLayout.addLayout(secondLayout, 0.5f, new AutoLayout.DynamicProperty[]{adjustBySizeProperty, repulsionProperty});
+//			     		autoLayout.execute();
+//			         }
+//			    
+//			   }).start();
+		
 
 	}
 
@@ -180,5 +169,10 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 	@Override
 	public BitmapFont getFont() {
 		return font;
+	}
+
+	@Override
+	public HierarchicalGraph getGraph() {
+		return graph;
 	}
 }
