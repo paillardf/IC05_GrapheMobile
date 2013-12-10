@@ -12,9 +12,11 @@ public interface IGrapheScreen{
 	
 	public MODE getMode();
 	
+	public void setMode(MODE mode);
+	
 	public List<NodeSprite> getSelectedNodes();
-
-	void setMode(MODE mode);
+	
+	public void updateSelectedNodesList();
 	
 	public BitmapFont getFont();
 

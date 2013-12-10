@@ -13,8 +13,8 @@ public class Main {
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 		cfg.title = "graphe-mobile";
 		cfg.useGL20 = false;
-		cfg.width = 580;
-		cfg.height = 420;
+		cfg.width = 1000;
+		cfg.height = 600;
 		
 		graphe = new GrapheMobile(new SpecificInterface() {
 			

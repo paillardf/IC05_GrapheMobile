@@ -14,6 +14,8 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.GL11;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.input.GestureDetector;
@@ -32,7 +34,7 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 		NORMAL, EDIT
 	}
 
-	private MODE mode = MODE.EDIT;
+	private MODE mode = MODE.NORMAL;
 
 	private HierarchicalGraph graph;
 	private List<NodeSprite> selectedNodes = new ArrayList<NodeSprite>();
@@ -50,6 +52,7 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 		uiStage = new UIStage(this);
 		uiStage.showLeftMenu();
 		uiStage.showRightMenu();
+		uiStage.showHideAndShowButton();
 		InputMultiplexer multiplexer = new InputMultiplexer();
 		multiplexer.addProcessor(uiStage);
 		multiplexer.addProcessor(grapheStage);
@@ -101,6 +104,7 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 	public void render(float delta) {
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+		Gdx.gl.glEnable(GL11.GL_POINT_SMOOTH);
 
 		grapheStage.act(delta);
 		grapheStage.draw();
@@ -142,6 +146,7 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 		uiStage = new UIStage(this);
 		uiStage.showLeftMenu();
 		uiStage.showRightMenu();
+		uiStage.showHideAndShowButton();
 	}
 
 	@Override
@@ -174,5 +179,12 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 	@Override
 	public HierarchicalGraph getGraph() {
 		return graph;
+	}
+
+
+	@Override
+	public void updateSelectedNodesList() {
+		// TODO Auto-generated method stub
+		
 	}
 }
