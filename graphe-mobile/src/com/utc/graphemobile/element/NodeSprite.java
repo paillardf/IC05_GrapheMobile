@@ -10,7 +10,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -28,6 +30,9 @@ public class NodeSprite extends Actor {
 	private boolean selected = false;
 	private TextureRegion textureRegion;
 
+	private static Action scaleAction =Actions.forever(Actions.sequence(
+			Actions.scaleTo(1.1f, 1.1f, 0.5f),
+			Actions.scaleTo(1, 1, 0.5f)));
 	public NodeSprite(Node n, TextureRegion regionCircle, IGrapheScreen mScreen) {
 		this.nodeModel = n;
 		this.screen = mScreen;
@@ -37,20 +42,30 @@ public class NodeSprite extends Actor {
 		ActorGestureListener mActorGestureListener = new ActorGestureListener() {
 
 			@Override
+			public boolean handle(Event e) {
+				switch (screen.getMode()) {
+				case EDIT:
+					return true;
+				default:
+					return false;
+				}
+				
+			};
+			
+			@Override
 			public boolean longPress(Actor actor, float x, float y) {
 				switch (screen.getMode()) {
 				case EDIT:
 					List<NodeSprite> selectedNodes = screen.getSelectedNodes();
 					if (!selected) {
 						selectedNodes.add(NodeSprite.this);
-						addAction(Actions.forever(Actions.sequence(
-								Actions.scaleTo(1.1f, 1.1f, 0.5f),
-								Actions.scaleTo(1, 1, 0.5f))));
+						addAction(scaleAction);
 					} else {
 						selectedNodes.remove(NodeSprite.this);
 						clearActions();
 					}
 					selected = !selected;
+					screen.updateSelectedNodesList();
 					return true;
 
 				default:
