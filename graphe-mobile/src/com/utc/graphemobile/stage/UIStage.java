@@ -126,7 +126,7 @@ public class UIStage extends Stage {
 		float scale = 0.0f;
 
 		/***		OPEN		***/
-		TextureRegion tr = new TextureRegion(new Texture(Gdx.files.internal("ok-icon-md.png")));
+		TextureRegion tr = new TextureRegion(skin.getRegion("open"));
 		Image image1 = new Image(tr);
 		scale = (float) (widthLeftMenu / image1.getWidth());
 		image1.setWidth(widthLeftMenu);
@@ -137,7 +137,7 @@ public class UIStage extends Stage {
 		image1.addListener(eventListener);
 		
 		/***		CENTER		***/
-		tr = new TextureRegion(new Texture(Gdx.files.internal("Delete All.png")));
+		tr = new TextureRegion(skin.getRegion("center"));
 		Image image2 = new Image(tr);
 		scale = (float) (widthLeftMenu / image2.getWidth());
 		image2.setWidth(widthLeftMenu);
