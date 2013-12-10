@@ -26,7 +26,6 @@ public class UIStage extends Stage {
 	private Table leftTable;
 	private Table rightTable;
 	private Skin skin;
-	private BitmapFont font;
 
 	private float widthUI = 0.0f;
 	private float widthLeftMenu = 0.0f;
@@ -40,30 +39,12 @@ public class UIStage extends Stage {
 		super();
 		this.screen = screen;
 		eventListener = new UIEventListener();
-		skin = new Skin();
-		font = new BitmapFont();
-		font.setScale(2f);
+		skin = new Skin(Gdx.files.internal("data/style.json"),
+				new TextureAtlas("data/style.atlas"));
 		
 		leftTable = new Table();
 
 		rightTable = new Table();
-
-		Pixmap p = new Pixmap(1, 1, Format.RGBA8888);
-		p.setColor(Color.WHITE);
-		p.fill();
-		skin.add("white", new Texture(p));
-
-		p.setColor(Color.GRAY);
-		p.fill();
-		skin.add("gray", new Texture(p));
-
-		p.setColor(Color.BLUE);
-		p.fill();
-		skin.add("blue", new Texture(p));
-
-		p.setColor(Color.BLACK);
-		p.fill();
-		skin.add("black", new Texture(p));
 
 		resize();
 		drawLeftMenu();
@@ -150,7 +131,7 @@ public class UIStage extends Stage {
 		table.addActor(image2);
 		image2.addListener(eventListener);
 
-		table.setBackground(skin.getDrawable("gray"));
+		table.setBackground(skin.getDrawable("gray-pixel"));
 
 		return table;
 	}
@@ -159,41 +140,25 @@ public class UIStage extends Stage {
 		Table table = new Table();
 
 		// TODO Gérer le menu
-		/*
-		LabelStyle labelStyle = new LabelStyle(font, Color.WHITE);
-		Label label = new Label("Name", labelStyle);
-		table.addActor(label);
-		*/
-
-		Skin textFieldSkin = new Skin(Gdx.files.internal("skins/TextField.json"));
-//		TextField textField = new TextField("Test", textFieldSkin);
-
-		TextFieldStyle style = new TextFieldStyle();
-		style.font = textFieldSkin.getFont("default-font");
-		style.fontColor = Color.BLACK;
-		style.cursor = skin.getDrawable("black");
-		style.background = skin.getDrawable("white");
-		style.selection = skin.getDrawable("blue");
-		
-		TextField textField = new TextField("test", style);
+		TextField textField = new TextField("Test", skin);
+		textField.setWidth(widthRightMenu - 10);
+		textField.setHeight(textField.getWidth() * 0.3f);
 		textField.setX(5);
 		textField.setY(heightUI - textField.getHeight() - 5);
-		textField.setWidth(widthRightMenu - 10);
 		table.addActor(textField);
 		
-		table.setBackground(skin.getDrawable("gray"));
+		table.setBackground(skin.getDrawable("gray-pixel"));
 		return table;
 		
 	}
 
 	private Table border() {
 		Table table = new Table();
-		table.setBackground(skin.getDrawable("gray"));
+		table.setBackground(skin.getDrawable("black-pixel"));
 		return table;
 	}
 	
 	public void dispose() {
 		skin.dispose();
-		font.dispose();
 	}
 }

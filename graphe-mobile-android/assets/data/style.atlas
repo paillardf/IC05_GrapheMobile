@@ -1,0 +1,67 @@
+style.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+about
+  rotate: false
+  xy: 68, 64
+  size: 56, 16
+  orig: 64, 64
+  offset: 4, 24
+  index: -1
+close
+  rotate: false
+  xy: 2, 2
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+center
+  rotate: false
+  xy: 2, 68
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+white-pixel
+  rotate: false
+  xy: 102, 82
+  size: 2, 2
+  orig: 2, 2
+  offset: 0, 0
+  index: -1
+tag
+  rotate: false
+  xy: 68, 82
+  size: 32, 32
+  orig: 64, 64
+  offset: 16, 16
+  index: -1
+open
+  rotate: false
+  xy: 68, 2
+  size: 56, 60
+  orig: 64, 64
+  offset: 4, 0
+  index: -1
+selection-pixel
+  rotate: false
+  xy: 105, 82
+  size: 2, 2
+  orig: 2, 2
+  offset: 0, 0
+  index: -1
+black-pixel
+  rotate: false
+  xy: 108, 82
+  size: 2, 2
+  orig: 2, 2
+  offset: 0, 0
+  index: -1
+gray-pixel
+  rotate: false
+  xy: 111, 82
+  size: 2, 2
+  orig: 2, 2
+  offset: 0, 0
+  index: -1

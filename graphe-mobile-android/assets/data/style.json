@@ -13,7 +13,10 @@
         com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
                 default: {
                 		font: default-font,
-                        fontColor: black
+                        fontColor: black,
+                        background: white-pixel,
+                        cursor: black-pixel,
+                        selection: selection-pixel
                 }
 	    }
 }
