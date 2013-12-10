@@ -52,6 +52,7 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 		uiStage = new UIStage(this);
 		uiStage.showLeftMenu();
 		uiStage.showRightMenu();
+		uiStage.showHideAndShowButton();
 		InputMultiplexer multiplexer = new InputMultiplexer();
 		multiplexer.addProcessor(uiStage);
 		multiplexer.addProcessor(grapheStage);
@@ -145,6 +146,7 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 		uiStage = new UIStage(this);
 		uiStage.showLeftMenu();
 		uiStage.showRightMenu();
+		uiStage.showHideAndShowButton();
 	}
 
 	@Override

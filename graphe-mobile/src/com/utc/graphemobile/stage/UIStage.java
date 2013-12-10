@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -17,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
+import com.utc.graphemobile.input.ShowLeftMenuEventListener;
 import com.utc.graphemobile.input.UIEventListener;
 import com.utc.graphemobile.screen.*;
 
@@ -25,6 +27,7 @@ public class UIStage extends Stage {
 	private UIEventListener eventListener;
 	private Table leftTable;
 	private Table rightTable;
+	private Image hideAndShowLeftMenu;
 	private Skin skin;
 	private BitmapFont font;
 
@@ -83,6 +86,7 @@ public class UIStage extends Stage {
 		leftTable.setFillParent(true);
 		leftTable.setWidth(widthUI);
 		leftTable.setHeight(heightUI);
+		leftTable.setX(-widthLeftMenu-widthBorder);
 		drawLeftMenu();
 
 		rightTable.reset();
@@ -91,6 +95,20 @@ public class UIStage extends Stage {
 		rightTable.setWidth(widthUI);
 		rightTable.setHeight(heightUI);
 		drawRightMenu();
+	}
+	
+	public void showHideAndShowButton() {
+		TextureRegion tr = new TextureRegion(new Texture(Gdx.files.internal("ok-icon-md.png")));
+		hideAndShowLeftMenu = new Image(tr);
+		float scale = (float) (widthLeftMenu / hideAndShowLeftMenu.getWidth());
+		hideAndShowLeftMenu.setWidth(widthLeftMenu/2);
+		hideAndShowLeftMenu.setHeight((int) ((hideAndShowLeftMenu.getHeight()/2) * scale));
+		hideAndShowLeftMenu.setX(7);
+		hideAndShowLeftMenu.setY(heightUI - hideAndShowLeftMenu.getHeight() - 7);
+		
+		this.addActor(hideAndShowLeftMenu);
+		
+		hideAndShowLeftMenu.addListener(new ShowLeftMenuEventListener(hideAndShowLeftMenu, leftTable, heightUI));
 	}
 
 	public void showLeftMenu() {
@@ -126,8 +144,8 @@ public class UIStage extends Stage {
 
 		float scale = 0.0f;
 
-		TextureRegion tr = new TextureRegion(new Texture(
-				Gdx.files.internal("ok-icon-md.png")));
+		/***		OPEN		***/
+		TextureRegion tr = new TextureRegion(new Texture(Gdx.files.internal("ok-icon-md.png")));
 		Image image1 = new Image(tr);
 		scale = (float) (widthLeftMenu / image1.getWidth());
 		image1.setWidth(widthLeftMenu);
@@ -136,11 +154,9 @@ public class UIStage extends Stage {
 		image1.setY(heightUI - image1.getHeight());
 		table.addActor(image1);
 		image1.addListener(eventListener);
-
-		table.row();
-
-		tr = new TextureRegion(
-				new Texture(Gdx.files.internal("Delete All.png")));
+		
+		/***		CENTER		***/
+		tr = new TextureRegion(new Texture(Gdx.files.internal("Delete All.png")));
 		Image image2 = new Image(tr);
 		scale = (float) (widthLeftMenu / image2.getWidth());
 		image2.setWidth(widthLeftMenu);
@@ -149,6 +165,17 @@ public class UIStage extends Stage {
 		image2.setY(image1.getY() - image2.getHeight() - 20);
 		table.addActor(image2);
 		image2.addListener(eventListener);
+		
+		/***		CENTER		***/
+		tr = new TextureRegion(new Texture(Gdx.files.internal("ok-icon-md.png")));
+		Image image3 = new Image(tr);
+		scale = (float) (widthLeftMenu / image3.getWidth());
+		image3.setWidth(widthLeftMenu);
+		image3.setHeight((int) (image3.getHeight() * scale));
+		image3.setX(0);
+		image3.setY(image2.getY() - image3.getHeight() - 20);
+		table.addActor(image3);
+		image3.addListener(eventListener);
 
 		table.setBackground(skin.getDrawable("gray"));
 
