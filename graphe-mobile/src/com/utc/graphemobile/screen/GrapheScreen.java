@@ -40,7 +40,6 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 	private List<NodeSprite> selectedNodes = new ArrayList<NodeSprite>();
 	private BitmapFont font;
 
-
 	public GrapheScreen(GrapheMobile game) throws FileNotFoundException, URISyntaxException {
 		this.game = game;
 		
@@ -185,6 +184,6 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 	@Override
 	public void updateSelectedNodesList() {
 		// TODO Auto-generated method stub
-		
+		uiStage.refresh();
 	}
 }

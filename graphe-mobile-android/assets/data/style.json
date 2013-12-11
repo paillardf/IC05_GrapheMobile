@@ -8,7 +8,10 @@
                 selection-color: { r:0.196, g:0.592, b:0.992, a: 1 }
         },
         com.badlogic.gdx.graphics.g2d.BitmapFont: {
-                default-font: { file: data/default.fnt }
+                default-font: {
+                		file: data/default.fnt,
+                		scale: 3
+        		}
         },
         com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
                 default: {

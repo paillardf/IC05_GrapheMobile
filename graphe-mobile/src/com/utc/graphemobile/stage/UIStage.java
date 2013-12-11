@@ -1,5 +1,7 @@
 package com.utc.graphemobile.stage;
 
+import java.util.List;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -18,8 +20,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
-import com.utc.graphemobile.input.ShowLeftMenuEventListener;
-import com.utc.graphemobile.input.UIEventListener;
+import com.utc.graphemobile.element.NodeSprite;
+import com.utc.graphemobile.input.*;
 import com.utc.graphemobile.screen.*;
 
 public class UIStage extends Stage {
@@ -76,6 +78,16 @@ public class UIStage extends Stage {
 		rightTable.setWidth(widthUI);
 		rightTable.setHeight(heightUI);
 		drawRightMenu();
+	}
+	
+	public void refresh(){
+		List<NodeSprite> selectedNodes = screen.getSelectedNodes();
+		if(selectedNodes.size() == 0){
+			hideRightMenu();
+		}
+		else{
+			resize();
+		}
 	}
 	
 	public void showHideAndShowButton() {
@@ -164,15 +176,29 @@ public class UIStage extends Stage {
 	}
 
 	private Table rightMenu() {
+		float currentY = heightUI;
 		Table table = new Table();
-
-		// TODO Gérer le menu
-		TextField textField = new TextField("Test", skin);
-		textField.setWidth(widthRightMenu - 10);
-		textField.setHeight(textField.getWidth() * 0.3f);
-		textField.setX(5);
-		textField.setY(heightUI - textField.getHeight() - 5);
-		table.addActor(textField);
+		List<NodeSprite> selectedNodes = screen.getSelectedNodes();
+//		if(selectedNodes.size() == 1){
+			TextField nameTF = new TextField("Test", skin);
+			nameTF.setWidth(widthRightMenu - 10);
+			nameTF.setHeight(nameTF.getWidth() * 0.3f);
+			nameTF.setX(5);
+			currentY -= nameTF.getHeight() + 5;
+			nameTF.setY(currentY);
+			nameTF.setTextFieldListener(new NameTextFieldListener(nameTF));
+			table.addActor(nameTF);
+//		}
+//		if(selectedNodes.size() >= 1){	
+			TextField colorTF = new TextField("A05E1D", skin);
+			colorTF.setWidth(widthRightMenu - 10);
+			colorTF.setHeight(colorTF.getWidth() * 0.3f);
+			colorTF.setX(5);
+			currentY -= colorTF.getHeight() + 5;
+			colorTF.setY(currentY);
+			colorTF.setTextFieldListener(new ColorTextFieldListener(colorTF));
+			table.addActor(colorTF);
+//		}
 		
 		table.setBackground(skin.getDrawable("gray-pixel"));
 		return table;

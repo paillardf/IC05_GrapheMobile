@@ -32,7 +32,7 @@ public class GrapheStage extends Stage{
 		
 		loadObjects();
 		
-		//screen.setMode(MODE.EDIT);//TODO remove me
+		// screen.setMode(MODE.EDIT);//TODO remove me
 	}
 
 	@Override
