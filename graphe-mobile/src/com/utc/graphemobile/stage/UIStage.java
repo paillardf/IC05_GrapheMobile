@@ -29,7 +29,8 @@ public class UIStage extends Stage {
 	private UIEventListener eventListener;
 	private Table leftTable;
 	private Table rightTable;
-	private Image hideAndShowLeftMenu;
+	private Image hideLeftMenu;
+	private Image showLeftMenu;
 	private Skin skin;
 
 	private float widthUI = 0.0f;
@@ -92,16 +93,16 @@ public class UIStage extends Stage {
 	
 	public void showHideAndShowButton() {
 		TextureRegion tr = new TextureRegion(new Texture(Gdx.files.internal("ok-icon-md.png")));
-		hideAndShowLeftMenu = new Image(tr);
-		float scale = (float) (widthLeftMenu / hideAndShowLeftMenu.getWidth());
-		hideAndShowLeftMenu.setWidth(widthLeftMenu/2);
-		hideAndShowLeftMenu.setHeight((int) ((hideAndShowLeftMenu.getHeight()/2) * scale));
-		hideAndShowLeftMenu.setX(7);
-		hideAndShowLeftMenu.setY(heightUI - hideAndShowLeftMenu.getHeight() - 7);
+		showLeftMenu = new Image(tr);
+		float scale = (float) (widthLeftMenu / showLeftMenu.getWidth());
+		showLeftMenu.setWidth(widthLeftMenu/2);
+		showLeftMenu.setHeight((showLeftMenu.getHeight()/2) * scale);
+		showLeftMenu.setX(7);
+		showLeftMenu.setY(heightUI - showLeftMenu.getHeight() - 7);
+		showLeftMenu.addListener(new ShowLeftMenuEventListener(showLeftMenu, leftTable));
 		
-		this.addActor(hideAndShowLeftMenu);
+		this.addActor(showLeftMenu);
 		
-		hideAndShowLeftMenu.addListener(new ShowLeftMenuEventListener(hideAndShowLeftMenu, leftTable, heightUI));
 	}
 
 	public void showLeftMenu() {
@@ -136,15 +137,25 @@ public class UIStage extends Stage {
 		Table table = new Table();
 
 		float scale = 0.0f;
+		
+		TextureRegion tr = new TextureRegion(new Texture(Gdx.files.internal("Delete All.png")));
+		hideLeftMenu = new Image(tr);
+		scale = (float) (widthLeftMenu / hideLeftMenu.getWidth());
+		hideLeftMenu.setWidth(widthLeftMenu/2);
+		hideLeftMenu.setHeight((hideLeftMenu.getHeight()/2) * scale);
+		hideLeftMenu.setX(7);
+		hideLeftMenu.setY(heightUI - hideLeftMenu.getHeight() - 7);
+		hideLeftMenu.addListener(new ShowLeftMenuEventListener(showLeftMenu, leftTable));
+		table.addActor(hideLeftMenu);
 
 		/***		OPEN		***/
-		TextureRegion tr = new TextureRegion(skin.getRegion("open"));
+		tr = new TextureRegion(skin.getRegion("open"));
 		Image image1 = new Image(tr);
 		scale = (float) (widthLeftMenu / image1.getWidth());
 		image1.setWidth(widthLeftMenu);
 		image1.setHeight((int) (image1.getHeight() * scale));
 		image1.setX(0);
-		image1.setY(heightUI - image1.getHeight());
+		image1.setY(heightUI - image1.getHeight() - 14 - hideLeftMenu.getHeight());
 		table.addActor(image1);
 		image1.addListener(eventListener);
 		
