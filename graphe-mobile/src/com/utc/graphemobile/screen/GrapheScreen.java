@@ -26,8 +26,8 @@ import com.utc.graphemobile.stage.UIStage;
 
 public class GrapheScreen implements Screen, IGrapheScreen {
 
-	static private GrapheStage grapheStage;
-	static private UIStage uiStage;
+	private GrapheStage grapheStage;
+	private UIStage uiStage;
 	private GrapheMobile game;
 
 	public enum MODE {
@@ -187,7 +187,7 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 		uiStage.refresh();
 	}
 	
-	static public GrapheStage getGrapheStage() {
+	public GrapheStage getGrapheStage() {
 		return grapheStage;
 	}
 }

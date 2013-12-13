@@ -44,7 +44,7 @@ public class UIStage extends Stage {
 	public UIStage(GrapheScreen screen) {
 		super();
 		this.screen = screen;
-		eventListener = new UIEventListener();
+		eventListener = new UIEventListener(screen);
 		skin = new Skin(Gdx.files.internal("data/style.json"),
 				new TextureAtlas("data/style.atlas"));
 		

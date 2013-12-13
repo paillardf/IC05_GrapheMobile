@@ -4,14 +4,15 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.utc.graphemobile.screen.GrapheScreen;
+import com.utc.graphemobile.screen.IGrapheScreen;
 import com.utc.graphemobile.stage.GrapheStage;
 
 public class UIEventListener extends ActorGestureListener{
 
-	private int i = 0;
+	private GrapheScreen screen;
 	
-	public UIEventListener() {
-		
+	public UIEventListener(GrapheScreen mScreen) {
+		this.screen = mScreen;
 	}
 	
 	@Override
@@ -23,7 +24,7 @@ public class UIEventListener extends ActorGestureListener{
 			} else if(this.getTouchDownTarget().getName().equals("close")) {
 				
 			} else if(this.getTouchDownTarget().getName().equals("center")) {				
-				GrapheScreen.getGrapheStage().getCamera().position.set(0, 0, 0);
+				screen.getGrapheStage().getCamera().position.set(0, 0, 0);
 			} else if(this.getTouchDownTarget().getName().equals("name")) {
 				
 			} else if(this.getTouchDownTarget().getName().equals("about")) {
