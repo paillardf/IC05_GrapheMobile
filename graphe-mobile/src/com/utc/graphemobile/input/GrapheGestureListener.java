@@ -18,6 +18,8 @@ public class GrapheGestureListener implements GestureListener{
 	public boolean touchDown(float x, float y, int pointer, int button) {
 		iniZoomCamera = camera.zoom;
 		//iniAngleCamera = camera.rotate(angle)
+		
+		System.out.println("x:"+x+" y:"+y);
 
 		return false;
 	}

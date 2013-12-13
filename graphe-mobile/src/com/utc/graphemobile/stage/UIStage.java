@@ -151,6 +151,7 @@ public class UIStage extends Stage {
 		/***		OPEN		***/
 		tr = new TextureRegion(skin.getRegion("open"));
 		Image openImg = new Image(tr);
+		openImg.setName("open");
 		scale = (float) (widthLeftMenu / openImg.getWidth());
 		openImg.setWidth(widthLeftMenu);
 		openImg.setHeight((int) (openImg.getHeight() * scale));
@@ -162,6 +163,7 @@ public class UIStage extends Stage {
 		/***		CLOSE		***/
 		tr = new TextureRegion(skin.getRegion("close"));
 		Image closeImg = new Image(tr);
+		closeImg.setName("close");
 		scale = (float) (widthLeftMenu / closeImg.getWidth());
 		closeImg.setWidth(widthLeftMenu);
 		closeImg.setHeight((int) (closeImg.getHeight() * scale));
@@ -173,6 +175,7 @@ public class UIStage extends Stage {
 		/***		CENTER		***/
 		tr = new TextureRegion(skin.getRegion("center"));
 		Image centerImg = new Image(tr);
+		centerImg.setName("center");
 		scale = (float) (widthLeftMenu / centerImg.getWidth());
 		centerImg.setWidth(widthLeftMenu);
 		centerImg.setHeight((int) (centerImg.getHeight() * scale));
@@ -185,6 +188,7 @@ public class UIStage extends Stage {
 		//TODO: Add region name
 		tr = new TextureRegion(skin.getRegion("center"));
 		Image nameImg = new Image(tr);
+		nameImg.setName("name");
 		scale = (float) (widthLeftMenu / nameImg.getWidth());
 		nameImg.setWidth(widthLeftMenu);
 		nameImg.setHeight((int) (nameImg.getHeight() * scale));
@@ -196,6 +200,7 @@ public class UIStage extends Stage {
 		/***		ABOUT		***/
 		tr = new TextureRegion(skin.getRegion("about"));
 		Image aboutImg = new Image(tr);
+		aboutImg.setName("about");
 		scale = (float) (widthLeftMenu / aboutImg.getWidth());
 		aboutImg.setWidth(widthLeftMenu);
 		aboutImg.setHeight((int) (aboutImg.getHeight() * scale));

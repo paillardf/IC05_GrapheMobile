@@ -20,7 +20,7 @@ public class GrapheStage extends Stage{
 	private GrapheGestureListener gestureListener;
 	private IGrapheScreen screen;
 	private Texture textureCircle;
-	private TextureRegion regionCircle;
+	private TextureRegion regionCircle;	
 
 	public GrapheStage(IGrapheScreen mScreen) {
 		super();
