@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.gephi.graph.api.HierarchicalGraph;
+import org.gephi.graph.api.Node;
 import org.gephi.io.ImportContainerImpl;
 import org.gephi.io.ImporterGEXF;
 
@@ -19,6 +20,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.input.GestureDetector;
+import com.badlogic.gdx.utils.Array;
 import com.utc.graphemobile.GrapheMobile;
 import com.utc.graphemobile.element.NodeSprite;
 import com.utc.graphemobile.stage.GrapheStage;
@@ -29,6 +31,9 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 	private GrapheStage grapheStage;
 	private UIStage uiStage;
 	private GrapheMobile game;
+	
+	private Array<String> nodeLabels;
+	private boolean nodeLabelsVisible = true;
 
 	public enum MODE {
 		NORMAL, EDIT
@@ -62,6 +67,17 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 		Gdx.input.setInputProcessor(multiplexer);
 		
 		loadGraphe(Gdx.files.internal("data/test.gexf"));//TODO to REMOVE
+		
+		this.getNodes();
+	}
+	
+	private void getNodes() {
+		// on récupère les labels des nodes
+		Array<String> nodeLabels = new Array<String>();
+		for(Node n : this.getGraph().getNodes()) {
+			nodeLabels.add(n.getNodeData().getLabel());
+		}
+		this.setNodeLabels(nodeLabels);
 	}
 
 	
@@ -189,5 +205,21 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 	
 	public GrapheStage getGrapheStage() {
 		return grapheStage;
+	}
+	
+	public Array<String> getNodeLabels() {
+		return nodeLabels;
+	}
+	
+	public void setNodeLabels(Array<String> array) {
+		this.nodeLabels = array;
+	}
+	
+	public boolean getNodeLabelsVisible() {
+		return nodeLabelsVisible;
+	}
+	
+	public void setNodeLabelsVisible(boolean bool) {
+		this.nodeLabelsVisible = bool;
 	}
 }

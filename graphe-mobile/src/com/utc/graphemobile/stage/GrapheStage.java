@@ -10,19 +10,22 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.Array;
 import com.utc.graphemobile.element.EdgeSprite;
 import com.utc.graphemobile.element.NodeSprite;
 import com.utc.graphemobile.input.GrapheGestureListener;
+import com.utc.graphemobile.screen.GrapheScreen;
 import com.utc.graphemobile.screen.IGrapheScreen;
 
 public class GrapheStage extends Stage{
 
 	private GrapheGestureListener gestureListener;
-	private IGrapheScreen screen;
+	private GrapheScreen screen;
 	private Texture textureCircle;
 	private TextureRegion regionCircle;	
+	
 
-	public GrapheStage(IGrapheScreen mScreen) {
+	public GrapheStage(GrapheScreen mScreen) {
 		super();
 		this.screen = mScreen;
 		

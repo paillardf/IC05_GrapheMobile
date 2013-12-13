@@ -1,8 +1,11 @@
 package com.utc.graphemobile.input;
 
+import org.gephi.graph.api.Node;
+
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
+import com.utc.graphemobile.element.NodeSprite;
 import com.utc.graphemobile.screen.GrapheScreen;
 import com.utc.graphemobile.screen.IGrapheScreen;
 import com.utc.graphemobile.stage.GrapheStage;
@@ -26,6 +29,18 @@ public class UIEventListener extends ActorGestureListener{
 			} else if(this.getTouchDownTarget().getName().equals("center")) {				
 				screen.getGrapheStage().getCamera().position.set(0, 0, 0);
 			} else if(this.getTouchDownTarget().getName().equals("name")) {
+				if(screen.getNodeLabelsVisible()) {
+					for(Node n : screen.getGraph().getNodes()) {
+						n.getNodeData().setLabel("");
+					}
+					screen.setNodeLabelsVisible(false);
+				} else {
+					int it = 0;
+					for(Node n : screen.getGraph().getNodes()) {
+						n.getNodeData().setLabel(screen.getNodeLabels().get(it++));
+					}
+					screen.setNodeLabelsVisible(true);
+				}
 				
 			} else if(this.getTouchDownTarget().getName().equals("about")) {
 				
