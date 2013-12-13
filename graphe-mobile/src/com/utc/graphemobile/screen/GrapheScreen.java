@@ -207,6 +207,10 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 		return grapheStage;
 	}
 	
+	public UIStage getUIStage() {
+		return uiStage;
+	}
+	
 	public Array<String> getNodeLabels() {
 		return nodeLabels;
 	}

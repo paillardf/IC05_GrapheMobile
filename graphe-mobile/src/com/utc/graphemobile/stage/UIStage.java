@@ -29,6 +29,7 @@ public class UIStage extends Stage {
 	private UIEventListener eventListener;
 	private Table leftTable;
 	private Table rightTable;
+	private Table aboutTable;
 	private Image hideLeftMenu;
 	private Image showLeftMenu;
 	private Skin skin;
@@ -49,12 +50,13 @@ public class UIStage extends Stage {
 				new TextureAtlas("data/style.atlas"));
 		
 		leftTable = new Table();
-
 		rightTable = new Table();
+		aboutTable = new Table();
 
 		resize();
 		drawLeftMenu();
 		drawRightMenu();
+		drawAbout();
 	}
 
 	public void resize() {
@@ -79,6 +81,12 @@ public class UIStage extends Stage {
 		rightTable.setWidth(widthUI);
 		rightTable.setHeight(heightUI);
 		drawRightMenu();
+		
+		aboutTable.reset();
+		aboutTable.setFillParent(true);
+		rightTable.setWidth(widthUI);
+		rightTable.setHeight(heightUI);
+		drawAbout();
 	}
 	
 	public void refresh(){
@@ -112,6 +120,10 @@ public class UIStage extends Stage {
 	public void showRightMenu() {
 		this.addActor(rightTable);
 	}
+	
+	public void showAbout() {
+		this.addActor(aboutTable);
+	}
 
 	public void hideLeftMenu() {
 		leftTable.remove();
@@ -119,6 +131,10 @@ public class UIStage extends Stage {
 
 	public void hideRightMenu() {
 		rightTable.remove();
+	}
+	
+	public void hideAbout() {
+		aboutTable.remove();
 	}
 
 	private void drawLeftMenu() {
@@ -131,6 +147,10 @@ public class UIStage extends Stage {
 		// Right Menu
 		rightTable.add().height(heightUI).width(widthUI - widthRightMenu);
 		rightTable.add(rightMenu()).height(heightUI).width(widthRightMenu);
+	}
+	
+	private void drawAbout() {
+		aboutTable.add(about()).height(heightUI).width(widthUI);
 	}
 
 	private Table leftMenu() {
@@ -243,6 +263,24 @@ public class UIStage extends Stage {
 		return table;
 		
 	}
+	
+	private Table about() {
+		Table table = new Table();
+		table.setBackground(skin.getDrawable("gray-pixel"));
+
+		TextureRegion tr = new TextureRegion(new Texture(Gdx.files.internal("Delete All.png")));
+		Image closeBtn = new Image(tr);
+		closeBtn.setName("aboutClose");
+		float scale = (float) (widthLeftMenu / closeBtn.getWidth());
+		closeBtn.setWidth(widthLeftMenu/2);
+		closeBtn.setHeight((closeBtn.getHeight()/2) * scale);
+		closeBtn.setX(widthUI - closeBtn.getWidth() - 10);
+		closeBtn.setY(heightUI - closeBtn.getHeight() - 10);
+		closeBtn.addListener(new UIEventListener(this.screen));
+		table.addActor(closeBtn);
+		
+		return table;
+	}
 
 	private Table border() {
 		Table table = new Table();
@@ -252,5 +290,21 @@ public class UIStage extends Stage {
 	
 	public void dispose() {
 		skin.dispose();
+	}
+	
+	public Table getLeftTable() {
+		return leftTable;
+	}
+	
+	public Table getRightTable() {
+		return rightTable;
+	}
+	
+	public Table getAbout() {
+		return aboutTable;
+	}
+	
+	public Skin getSkin() {
+		return skin;
 	}
 }
