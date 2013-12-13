@@ -150,36 +150,59 @@ public class UIStage extends Stage {
 
 		/***		OPEN		***/
 		tr = new TextureRegion(skin.getRegion("open"));
-		Image image1 = new Image(tr);
-		scale = (float) (widthLeftMenu / image1.getWidth());
-		image1.setWidth(widthLeftMenu);
-		image1.setHeight((int) (image1.getHeight() * scale));
-		image1.setX(0);
-		image1.setY(heightUI - image1.getHeight() - 14 - hideLeftMenu.getHeight());
-		table.addActor(image1);
-		image1.addListener(eventListener);
+		Image openImg = new Image(tr);
+		scale = (float) (widthLeftMenu / openImg.getWidth());
+		openImg.setWidth(widthLeftMenu);
+		openImg.setHeight((int) (openImg.getHeight() * scale));
+		openImg.setX(0);
+		openImg.setY(heightUI - openImg.getHeight() - 14 - hideLeftMenu.getHeight());
+		table.addActor(openImg);
+		openImg.addListener(eventListener);
+		
+		/***		CLOSE		***/
+		tr = new TextureRegion(skin.getRegion("close"));
+		Image closeImg = new Image(tr);
+		scale = (float) (widthLeftMenu / closeImg.getWidth());
+		closeImg.setWidth(widthLeftMenu);
+		closeImg.setHeight((int) (closeImg.getHeight() * scale));
+		closeImg.setX(0);
+		closeImg.setY(openImg.getY() - closeImg.getHeight() - 20);
+		table.addActor(closeImg);
+		closeImg.addListener(eventListener);
 		
 		/***		CENTER		***/
 		tr = new TextureRegion(skin.getRegion("center"));
-		Image image2 = new Image(tr);
-		scale = (float) (widthLeftMenu / image2.getWidth());
-		image2.setWidth(widthLeftMenu);
-		image2.setHeight((int) (image2.getHeight() * scale));
-		image2.setX(0);
-		image2.setY(image1.getY() - image2.getHeight() - 20);
-		table.addActor(image2);
-		image2.addListener(eventListener);
+		Image centerImg = new Image(tr);
+		scale = (float) (widthLeftMenu / centerImg.getWidth());
+		centerImg.setWidth(widthLeftMenu);
+		centerImg.setHeight((int) (centerImg.getHeight() * scale));
+		centerImg.setX(0);
+		centerImg.setY(closeImg.getY() - centerImg.getHeight() - 20);
+		table.addActor(centerImg);
+		centerImg.addListener(eventListener);
 		
-		/***		CENTER		***/
-		tr = new TextureRegion(new Texture(Gdx.files.internal("ok-icon-md.png")));
-		Image image3 = new Image(tr);
-		scale = (float) (widthLeftMenu / image3.getWidth());
-		image3.setWidth(widthLeftMenu);
-		image3.setHeight((int) (image3.getHeight() * scale));
-		image3.setX(0);
-		image3.setY(image2.getY() - image3.getHeight() - 20);
-		table.addActor(image3);
-		image3.addListener(eventListener);
+		/***		NAME		***/
+		//TODO: Add region name
+		tr = new TextureRegion(skin.getRegion("center"));
+		Image nameImg = new Image(tr);
+		scale = (float) (widthLeftMenu / nameImg.getWidth());
+		nameImg.setWidth(widthLeftMenu);
+		nameImg.setHeight((int) (nameImg.getHeight() * scale));
+		nameImg.setX(0);
+		nameImg.setY(centerImg.getY() - nameImg.getHeight() - 20);
+		table.addActor(nameImg);
+		nameImg.addListener(eventListener);
+		
+		/***		ABOUT		***/
+		tr = new TextureRegion(skin.getRegion("about"));
+		Image aboutImg = new Image(tr);
+		scale = (float) (widthLeftMenu / aboutImg.getWidth());
+		aboutImg.setWidth(widthLeftMenu);
+		aboutImg.setHeight((int) (aboutImg.getHeight() * scale));
+		aboutImg.setX(0);
+		aboutImg.setY(nameImg.getY() - aboutImg.getHeight() - 20);
+		table.addActor(aboutImg);
+		aboutImg.addListener(eventListener);
 
 		table.setBackground(skin.getDrawable("gray-pixel"));
 
