@@ -32,8 +32,8 @@ public class ShowLeftMenuEventListener extends ActorGestureListener{
 		} else {
 			isLeftMenuHidden = true;
 			leftMenu.addAction(Actions.moveTo(-leftMenu.getWidth(), 0, 0.7f, Interpolation.fade));
-			
-			imageShowMenu.setVisible(true);
+			imageShowMenu.addAction(Actions.delay(0.5f, Actions.show()));
+			//imageShowMenu.setVisible(true);
 			
 		}
 	}

@@ -143,7 +143,7 @@ public class UIStage extends Stage {
 		scale = (float) (widthLeftMenu / hideLeftMenu.getWidth());
 		hideLeftMenu.setWidth(widthLeftMenu/2);
 		hideLeftMenu.setHeight((hideLeftMenu.getHeight()/2) * scale);
-		hideLeftMenu.setX(7);
+		hideLeftMenu.setX(((widthLeftMenu)/2) - (hideLeftMenu.getWidth()/2));
 		hideLeftMenu.setY(heightUI - hideLeftMenu.getHeight() - 7);
 		hideLeftMenu.addListener(new ShowLeftMenuEventListener(showLeftMenu, leftTable));
 		table.addActor(hideLeftMenu);
