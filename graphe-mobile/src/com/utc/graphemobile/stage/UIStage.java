@@ -206,7 +206,7 @@ public class UIStage extends Stage {
 		
 		/***		NAME		***/
 		//TODO: Add region name
-		tr = new TextureRegion(skin.getRegion("center"));
+		tr = new TextureRegion(skin.getRegion("label"));
 		Image nameImg = new Image(tr);
 		nameImg.setName("name");
 		scale = (float) (widthLeftMenu / nameImg.getWidth());

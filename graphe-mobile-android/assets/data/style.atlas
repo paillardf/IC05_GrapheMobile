@@ -30,7 +30,7 @@ white-pixel
   orig: 2, 2
   offset: 0, 0
   index: -1
-tag
+label
   rotate: false
   xy: 68, 82
   size: 32, 32
