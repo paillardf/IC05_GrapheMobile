@@ -13,6 +13,11 @@
                 		scale: 3
         		}
         },
+        com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
+                default: {
+                		font: default-font
+                }
+	    },
         com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
                 default: {
                 		font: default-font,

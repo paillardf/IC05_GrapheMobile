@@ -16,7 +16,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.GL11;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.input.GestureDetector;
@@ -44,6 +43,7 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 	private HierarchicalGraph graph;
 	private List<NodeSprite> selectedNodes = new ArrayList<NodeSprite>();
 	private BitmapFont font;
+	private boolean isLabelVisible;
 
 	public GrapheScreen(GrapheMobile game) throws FileNotFoundException, URISyntaxException {
 		this.game = game;
@@ -54,9 +54,7 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 
 		grapheStage = new GrapheStage(this);
 		uiStage = new UIStage(this);
-		uiStage.showLeftMenu();
 		uiStage.showRightMenu();
-		uiStage.showHideAndShowButton();
 		InputMultiplexer multiplexer = new InputMultiplexer();
 		multiplexer.addProcessor(uiStage);
 		multiplexer.addProcessor(grapheStage);
@@ -157,11 +155,9 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 	@Override
 	public void resume() {
 		// TODO Auto-generated method stub
-		uiStage.dispose();
-		uiStage = new UIStage(this);
-		uiStage.showLeftMenu();
-		uiStage.showRightMenu();
-		uiStage.showHideAndShowButton();
+//		uiStage.dispose();
+//		uiStage = new UIStage(this);
+//		uiStage.showRightMenu();
 	}
 
 	@Override
@@ -225,5 +221,29 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 	
 	public void setNodeLabelsVisible(boolean bool) {
 		this.nodeLabelsVisible = bool;
+	}
+
+	@Override
+	public void iniCameraPos() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void showLabel(boolean isVisible) {
+		this.isLabelVisible = isVisible;
+		
+	}
+	
+	@Override
+	public boolean isLabelVisible(){
+		return isLabelVisible;
+	}
+	
+
+	@Override
+	public void showAbout(boolean b) {
+		// TODO Auto-generated method stub
+		
 	}
 }
