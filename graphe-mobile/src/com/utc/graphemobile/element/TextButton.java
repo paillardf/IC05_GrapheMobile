@@ -18,6 +18,7 @@ public class TextButton extends Group {
 		this.tr = imageTR;
 		this.setName(name);
 		Label l = new Label(title, s);
+		l.setName(name);
 		l.setPosition(Utils.toDp(margin+size),0);
 		this.addActor(l);
 		Image image = new Image(tr);
@@ -25,6 +26,7 @@ public class TextButton extends Group {
 		image.setHeight(Utils.toDp(size));
 		image.setX(0);
 		image.setY(0);
+		image.setName(name);
 		this.addActor(image);
 		this.setWidth(Utils.toDp(LeftMenu.WIDTH));
 		this.setHeight(Utils.toDp(size));

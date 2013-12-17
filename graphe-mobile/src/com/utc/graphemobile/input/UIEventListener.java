@@ -17,8 +17,9 @@ public class UIEventListener extends ActorGestureListener{
 	@Override
 	public void touchDown (InputEvent event, float x, float y, int pointer, int button) {
 		System.out.println(this.getTouchDownTarget().getName());
-		if(this.getTouchDownTarget() instanceof Image) {
-			if(this.getTouchDownTarget().getName().equals("open")) {
+		if(this.getTouchDownTarget().getName()==null)
+			return;
+		if(this.getTouchDownTarget().getName().equals("open")) {
 				
 			} else if(this.getTouchDownTarget().getName().equals("close")) {
 				
@@ -36,5 +37,5 @@ public class UIEventListener extends ActorGestureListener{
 				screen.showAbout(true);
 			}
 		}
-	}
+	
 }

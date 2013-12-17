@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.utc.graphemobile.input.ShowLeftMenuEventListener;
 import com.utc.graphemobile.input.UIEventListener;
-import com.utc.graphemobile.stage.UIStage;
+import com.utc.graphemobile.screen.IGrapheScreen;
 import com.utc.graphemobile.utils.Utils;
 
 public class LeftMenu extends Table {
@@ -15,9 +15,13 @@ public class LeftMenu extends Table {
 	public static final float PADDING = 5;
 	public static final float CLOSE_SIZE = 20;
 	private Image img;
-	public LeftMenu(UIStage stage) {
+	private IGrapheScreen screen = null;
+	
+	public LeftMenu(IGrapheScreen screen) {
+		
+		this.screen = screen;
 
-		UIEventListener listener = new UIEventListener(stage.screen);
+		UIEventListener listener = new UIEventListener(screen);
 		top();
 		left();
 		TextureRegion deleteTR = new TextureRegion(new Texture(Gdx.files.internal("Delete All.png")));//TODO sale 
@@ -29,19 +33,19 @@ public class LeftMenu extends Table {
 		this.addActor(img);
 		
 		
-		TextButton bt = new TextButton("open","Open", stage.getSkin().getRegion("open"), stage.getSkin());
+		TextButton bt = new TextButton("open","Open", screen.getSkin().getRegion("open"), screen.getSkin());
 		bt.addListener(listener);
 		this.add(bt).pad(Utils.toDp(PADDING));
 		row();
-		bt = new TextButton("center", "Center", stage.getSkin().getRegion("center"), stage.getSkin());
+		bt = new TextButton("center", "Center", screen.getSkin().getRegion("center"), screen.getSkin());
 		bt.addListener(listener);
 		this.add(bt).pad(Utils.toDp(PADDING));
 		row();
-		bt = new TextButton("label", "Label", stage.getSkin().getRegion("label"), stage.getSkin());
+		bt = new TextButton("label", "Label", screen.getSkin().getRegion("label"), screen.getSkin());
 		bt.addListener(listener);
 		this.add(bt).pad(Utils.toDp(PADDING));
 		row();
-		bt = new TextButton("about", "About", stage.getSkin().getRegion("about"), stage.getSkin());
+		bt = new TextButton("about", "About", screen.getSkin().getRegion("about"), screen.getSkin());
 		bt.addListener(listener);
 		this.add(bt).pad(Utils.toDp(PADDING));
 		
@@ -50,17 +54,14 @@ public class LeftMenu extends Table {
 		setWidth(Utils.toDp(WIDTH));
 		setHeight(Gdx.graphics.getHeight());
 		
-		setBackground(stage.getSkin().getDrawable("gray-pixel"));
+		setBackground(screen.getSkin().getDrawable("gray-pixel"));
 		
-		
+		this.setX(Utils.toDp(-WIDTH));
 	}
 	
 	public void onResize(){
 		setHeight(Gdx.graphics.getHeight());
-		img.setY(Gdx.graphics.getHeight()-img.getHeight());
+		invalidate();
+		img.setY(getHeight()-img.getHeight());
 	}
-
-	
-
-	
 }

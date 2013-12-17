@@ -16,9 +16,10 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.GL11;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.input.GestureDetector;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 import com.utc.graphemobile.GrapheMobile;
 import com.utc.graphemobile.element.NodeSprite;
@@ -30,6 +31,7 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 	private GrapheStage grapheStage;
 	private UIStage uiStage;
 	private GrapheMobile game;
+	private Skin skin;
 	
 	private Array<String> nodeLabels;
 	private boolean nodeLabelsVisible = true;
@@ -42,19 +44,17 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 
 	private HierarchicalGraph graph;
 	private List<NodeSprite> selectedNodes = new ArrayList<NodeSprite>();
-	private BitmapFont font;
 	private boolean isLabelVisible;
 
 	public GrapheScreen(GrapheMobile game) throws FileNotFoundException, URISyntaxException {
 		this.game = game;
-		
-		font = new BitmapFont();
-		font.getRegion().getTexture()
-				.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 
+		skin = new Skin(Gdx.files.internal("data/style.json"),
+				new TextureAtlas("data/style.atlas"));
+		
 		grapheStage = new GrapheStage(this);
 		uiStage = new UIStage(this);
-		uiStage.showRightMenu();
+		uiStage.refresh();
 		InputMultiplexer multiplexer = new InputMultiplexer();
 		multiplexer.addProcessor(uiStage);
 		multiplexer.addProcessor(grapheStage);
@@ -164,7 +164,7 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 	public void dispose() {
 		grapheStage.dispose();
 		uiStage.dispose();
-		font.dispose();
+		skin.dispose();
 	}
 
 	@Override
@@ -184,7 +184,7 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 
 	@Override
 	public BitmapFont getFont() {
-		return font;
+		return skin.getFont("default-font");
 	}
 
 	@Override
@@ -245,5 +245,10 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 	public void showAbout(boolean b) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Skin getSkin() {
+		return skin;
 	}
 }
