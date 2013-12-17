@@ -30,9 +30,6 @@ public class NodeSprite extends Actor {
 	private boolean selected = false;
 	private TextureRegion textureRegion;
 
-	private static Action scaleAction =Actions.forever(Actions.sequence(
-			Actions.scaleTo(1.1f, 1.1f, 0.5f),
-			Actions.scaleTo(1, 1, 0.5f)));
 	public NodeSprite(Node n, TextureRegion regionCircle, IGrapheScreen mScreen) {
 		this.nodeModel = n;
 		this.screen = mScreen;
@@ -45,13 +42,13 @@ public class NodeSprite extends Actor {
 			public boolean handle(Event e) {
 				switch (screen.getMode()) {
 				case EDIT:
-					return true;
+					return super.handle(e);
 				default:
 					return false;
 				}
-				
+
 			};
-			
+
 			@Override
 			public boolean longPress(Actor actor, float x, float y) {
 				switch (screen.getMode()) {
@@ -59,7 +56,9 @@ public class NodeSprite extends Actor {
 					List<NodeSprite> selectedNodes = screen.getSelectedNodes();
 					if (!selected) {
 						selectedNodes.add(NodeSprite.this);
-						addAction(scaleAction);
+						addAction(Actions.forever(Actions.sequence(
+								Actions.scaleTo(1.1f, 1.1f, 0.5f),
+								Actions.scaleTo(1, 1, 0.5f))));
 					} else {
 						selectedNodes.remove(NodeSprite.this);
 						clearActions();
@@ -100,6 +99,10 @@ public class NodeSprite extends Actor {
 		};
 		mActorGestureListener.getGestureDetector().setLongPressSeconds(0.5f);
 		addListener(mActorGestureListener);
+	}
+
+	public Node getNodeModel() {
+		return nodeModel;
 	}
 
 	public void draw(SpriteBatch batch, float parentAlpha) {

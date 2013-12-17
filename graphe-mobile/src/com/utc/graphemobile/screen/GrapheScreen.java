@@ -39,7 +39,7 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 		NORMAL, EDIT
 	}
 
-	private MODE mode = MODE.NORMAL;
+	private MODE mode = MODE.EDIT;
 
 	private HierarchicalGraph graph;
 	private List<NodeSprite> selectedNodes = new ArrayList<NodeSprite>();

@@ -245,7 +245,7 @@ public class UIStage extends Stage {
 			nameTF.setX(5);
 			currentY -= nameTF.getHeight() + 5;
 			nameTF.setY(currentY);
-			nameTF.setTextFieldListener(new NameTextFieldListener(nameTF));
+			nameTF.setTextFieldListener(new NameTextFieldListener(screen));
 			table.addActor(nameTF);
 //		}
 //		if(selectedNodes.size() >= 1){	
@@ -255,7 +255,7 @@ public class UIStage extends Stage {
 			colorTF.setX(5);
 			currentY -= colorTF.getHeight() + 5;
 			colorTF.setY(currentY);
-			colorTF.setTextFieldListener(new ColorTextFieldListener(colorTF));
+			colorTF.setTextFieldListener(new ColorTextFieldListener(screen));
 			table.addActor(colorTF);
 //		}
 		

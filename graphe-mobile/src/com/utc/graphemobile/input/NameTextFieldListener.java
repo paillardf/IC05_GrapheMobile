@@ -2,19 +2,18 @@ package com.utc.graphemobile.input;
 
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldListener;
+import com.utc.graphemobile.screen.IGrapheScreen;
 
 public class NameTextFieldListener implements TextFieldListener{
-	
-	TextField mTextField;
-	
-	public NameTextFieldListener(TextField textField){
-		this.mTextField = textField;
+
+	public NameTextFieldListener(IGrapheScreen screen) {
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void keyTyped(TextField textField, char key) {
 		// TODO Auto-generated method stub
-		System.out.println(mTextField.getText());
+		System.out.println(textField.getText());
 		
 	}
 }
