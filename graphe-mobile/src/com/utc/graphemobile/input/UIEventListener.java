@@ -1,24 +1,16 @@
 package com.utc.graphemobile.input;
 
-import org.gephi.graph.api.Node;
-
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
-import com.utc.graphemobile.element.NodeSprite;
-import com.utc.graphemobile.screen.GrapheScreen;
 import com.utc.graphemobile.screen.IGrapheScreen;
-import com.utc.graphemobile.stage.GrapheStage;
 
 public class UIEventListener extends ActorGestureListener{
 
-	private GrapheScreen screen;
+	private IGrapheScreen screen;
+	private boolean isVisible= false;
 	
-	public UIEventListener(GrapheScreen mScreen) {
+	public UIEventListener(IGrapheScreen mScreen) {
 		this.screen = mScreen;
 	}
 	
@@ -31,26 +23,17 @@ public class UIEventListener extends ActorGestureListener{
 			} else if(this.getTouchDownTarget().getName().equals("close")) {
 				
 			} else if(this.getTouchDownTarget().getName().equals("center")) {				
-				screen.getGrapheStage().getCamera().position.set(0, 0, 0);
+				screen.iniCameraPos();
 			} else if(this.getTouchDownTarget().getName().equals("name")) {
-				if(screen.getNodeLabelsVisible()) {
-					for(Node n : screen.getGraph().getNodes()) {
-						n.getNodeData().setLabel("");
-					}
-					screen.setNodeLabelsVisible(false);
-				} else {
-					int it = 0;
-					for(Node n : screen.getGraph().getNodes()) {
-						n.getNodeData().setLabel(screen.getNodeLabels().get(it++));
-					}
-					screen.setNodeLabelsVisible(true);
-				}
+				isVisible=!isVisible;		
+				screen.showLabel(isVisible);
+						
 				
 			} else if(this.getTouchDownTarget().getName().equals("about")) {
-				screen.getUIStage().showAbout();			
+				screen.showAbout(true);			
 				
 			} else if(this.getTouchDownTarget().getName().equals("aboutClose")) {
-				screen.getUIStage().hideAbout();
+				screen.showAbout(true);
 			}
 		}
 	}

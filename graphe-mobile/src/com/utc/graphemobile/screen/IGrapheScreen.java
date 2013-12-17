@@ -21,4 +21,12 @@ public interface IGrapheScreen{
 	public BitmapFont getFont();
 
 	public HierarchicalGraph getGraph();
+
+	public void iniCameraPos();
+
+	public void showLabel(boolean isVisible);
+	
+	public boolean isLabelVisible();
+
+	public void showAbout(boolean b);
 }
