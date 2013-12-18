@@ -23,6 +23,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 import com.utc.graphemobile.GrapheMobile;
 import com.utc.graphemobile.element.NodeSprite;
+import com.utc.graphemobile.specific.SpecificInterface;
 import com.utc.graphemobile.stage.GrapheStage;
 import com.utc.graphemobile.stage.UIStage;
 
@@ -67,21 +68,13 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 
 		loadGraphe(Gdx.files.internal("data/test.gexf"));// TODO to REMOVE
 
-		this.getNodes();
 	}
 
-	private void getNodes() {
-		// on récupère les labels des nodes
-		Array<String> nodeLabels = new Array<String>();
-		for (Node n : this.getGraph().getNodes()) {
-			nodeLabels.add(n.getNodeData().getLabel());
-		}
-		this.setNodeLabels(nodeLabels);
-	}
+
 
 	public void loadGraphe(FileHandle handle) throws URISyntaxException,
 			FileNotFoundException {
-
+		clearSelection();
 		ImporterGEXF importer = new ImporterGEXF();
 		try {
 			// FileHandle handle = Gdx.files.internal("data/test.gexf");
@@ -95,6 +88,7 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 		importer.execute(container);
 		graph = importer.process();
 		grapheStage.loadObjects();
+		
 		// new Thread(new Runnable() {
 		// @Override
 		// public void run() {
@@ -239,7 +233,8 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 
 	@Override
 	public void iniCameraPos() {
-		// TODO Auto-generated method stub
+		grapheStage.getCamera().position.x = 0;
+		grapheStage.getCamera().position.y = 0;
 
 	}
 
@@ -262,5 +257,11 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 	@Override
 	public Skin getSkin() {
 		return skin;
+	}
+
+	@Override
+	public SpecificInterface getOsInterface() {
+		return game.getOsInterface();
+		
 	}
 }

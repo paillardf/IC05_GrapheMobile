@@ -112,12 +112,14 @@ public class NodeSprite extends Actor {
 				nodeModel.getNodeData().b(), nodeModel.getNodeData().alpha());
 
 		drawCircle(batch);
-		screen.getFont().setColor(Color.BLACK);
-		screen.getFont().setScale(
-				getRadius() / textureRegion.getRegionWidth() * 5);
-		screen.getFont().drawMultiLine(batch,
-				nodeModel.getNodeData().getLabel(), getX(), getY() + 5, 0,
-				HAlignment.CENTER);
+		if (screen.isLabelVisible()) {
+			screen.getFont().setColor(Color.BLACK);
+			screen.getFont().setScale(
+					getRadius() / textureRegion.getRegionWidth() * 2);
+			screen.getFont().drawMultiLine(batch,
+					nodeModel.getNodeData().getLabel(), getX(), getY() + 5, 0,
+					HAlignment.CENTER);
+		}
 	}
 
 	@Override
@@ -146,7 +148,7 @@ public class NodeSprite extends Actor {
 		// System.out.println(getScaleX());
 
 	}
-	
+
 	public boolean isSelected() {
 		return selected;
 	}

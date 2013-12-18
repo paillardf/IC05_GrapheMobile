@@ -71,4 +71,9 @@ public class GrapheMobile extends Game {
 		}
 
 	}
+
+	public SpecificInterface getOsInterface() {
+		return mInterface;
+		
+	}
 }

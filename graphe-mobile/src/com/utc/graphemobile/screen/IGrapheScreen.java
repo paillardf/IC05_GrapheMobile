@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.utc.graphemobile.element.NodeSprite;
 import com.utc.graphemobile.screen.GrapheScreen.MODE;
+import com.utc.graphemobile.specific.SpecificInterface;
 
 public interface IGrapheScreen {
 
@@ -34,4 +35,6 @@ public interface IGrapheScreen {
 	public void showAbout(boolean b);
 
 	public void clearSelection();
+
+	public SpecificInterface getOsInterface();
 }

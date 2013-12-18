@@ -20,9 +20,7 @@ public class UIEventListener extends ActorGestureListener {
 		if (this.getTouchDownTarget().getName() == null)
 			return;
 		if (this.getTouchDownTarget().getName().equals("open")) {
-
-		} else if (this.getTouchDownTarget().getName().equals("close")) {
-
+			screen.getOsInterface().openFileChooser();
 		} else if (this.getTouchDownTarget().getName().equals("center")) {
 			screen.iniCameraPos();
 		} else if (this.getTouchDownTarget().getName().equals("label")) {

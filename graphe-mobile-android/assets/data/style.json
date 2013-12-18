@@ -9,11 +9,11 @@
         },
         com.badlogic.gdx.graphics.g2d.BitmapFont: {
                 default-font: {
-                		file: data/default.fnt,
-                		scale: 3
+                		file: data/hdfont.fnt,
+                		scale: 1
         		},
                 big-font: {
-                		file: data/default.fnt,
+                		file: data/hdfont.fnt,
                 		scale: 50
         		}
         },
