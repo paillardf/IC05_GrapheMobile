@@ -28,12 +28,12 @@ public class UIEventListener extends ActorGestureListener {
 		} else if (this.getTouchDownTarget().getName().equals("name")) {
 			isVisible = !isVisible;
 			screen.showLabel(isVisible);
-
 		} else if (this.getTouchDownTarget().getName().equals("about")) {
 			screen.showAbout(true);
-
 		} else if (this.getTouchDownTarget().getName().equals("aboutClose")) {
 			screen.showAbout(true);
+		} else if (this.getTouchDownTarget().getName().equals("unselect")) {
+			screen.clearSelection();
 		}
 	}
 

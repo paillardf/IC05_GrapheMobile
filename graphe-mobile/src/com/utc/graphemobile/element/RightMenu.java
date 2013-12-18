@@ -4,11 +4,13 @@ import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.utc.graphemobile.input.ColorTextFieldListener;
 import com.utc.graphemobile.input.NameTextFieldListener;
+import com.utc.graphemobile.input.UIEventListener;
 import com.utc.graphemobile.screen.IGrapheScreen;
 import com.utc.graphemobile.utils.Utils;
 
@@ -24,6 +26,7 @@ public class RightMenu extends Table {
 	IGrapheScreen screen = null;
 	TextField nameTF = null;
 	TextField colorTF = null;
+	Image unselect = null;
 	public static final float PADDING = 5;
 	public static final float WIDTH_SCALE = 0.1f;
 	boolean visible = false;
@@ -103,7 +106,6 @@ public class RightMenu extends Table {
 			}
 			nameTF.setText(selectedNodes.get(0).getNodeModel().getNodeData()
 					.getLabel());
-			nameTF.setScale(5);
 			add(nameTF).top().left().pad(Utils.toDp(PADDING))
 					.width(getWidth() - 2 * Utils.toDp(PADDING))
 					.height(getWidth() * 0.3f);
@@ -112,8 +114,8 @@ public class RightMenu extends Table {
 			removeActor(nameTF);
 		}
 
-		// manage the color
 		if (visible && selectedNodes.size() >= 1) {
+			// manage the color
 			if (colorTF == null) {
 				colorTF = new TextField(" ", getSkin());
 				colorTF.setTextFieldListener(new ColorTextFieldListener(screen));
@@ -123,8 +125,24 @@ public class RightMenu extends Table {
 					.width(getWidth() - 2 * Utils.toDp(PADDING))
 					.height(getWidth() * 0.3f);
 			row();
-		} else if (colorTF != null) {
-			removeActor(colorTF);
+			row();
+
+			// Manage the unselect button
+			if (unselect == null) {
+				unselect = new Image(getSkin().getRegion("close"));
+				unselect.setName("unselect");
+				UIEventListener listener = new UIEventListener(screen);
+				unselect.addListener(listener);
+			}
+			add(unselect).right();
+			row();
+		} else {
+			if (colorTF != null) {
+				removeActor(colorTF);
+			}
+			if (unselect != null) {
+				removeActor(unselect);
+			}
 		}
 	}
 

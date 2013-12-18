@@ -32,4 +32,6 @@ public interface IGrapheScreen {
 	public boolean isLabelVisible();
 
 	public void showAbout(boolean b);
+
+	public void clearSelection();
 }

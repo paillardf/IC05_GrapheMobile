@@ -190,6 +190,15 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 	}
 
 	@Override
+	public void clearSelection() {
+		for (NodeSprite nodeSprite : selectedNodes) {
+			nodeSprite.setSelected(false);
+		}
+		selectedNodes.clear();
+		updateSelectedNodesList();
+	}
+
+	@Override
 	public BitmapFont getFont() {
 		return skin.getFont("default-font");
 	}
@@ -201,7 +210,6 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 
 	@Override
 	public void updateSelectedNodesList() {
-		// TODO Auto-generated method stub
 		uiStage.refresh();
 	}
 

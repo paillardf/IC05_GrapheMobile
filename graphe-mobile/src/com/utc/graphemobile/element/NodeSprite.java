@@ -27,6 +27,7 @@ public class NodeSprite extends Actor {
 	private IGrapheScreen screen;
 
 	private boolean selected = false;
+
 	private TextureRegion textureRegion;
 
 	public NodeSprite(Node n, TextureRegion regionCircle, IGrapheScreen mScreen) {
@@ -55,14 +56,10 @@ public class NodeSprite extends Actor {
 					List<NodeSprite> selectedNodes = screen.getSelectedNodes();
 					if (!selected) {
 						selectedNodes.add(NodeSprite.this);
-						addAction(Actions.forever(Actions.sequence(
-								Actions.scaleTo(1.1f, 1.1f, 0.5f),
-								Actions.scaleTo(1, 1, 0.5f))));
 					} else {
 						selectedNodes.remove(NodeSprite.this);
-						clearActions();
 					}
-					selected = !selected;
+					setSelected(!selected);
 					screen.updateSelectedNodesList();
 					return true;
 
@@ -148,6 +145,21 @@ public class NodeSprite extends Actor {
 		// shapeRenderer.end();
 		// System.out.println(getScaleX());
 
+	}
+	
+	public boolean isSelected() {
+		return selected;
+	}
+
+	public void setSelected(boolean selected) {
+		this.selected = selected;
+		if (selected) {
+			addAction(Actions.forever(Actions.sequence(
+					Actions.scaleTo(1.1f, 1.1f, 0.5f),
+					Actions.scaleTo(1, 1, 0.5f))));
+		} else {
+			clearActions();
+		}
 	}
 
 	public float getRadius() {
