@@ -18,7 +18,7 @@ public class ColorTextFieldListener implements TextFieldListener {
 		int cursorPosition = textField.getCursorPosition();
 		String text = textField.getText();
 		// Enter OR Ctrl + s
-		if (key == 13 || key == 19) {
+		if (key == 10 || key == 13 || key == 19) {
 			if (text.length() < 6) {
 				text = (text + "000000").substring(0, 6);
 				textField.setText(text);
@@ -53,11 +53,13 @@ public class ColorTextFieldListener implements TextFieldListener {
 		// Other letter
 		else if (key != 0) {
 			System.out.println("Other at : " + textField.getCursorPosition()
-					+ ", key : " + key + ", val : " + (int) key);
+					+ ", val : " + (int) key + ", key : " + key);
 			text = text.replace(String.valueOf(key), "");
 			textField.setText(text);
 			if (textField.getCursorPosition() != cursorPosition)
 				textField.setCursorPosition(cursorPosition - 1);
 		}
+		System.out.println("KEY AT : " + textField.getCursorPosition()
+				+ ", val : " + (int) key + ", key : " + key);
 	}
 }

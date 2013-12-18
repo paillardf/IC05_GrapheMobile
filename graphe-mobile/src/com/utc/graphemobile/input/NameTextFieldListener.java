@@ -18,7 +18,7 @@ public class NameTextFieldListener implements TextFieldListener {
 	@Override
 	public void keyTyped(TextField textField, char key) {
 		// Enter OR Ctrl + s
-		if (key == 13 || key == 19) {
+		if (key == 10 || key == 13 || key == 19) {
 			List<NodeSprite> selectedNodes = screen.getSelectedNodes();
 			if (selectedNodes.size() == 1) {
 				selectedNodes.get(0).getNodeModel().getNodeData()
@@ -28,6 +28,10 @@ public class NameTextFieldListener implements TextFieldListener {
 		// Ctrl + a
 		else if (key == 1) {
 			textField.selectAll();
+		}
+		else{
+			System.out.println("Other at : " + textField.getCursorPosition()
+					+ ", val : " + (int) key + ", key : " + key);
 		}
 	}
 }
