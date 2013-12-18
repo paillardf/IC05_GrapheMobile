@@ -246,7 +246,6 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 	@Override
 	public void showLabel(boolean isVisible) {
 		this.isLabelVisible = isVisible;
-
 	}
 
 	@Override

@@ -26,7 +26,7 @@ public class RightMenu extends Table {
 	IGrapheScreen screen = null;
 	TextField nameTF = null;
 	TextField colorTF = null;
-	Image unselect = null;
+	TextButton unselect = null;
 	public static final float PADDING = 5;
 	public static final float WIDTH_SCALE = 0.1f;
 	boolean visible = false;
@@ -39,6 +39,11 @@ public class RightMenu extends Table {
 	 */
 	public RightMenu(IGrapheScreen screen) {
 		this.screen = screen;
+
+		UIEventListener listener = new UIEventListener(screen);
+		unselect = new TextButton("unselect", "Unselect", screen.getSkin()
+				.getRegion("close"), screen.getSkin());
+		unselect.addListener(listener);
 
 		setBackground(getSkin().getDrawable("gray-pixel"));
 		onResize();
@@ -125,24 +130,15 @@ public class RightMenu extends Table {
 					.width(getWidth() - 2 * Utils.toDp(PADDING))
 					.height(getWidth() * 0.3f);
 			row();
-			row();
 
 			// Manage the unselect button
-			if (unselect == null) {
-				unselect = new Image(getSkin().getRegion("close"));
-				unselect.setName("unselect");
-				UIEventListener listener = new UIEventListener(screen);
-				unselect.addListener(listener);
-			}
-			add(unselect).right();
+			add(unselect).pad(Utils.toDp(PADDING));
 			row();
 		} else {
 			if (colorTF != null) {
 				removeActor(colorTF);
 			}
-			if (unselect != null) {
-				removeActor(unselect);
-			}
+			removeActor(unselect);
 		}
 	}
 

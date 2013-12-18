@@ -25,7 +25,7 @@ public class UIEventListener extends ActorGestureListener {
 
 		} else if (this.getTouchDownTarget().getName().equals("center")) {
 			screen.iniCameraPos();
-		} else if (this.getTouchDownTarget().getName().equals("name")) {
+		} else if (this.getTouchDownTarget().getName().equals("label")) {
 			isVisible = !isVisible;
 			screen.showLabel(isVisible);
 		} else if (this.getTouchDownTarget().getName().equals("about")) {
