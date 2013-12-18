@@ -5,7 +5,6 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.utc.graphemobile.stage.UIStage;
 import com.utc.graphemobile.utils.Utils;
 
 public class TextButton extends Group {
@@ -19,7 +18,7 @@ public class TextButton extends Group {
 		this.setName(name);
 		Label l = new Label(title, s);
 		l.setName(name);
-		l.setPosition(Utils.toDp(margin+size),0);
+		l.setPosition(Utils.toDp(margin + size), 0);
 		this.addActor(l);
 		Image image = new Image(tr);
 		image.setWidth(Utils.toDp(size));
@@ -31,13 +30,4 @@ public class TextButton extends Group {
 		this.setWidth(Utils.toDp(LeftMenu.WIDTH));
 		this.setHeight(Utils.toDp(size));
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

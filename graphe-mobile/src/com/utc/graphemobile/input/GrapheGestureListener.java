@@ -4,11 +4,10 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Vector2;
 
-public class GrapheGestureListener implements GestureListener{
+public class GrapheGestureListener implements GestureListener {
 
 	private OrthographicCamera camera;
 	private float iniZoomCamera = 0;
-	
 
 	public GrapheGestureListener(OrthographicCamera camera) {
 		this.camera = camera;
@@ -17,7 +16,7 @@ public class GrapheGestureListener implements GestureListener{
 	@Override
 	public boolean touchDown(float x, float y, int pointer, int button) {
 		iniZoomCamera = camera.zoom;
-		//iniAngleCamera = camera.rotate(angle)
+		// iniAngleCamera = camera.rotate(angle)
 
 		return false;
 	}
@@ -41,8 +40,8 @@ public class GrapheGestureListener implements GestureListener{
 
 	@Override
 	public boolean pan(float x, float y, float deltaX, float deltaY) {
-		//camera.lookAt(x, y, 0);
-		camera.translate(-deltaX*camera.zoom, deltaY*camera.zoom);
+		// camera.lookAt(x, y, 0);
+		camera.translate(-deltaX * camera.zoom, deltaY * camera.zoom);
 		return false;
 	}
 

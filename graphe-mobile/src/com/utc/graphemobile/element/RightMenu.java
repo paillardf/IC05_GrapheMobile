@@ -12,6 +12,13 @@ import com.utc.graphemobile.input.NameTextFieldListener;
 import com.utc.graphemobile.screen.IGrapheScreen;
 import com.utc.graphemobile.utils.Utils;
 
+/**
+ * RightMenu of the application
+ * 
+ * Content depends of the current nodes selection
+ * 
+ * @TODO : Add a previsualisation of the color
+ */
 public class RightMenu extends Table {
 
 	IGrapheScreen screen = null;
@@ -21,23 +28,34 @@ public class RightMenu extends Table {
 	public static final float WIDTH_SCALE = 0.1f;
 	boolean visible = false;
 
+	/**
+	 * Constructor of RightMenu
+	 * 
+	 * @param screen
+	 *            The GrapeScreen
+	 */
 	public RightMenu(IGrapheScreen screen) {
 		this.screen = screen;
 
-		left().top();
 		setBackground(getSkin().getDrawable("gray-pixel"));
 		onResize();
 	}
 
+	/**
+	 * Manage the resize of the menu
+	 */
 	public void onResize() {
 		setWidth(Utils.toDp(Gdx.graphics.getWidth() * WIDTH_SCALE));
 		setHeight(Gdx.graphics.getHeight());
 
-		setX(Gdx.graphics.getWidth());
+		setX(Gdx.graphics.getWidth() + (visible ? -getWidth() : 0));
 
 		update();
 	}
 
+	/***
+	 * Allow the menu to be refresh
+	 */
 	public void refresh() {
 		List<NodeSprite> selectedNodes = screen.getSelectedNodes();
 		if (selectedNodes.size() == 0) {
@@ -47,6 +65,9 @@ public class RightMenu extends Table {
 		}
 	}
 
+	/**
+	 * Hide the menu by moving it to the left
+	 */
 	private void show() {
 		if (visible == false) {
 			visible = true;
@@ -55,6 +76,9 @@ public class RightMenu extends Table {
 		update();
 	}
 
+	/**
+	 * Hide the menu by moving it to the right
+	 */
 	private void hide() {
 		if (visible == true) {
 			visible = false;
@@ -63,8 +87,15 @@ public class RightMenu extends Table {
 		update();
 	}
 
+	/**
+	 * Update display of the menu
+	 */
 	private void update() {
+		reset();
+		left().top();
 		List<NodeSprite> selectedNodes = screen.getSelectedNodes();
+
+		// Manage the name
 		if (visible && selectedNodes.size() == 1) {
 			if (nameTF == null) {
 				nameTF = new TextField(" ", getSkin());
@@ -72,31 +103,42 @@ public class RightMenu extends Table {
 			}
 			nameTF.setText(selectedNodes.get(0).getNodeModel().getNodeData()
 					.getLabel());
-			add(nameTF).pad(Utils.toDp(PADDING));
-			nameTF.setWidth(Utils.toDp(getWidth() - 2 * PADDING));
-			nameTF.setHeight(getWidth() * 0.3f);
+			nameTF.setScale(5);
+			add(nameTF).top().left().pad(Utils.toDp(PADDING))
+					.width(getWidth() - 2 * Utils.toDp(PADDING))
+					.height(getWidth() * 0.3f);
 			row();
 		} else if (nameTF != null) {
 			removeActor(nameTF);
 		}
 
-//		if (visible && selectedNodes.size() >= 1) {
-//			if (colorTF == null) {
-//				colorTF = new TextField(" ", getSkin());
-//				colorTF.setTextFieldListener(new ColorTextFieldListener(screen));
-//			}
-//			colorTF.setText(getColorToEdit(selectedNodes));
-//			add(colorTF).pad(Utils.toDp(PADDING));
-//			row();
-//		} else if (colorTF != null) {
-//			removeActor(colorTF);
-//		}
+		// manage the color
+		if (visible && selectedNodes.size() >= 1) {
+			if (colorTF == null) {
+				colorTF = new TextField(" ", getSkin());
+				colorTF.setTextFieldListener(new ColorTextFieldListener(screen));
+			}
+			colorTF.setText(getColorToEdit(selectedNodes));
+			add(colorTF).top().left().pad(Utils.toDp(PADDING))
+					.width(getWidth() - 2 * Utils.toDp(PADDING))
+					.height(getWidth() * 0.3f);
+			row();
+		} else if (colorTF != null) {
+			removeActor(colorTF);
+		}
 	}
 
 	private Skin getSkin() {
 		return screen.getSkin();
 	}
 
+	/**
+	 * Get the medium color of all selected elements
+	 * 
+	 * @param selectedNodes
+	 *            All selected elements
+	 * @return The corresponding color
+	 */
 	private String getColorToEdit(List<NodeSprite> selectedNodes) {
 		if (selectedNodes.size() == 0)
 			return "000000";
@@ -114,7 +156,7 @@ public class RightMenu extends Table {
 
 		Color color = new Color();
 		color.set(r, g, b, a);
-		return color.toString();
+		return color.toString().substring(0, 6);
 	}
 
 }

@@ -32,7 +32,7 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 	private UIStage uiStage;
 	private GrapheMobile game;
 	private Skin skin;
-	
+
 	private Array<String> nodeLabels;
 	private boolean nodeLabelsVisible = true;
 
@@ -46,12 +46,13 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 	private List<NodeSprite> selectedNodes = new ArrayList<NodeSprite>();
 	private boolean isLabelVisible;
 
-	public GrapheScreen(GrapheMobile game) throws FileNotFoundException, URISyntaxException {
+	public GrapheScreen(GrapheMobile game) throws FileNotFoundException,
+			URISyntaxException {
 		this.game = game;
 
 		skin = new Skin(Gdx.files.internal("data/style.json"),
 				new TextureAtlas("data/style.atlas"));
-		
+
 		grapheStage = new GrapheStage(this);
 		uiStage = new UIStage(this);
 		uiStage.refresh();
@@ -63,53 +64,59 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 		// multiplexer.addProcessor(new
 		// GestureDetector(uiStage.getGestureListener()));
 		Gdx.input.setInputProcessor(multiplexer);
-		
-		loadGraphe(Gdx.files.internal("data/test.gexf"));//TODO to REMOVE
-		
+
+		loadGraphe(Gdx.files.internal("data/test.gexf"));// TODO to REMOVE
+
 		this.getNodes();
 	}
-	
+
 	private void getNodes() {
 		// on récupère les labels des nodes
 		Array<String> nodeLabels = new Array<String>();
-		for(Node n : this.getGraph().getNodes()) {
+		for (Node n : this.getGraph().getNodes()) {
 			nodeLabels.add(n.getNodeData().getLabel());
 		}
 		this.setNodeLabels(nodeLabels);
 	}
 
-	
-	public void loadGraphe(FileHandle handle) throws URISyntaxException, FileNotFoundException {
-		
+	public void loadGraphe(FileHandle handle) throws URISyntaxException,
+			FileNotFoundException {
+
 		ImporterGEXF importer = new ImporterGEXF();
-        try {
-        	//FileHandle handle = Gdx.files.internal("data/test.gexf");
-           
-            importer.setReader(handle.reader());//FileHandle(handle);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-		
-        ImportContainerImpl container = new ImportContainerImpl();
-        importer.execute(container);
-        graph = importer.process();   
+		try {
+			// FileHandle handle = Gdx.files.internal("data/test.gexf");
+
+			importer.setReader(handle.reader());// FileHandle(handle);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+		ImportContainerImpl container = new ImportContainerImpl();
+		importer.execute(container);
+		graph = importer.process();
 		grapheStage.loadObjects();
-//		new Thread(new Runnable() {
-//			         @Override
-//			         public void run() {
-//			        	 AutoLayout autoLayout = new AutoLayout(10, TimeUnit.MINUTES);
-//			     		autoLayout.setGraphModel(graph.getGraphModel());
-//			     		YifanHuLayout firstLayout = new YifanHuLayout(new StepDisplacement(1f));
-//			     		ForceAtlasLayout secondLayout = new ForceAtlasLayout();
-//			     		AutoLayout.DynamicProperty adjustBySizeProperty = AutoLayout.createDynamicProperty("forceAtlas.adjustSizes.name", Boolean.TRUE, 0.1f);//True after 10% of layout time
-//			     		AutoLayout.DynamicProperty repulsionProperty = AutoLayout.createDynamicProperty("forceAtlas.repulsionStrength.name", new Double(500.), 0f);//500 for the complete period
-//			     		autoLayout.addLayout(firstLayout, 0.5f);
-//			     		autoLayout.addLayout(secondLayout, 0.5f, new AutoLayout.DynamicProperty[]{adjustBySizeProperty, repulsionProperty});
-//			     		autoLayout.execute();
-//			         }
-//			    
-//			   }).start();
-		
+		// new Thread(new Runnable() {
+		// @Override
+		// public void run() {
+		// AutoLayout autoLayout = new AutoLayout(10, TimeUnit.MINUTES);
+		// autoLayout.setGraphModel(graph.getGraphModel());
+		// YifanHuLayout firstLayout = new YifanHuLayout(new
+		// StepDisplacement(1f));
+		// ForceAtlasLayout secondLayout = new ForceAtlasLayout();
+		// AutoLayout.DynamicProperty adjustBySizeProperty =
+		// AutoLayout.createDynamicProperty("forceAtlas.adjustSizes.name",
+		// Boolean.TRUE, 0.1f);//True after 10% of layout time
+		// AutoLayout.DynamicProperty repulsionProperty =
+		// AutoLayout.createDynamicProperty("forceAtlas.repulsionStrength.name",
+		// new Double(500.), 0f);//500 for the complete period
+		// autoLayout.addLayout(firstLayout, 0.5f);
+		// autoLayout.addLayout(secondLayout, 0.5f, new
+		// AutoLayout.DynamicProperty[]{adjustBySizeProperty,
+		// repulsionProperty});
+		// autoLayout.execute();
+		// }
+		//
+		// }).start();
 
 	}
 
@@ -155,9 +162,9 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 	@Override
 	public void resume() {
 		// TODO Auto-generated method stub
-//		uiStage.dispose();
-//		uiStage = new UIStage(this);
-//		uiStage.showRightMenu();
+		// uiStage.dispose();
+		// uiStage = new UIStage(this);
+		// uiStage.showRightMenu();
 	}
 
 	@Override
@@ -192,33 +199,32 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 		return graph;
 	}
 
-
 	@Override
 	public void updateSelectedNodesList() {
 		// TODO Auto-generated method stub
 		uiStage.refresh();
 	}
-	
+
 	public GrapheStage getGrapheStage() {
 		return grapheStage;
 	}
-	
+
 	public UIStage getUIStage() {
 		return uiStage;
 	}
-	
+
 	public Array<String> getNodeLabels() {
 		return nodeLabels;
 	}
-	
+
 	public void setNodeLabels(Array<String> array) {
 		this.nodeLabels = array;
 	}
-	
+
 	public boolean getNodeLabelsVisible() {
 		return nodeLabelsVisible;
 	}
-	
+
 	public void setNodeLabelsVisible(boolean bool) {
 		this.nodeLabelsVisible = bool;
 	}
@@ -226,25 +232,24 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 	@Override
 	public void iniCameraPos() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void showLabel(boolean isVisible) {
 		this.isLabelVisible = isVisible;
-		
+
 	}
-	
+
 	@Override
-	public boolean isLabelVisible(){
+	public boolean isLabelVisible() {
 		return isLabelVisible;
 	}
-	
 
 	@Override
 	public void showAbout(boolean b) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override

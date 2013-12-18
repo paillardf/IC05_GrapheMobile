@@ -23,6 +23,8 @@ package org.gephi.graph.api;
 
 import org.gephi.graph.spi.LayoutData;
 
+import com.badlogic.gdx.graphics.Color;
+
 /**
  * Contains all extended data related to a node, including access to its
  * attributes.

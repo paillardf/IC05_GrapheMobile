@@ -21,8 +21,7 @@ public class GrapheMobile extends Game {
 
 	@Override
 	public void create() {
-		
-		
+
 		// Use LibGDX's default Arial font.
 		font = new BitmapFont();
 
@@ -64,12 +63,12 @@ public class GrapheMobile extends Game {
 
 	public void openGraphe(File file) {
 		try {
-			((GrapheScreen)getScreen()).loadGraphe(new FileHandle(file));
+			((GrapheScreen) getScreen()).loadGraphe(new FileHandle(file));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 }

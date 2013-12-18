@@ -11,6 +11,10 @@
                 default-font: {
                 		file: data/default.fnt,
                 		scale: 3
+        		},
+                big-font: {
+                		file: data/default.fnt,
+                		scale: 50
         		}
         },
         com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
@@ -20,7 +24,7 @@
 	    },
         com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
                 default: {
-                		font: default-font,
+                		font: big-font,
                         fontColor: black,
                         background: white-pixel,
                         cursor: black-pixel,

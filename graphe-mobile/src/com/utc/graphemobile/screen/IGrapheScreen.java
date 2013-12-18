@@ -9,18 +9,18 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.utc.graphemobile.element.NodeSprite;
 import com.utc.graphemobile.screen.GrapheScreen.MODE;
 
-public interface IGrapheScreen{
-	
+public interface IGrapheScreen {
+
 	public MODE getMode();
-	
+
 	public void setMode(MODE mode);
-	
+
 	public List<NodeSprite> getSelectedNodes();
-	
+
 	public void updateSelectedNodesList();
-	
+
 	public Skin getSkin();
-	
+
 	public BitmapFont getFont();
 
 	public HierarchicalGraph getGraph();
@@ -28,7 +28,7 @@ public interface IGrapheScreen{
 	public void iniCameraPos();
 
 	public void showLabel(boolean isVisible);
-	
+
 	public boolean isLabelVisible();
 
 	public void showAbout(boolean b);

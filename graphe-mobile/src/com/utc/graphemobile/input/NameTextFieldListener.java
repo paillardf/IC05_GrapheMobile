@@ -1,19 +1,33 @@
 package com.utc.graphemobile.input;
 
+import java.util.List;
+
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldListener;
+import com.utc.graphemobile.element.NodeSprite;
 import com.utc.graphemobile.screen.IGrapheScreen;
 
-public class NameTextFieldListener implements TextFieldListener{
+public class NameTextFieldListener implements TextFieldListener {
+
+	private IGrapheScreen screen = null;
 
 	public NameTextFieldListener(IGrapheScreen screen) {
-		// TODO Auto-generated constructor stub
+		this.screen = screen;
 	}
 
 	@Override
 	public void keyTyped(TextField textField, char key) {
-		// TODO Auto-generated method stub
-		System.out.println(textField.getText());
-		
+		// Enter OR Ctrl + s
+		if (key == 13 || key == 19) {
+			List<NodeSprite> selectedNodes = screen.getSelectedNodes();
+			if (selectedNodes.size() == 1) {
+				selectedNodes.get(0).getNodeModel().getNodeData()
+						.setLabel(textField.getText());
+			}
+		}
+		// Ctrl + a
+		else if (key == 1) {
+			textField.selectAll();
+		}
 	}
 }

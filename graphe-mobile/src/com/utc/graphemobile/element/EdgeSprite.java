@@ -4,7 +4,6 @@ import org.gephi.graph.api.Edge;
 import org.gephi.graph.api.Node;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
@@ -33,24 +32,25 @@ public class EdgeSprite extends Actor {
 	public void drawLine(SpriteBatch batch) {
 		shapeRenderer.setProjectionMatrix(batch.getProjectionMatrix());
 		shapeRenderer.begin(ShapeType.Curve);
-		Gdx.gl10.glLineWidth(edgeModel.getWeight()*2);
-		
+		Gdx.gl10.glLineWidth(edgeModel.getWeight() * 2);
+
 		shapeRenderer.setColor(getColor()); // last argument is alpha channel
 		Node target = edgeModel.getTarget();
-//		shapeRenderer.line(getX(), getY(), target.getNodeData().x(), target
-//				.getNodeData().y());
-	
+		// shapeRenderer.line(getX(), getY(), target.getNodeData().x(), target
+		// .getNodeData().y());
+
 		Vector2 pos = new Vector2(getX(), getY());
 		Vector2 dest = new Vector2(target.getNodeData().x(), target
 				.getNodeData().y());
 		Vector2 vect = dest.cpy().sub(pos);
 		Vector2 norm = vect.cpy().rotate(90);
-		//System.out.println(vect);
+		// System.out.println(vect);
 		Vector2 pos1 = vect.cpy().div(3).add(norm.cpy().div(3)).add(pos);
-		Vector2 pos2 = vect.cpy().rotate(180).div(3).add(norm.cpy().div(3)).add(dest);//new Vector2(0,0);//dest.sub(vect.div(2));
-		//shapeRenderer.line(pos.x, pos.y, pos1.x, pos1.y);
-				
-		shapeRenderer.curve(getX(), getY(),pos1.x, pos1.y, pos2.x, pos2.y,
+		Vector2 pos2 = vect.cpy().rotate(180).div(3).add(norm.cpy().div(3))
+				.add(dest);// new Vector2(0,0);//dest.sub(vect.div(2));
+		// shapeRenderer.line(pos.x, pos.y, pos1.x, pos1.y);
+
+		shapeRenderer.curve(getX(), getY(), pos1.x, pos1.y, pos2.x, pos2.y,
 				target.getNodeData().x(), target.getNodeData().y());
 		shapeRenderer.end();
 	}
