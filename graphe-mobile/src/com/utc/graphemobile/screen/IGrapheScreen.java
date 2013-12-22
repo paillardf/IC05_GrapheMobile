@@ -9,6 +9,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.utc.graphemobile.element.NodeSprite;
 import com.utc.graphemobile.screen.GrapheScreen.MODE;
 import com.utc.graphemobile.specific.SpecificInterface;
+import com.utc.graphemobile.stage.GrapheStage;
+import com.utc.graphemobile.stage.UIStage;
 
 public interface IGrapheScreen {
 
@@ -37,4 +39,8 @@ public interface IGrapheScreen {
 	public void clearSelection();
 
 	public SpecificInterface getOsInterface();
+	
+	public GrapheStage getGrapheStage();
+
+	public UIStage getUIStage();
 }

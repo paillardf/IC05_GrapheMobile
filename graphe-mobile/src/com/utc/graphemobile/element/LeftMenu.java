@@ -29,7 +29,7 @@ public class LeftMenu extends Table {
 		
 		
 		
-		TextureRegion deleteTR =screen.getSkin().getRegion("close");
+		TextureRegion deleteTR = screen.getSkin().getRegion("close");
 		TextureRegion bg = screen.getSkin().getRegion("gray-pixel");
 		closeBG = new Image(bg);
 		img = new Image(deleteTR);
@@ -37,8 +37,7 @@ public class LeftMenu extends Table {
 		
 		img.setHeight(Utils.toDp(CLOSE_SIZE));
 		img.setWidth(Utils.toDp(CLOSE_SIZE));
-		img.setPosition(Utils.toDp(WIDTH),
-				Gdx.graphics.getHeight() - img.getHeight());
+		img.setPosition(Utils.toDp(WIDTH), Gdx.graphics.getHeight() - img.getHeight());
 		img.addListener(new ShowLeftMenuEventListener(this));
 		closeBG.setSize(img.getWidth(), img.getWidth());
 		closeBG.setPosition(img.getX(), img.getY());

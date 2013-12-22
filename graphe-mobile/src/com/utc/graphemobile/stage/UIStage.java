@@ -2,6 +2,8 @@ package com.utc.graphemobile.stage;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.utc.graphemobile.element.About;
 import com.utc.graphemobile.element.LeftMenu;
 import com.utc.graphemobile.element.RightMenu;
 import com.utc.graphemobile.screen.IGrapheScreen;
@@ -12,6 +14,7 @@ public class UIStage extends Stage {
 
 	private LeftMenu leftMenu;
 	private RightMenu rightMenu;
+	private About about;
 
 	public UIStage(IGrapheScreen screen) {
 		super();
@@ -22,6 +25,9 @@ public class UIStage extends Stage {
 
 		rightMenu = new RightMenu(screen);
 		this.addActor(rightMenu);
+		
+		about = new About(screen, this.getWidth(), this.getHeight());
+		//this.addActor(about);
 
 
 		resize();
@@ -37,32 +43,19 @@ public class UIStage extends Stage {
 		rightMenu.refresh();
 	}
 
-
-//	private void drawAbout() {
-//		aboutTable.add(about()).height(getHeight()).width(getWidth());
-//	}
-
-//	private Table about() {
-//		Table table = new Table();
-//		table.setBackground(getSkin().getDrawable("gray-pixel"));
-//
-//		TextureRegion tr = new TextureRegion(new Texture(
-//				Gdx.files.internal("Delete All.png")));
-//		Image closeBtn = new Image(tr);
-//		closeBtn.setName("aboutClose");
-//		float scale = (float) (leftMenu.getWidth() / closeBtn.getWidth());
-//		closeBtn.setWidth(leftMenu.getWidth() / 2);
-//		closeBtn.setHeight((closeBtn.getHeight() / 2) * scale);
-//		closeBtn.setX(getWidth() - closeBtn.getWidth() - 10);
-//		closeBtn.setY(getHeight() - closeBtn.getHeight() - 10);
-//		closeBtn.addListener(new UIEventListener(this.screen));
-//		table.addActor(closeBtn);
-//
-//		return table;
-//	}
-
-
 	public Skin getSkin() {
 		return screen.getSkin();
+	}
+	
+	public LeftMenu getLeftMenu() {
+		return leftMenu;
+	}
+	
+	public RightMenu getRightMenu() {
+		return rightMenu;
+	}
+	
+	public About getAbout() {
+		return about;
 	}
 }

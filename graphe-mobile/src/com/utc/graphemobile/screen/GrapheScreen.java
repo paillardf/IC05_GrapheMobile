@@ -250,8 +250,11 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 
 	@Override
 	public void showAbout(boolean b) {
-		// TODO Auto-generated method stub
-
+		if(b){
+			this.getUIStage().addActor(this.getUIStage().getAbout());
+		} else {
+			this.getUIStage().getAbout().remove();
+		}
 	}
 
 	@Override
