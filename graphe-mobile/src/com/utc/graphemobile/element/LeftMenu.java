@@ -56,7 +56,7 @@ public class LeftMenu extends Table {
 		this.add(bt).pad(Utils.toDp(PADDING)).left().width(Utils.toDp(WIDTH-PADDING*2));
 		row();
 		
-		bt = new TextButton("edit", "Edit", screen.getSkin().getRegion(
+		bt = new TextButton("edit", "Normal", screen.getSkin().getRegion(
 				"edit"), screen.getSkin());
 		bt.addListener(listener);
 		this.add(bt).pad(Utils.toDp(PADDING)).left().width(Utils.toDp(WIDTH-PADDING*2));
