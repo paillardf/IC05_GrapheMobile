@@ -48,7 +48,7 @@ public class GrapheStage extends Stage {
 
 		ShapeRenderer shapeRenderer = new ShapeRenderer();
 		for (Edge e : screen.getGraph().getEdges()) {
-			EdgeSprite eSprite = new EdgeSprite(e, shapeRenderer);
+			EdgeSprite eSprite = new EdgeSprite(e, shapeRenderer, screen);
 			this.addActor(eSprite);
 		}
 
@@ -56,7 +56,6 @@ public class GrapheStage extends Stage {
 			NodeSprite nSprite = new NodeSprite(n, regionCircle, screen);
 			this.addActor(nSprite);
 		}
-
 	}
 
 	public GestureListener getGestureListener() {

@@ -36,7 +36,7 @@ import org.gephi.data.attributes.type.NumberList;
  * @author Martin Škurla
  */
 //@ServiceProvider(service = AttributeUtils.class)
-@SuppressWarnings({"unchecked", "rawtypes"})
+@SuppressWarnings({"rawtypes"})
 public class AttributeUtilsImpl extends AttributeUtils {
 
     @Override

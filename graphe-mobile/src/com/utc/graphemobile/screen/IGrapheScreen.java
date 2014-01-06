@@ -34,6 +34,10 @@ public interface IGrapheScreen {
 
 	public boolean isLabelVisible();
 
+	public void setIsCurve(boolean isCurve);
+
+	public boolean isCurve();
+
 	public void showAbout(boolean b);
 
 	public void clearSelection();

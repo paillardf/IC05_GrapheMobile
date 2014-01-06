@@ -2,7 +2,6 @@ package com.utc.graphemobile.stage;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.utc.graphemobile.element.About;
 import com.utc.graphemobile.element.LeftMenu;
 import com.utc.graphemobile.element.RightMenu;
@@ -29,14 +28,12 @@ public class UIStage extends Stage {
 		about = new About(screen, this.getWidth(), this.getHeight());
 		//this.addActor(about);
 
-
 		resize();
 	}
 
 	public void resize() {
 		leftMenu.onResize();
 		rightMenu.onResize();
-
 	}
 
 	public void refresh() {

@@ -4,7 +4,8 @@ import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
@@ -18,17 +19,16 @@ import com.utc.graphemobile.utils.Utils;
  * RightMenu of the application
  * 
  * Content depends of the current nodes selection
- * 
- * @TODO : Add a previsualisation of the color
  */
 public class RightMenu extends Table {
 
 	IGrapheScreen screen = null;
 	TextField nameTF = null;
 	TextField colorTF = null;
+	ColorVisualisation colorSample = null;
 	TextButton unselect = null;
 	public static final float PADDING = 5;
-	public static final float WIDTH_SCALE = 0.1f;
+	public static final float WIDTH_SCALE = 0.3f;
 	boolean visible = false;
 
 	/**
@@ -79,7 +79,9 @@ public class RightMenu extends Table {
 	private void show() {
 		if (visible == false) {
 			visible = true;
-			setX(getX() - getWidth());
+			// setX(getX() - getWidth());
+			addAction(Actions.moveTo(getX() - getWidth(), 0, 0.7f,
+					Interpolation.fade));
 		}
 		update();
 	}
@@ -90,7 +92,9 @@ public class RightMenu extends Table {
 	private void hide() {
 		if (visible == true) {
 			visible = false;
-			setX(getX() + getWidth());
+			// setX(getX() + getWidth());
+			addAction(Actions.moveTo(getX() + getWidth(), 0, 0.7f,
+					Interpolation.fade));
 		}
 		update();
 	}
@@ -112,29 +116,41 @@ public class RightMenu extends Table {
 			nameTF.setText(selectedNodes.get(0).getNodeModel().getNodeData()
 					.getLabel());
 			add(nameTF).top().left().pad(Utils.toDp(PADDING))
-					.width(getWidth() - 2 * Utils.toDp(PADDING))
-					.height(getWidth() * 0.3f);
+				.width(getWidth() - 2 * Utils.toDp(PADDING))
+				.height(getWidth() * 0.3f);
 			row();
 		} else if (nameTF != null) {
 			removeActor(nameTF);
 		}
 
 		if (visible && selectedNodes.size() >= 1) {
+			Color color = getColorToEdit(selectedNodes);
+			if(colorSample == null){
+				colorSample = new ColorVisualisation(getSkin().getRegion("white-pixel"));
+			}
+			colorSample.setColor(color);
+			add(colorSample).top().left().pad(Utils.toDp(PADDING))
+				.width(getWidth() - 2 * Utils.toDp(PADDING))
+				.height(getWidth() * 0.3f);
+			row();
 			// manage the color
 			if (colorTF == null) {
 				colorTF = new TextField(" ", getSkin());
-				colorTF.setTextFieldListener(new ColorTextFieldListener(screen));
+				colorTF.setTextFieldListener(new ColorTextFieldListener(screen, colorSample));
 			}
-			colorTF.setText(getColorToEdit(selectedNodes));
+			colorTF.setText(color.toString().substring(0, 6));
 			add(colorTF).top().left().pad(Utils.toDp(PADDING))
-					.width(getWidth() - 2 * Utils.toDp(PADDING))
-					.height(getWidth() * 0.3f);
+				.width(getWidth() - 2 * Utils.toDp(PADDING))
+				.height(getWidth() * 0.3f);
 			row();
 
 			// Manage the unselect button
 			add(unselect).pad(Utils.toDp(PADDING));
 			row();
 		} else {
+			if (colorSample != null) {
+				removeActor(colorSample);
+			}
 			if (colorTF != null) {
 				removeActor(colorTF);
 			}
@@ -153,24 +169,26 @@ public class RightMenu extends Table {
 	 *            All selected elements
 	 * @return The corresponding color
 	 */
-	private String getColorToEdit(List<NodeSprite> selectedNodes) {
+	private Color getColorToEdit(List<NodeSprite> selectedNodes) {
 		if (selectedNodes.size() == 0)
-			return "000000";
-		float r, g, b, a;
-		r = g = b = a = 0.0f;
+			return new Color();
+		float r, g, b, alpha;
+		r = g = b = alpha = 0.0f;
 
 		for (NodeSprite nodeSprite : selectedNodes) {
 			r += nodeSprite.getNodeModel().getNodeData().r();
 			g += nodeSprite.getNodeModel().getNodeData().g();
 			b += nodeSprite.getNodeModel().getNodeData().b();
+			alpha += nodeSprite.getNodeModel().getNodeData().alpha();
 		}
 		r /= selectedNodes.size();
 		g /= selectedNodes.size();
 		b /= selectedNodes.size();
+		alpha /= selectedNodes.size();
 
 		Color color = new Color();
-		color.set(r, g, b, a);
-		return color.toString().substring(0, 6);
+		color.set(r, g, b, alpha);
+		return color;
 	}
 
 }

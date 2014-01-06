@@ -2,8 +2,6 @@ package com.utc.graphemobile;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Environment;
 import android.widget.Toast;
 
 import com.utc.graphemobile.specific.SpecificInterface;

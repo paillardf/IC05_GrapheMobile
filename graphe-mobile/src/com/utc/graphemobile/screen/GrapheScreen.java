@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.gephi.graph.api.HierarchicalGraph;
-import org.gephi.graph.api.Node;
 import org.gephi.io.ImportContainerImpl;
 import org.gephi.io.ImporterGEXF;
 
@@ -46,6 +45,7 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 	private HierarchicalGraph graph;
 	private List<NodeSprite> selectedNodes = new ArrayList<NodeSprite>();
 	private boolean isLabelVisible;
+	private boolean isCurve = true;
 
 	public GrapheScreen(GrapheMobile game) throws FileNotFoundException,
 			URISyntaxException {
@@ -246,6 +246,14 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 	@Override
 	public boolean isLabelVisible() {
 		return isLabelVisible;
+	}
+
+	public void setIsCurve(boolean isCurve) {
+		this.isCurve = isCurve;
+	}
+
+	public boolean isCurve() {
+		return isCurve;
 	}
 
 	@Override

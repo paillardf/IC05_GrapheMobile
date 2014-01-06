@@ -2,6 +2,7 @@ package com.utc.graphemobile.input;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
+import com.utc.graphemobile.screen.GrapheScreen.MODE;
 import com.utc.graphemobile.screen.IGrapheScreen;
 
 public class UIEventListener extends ActorGestureListener {
@@ -23,6 +24,8 @@ public class UIEventListener extends ActorGestureListener {
 			screen.getOsInterface().openFileChooser();
 		} else if (this.getTouchDownTarget().getName().equals("center")) {
 			screen.iniCameraPos();
+		} else if (this.getTouchDownTarget().getName().equals("spatial")) {
+			// TODO
 		} else if (this.getTouchDownTarget().getName().equals("label")) {
 			isVisible = !isVisible;
 			screen.showLabel(isVisible);
@@ -32,6 +35,10 @@ public class UIEventListener extends ActorGestureListener {
 			screen.showAbout(false);
 		} else if (this.getTouchDownTarget().getName().equals("unselect")) {
 			screen.clearSelection();
+		} else if (this.getTouchDownTarget().getName().equals("edge")) {
+			screen.setIsCurve(!screen.isCurve());
+		} else if (this.getTouchDownTarget().getName().equals("edit")) {
+			screen.setMode((screen.getMode() == MODE.EDIT) ? MODE.NORMAL : MODE.EDIT);
 		}
 	}
 

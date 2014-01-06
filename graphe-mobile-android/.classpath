@@ -9,6 +9,5 @@
 	<classpathentry exported="true" kind="lib" path="/graphe-mobile/libs/bodyeditor-loader.jar" sourcepath="/graphe-mobile/libs/bodyeditor-loader-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="/graphe-mobile/libs/tween-engine-api.jar" sourcepath="/graphe-mobile/libs/tween-engine-api-sources.jar"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
-	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

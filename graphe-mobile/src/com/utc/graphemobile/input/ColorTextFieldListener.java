@@ -3,14 +3,18 @@ package com.utc.graphemobile.input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldListener;
+import com.utc.graphemobile.element.ColorVisualisation;
 import com.utc.graphemobile.element.NodeSprite;
 import com.utc.graphemobile.screen.IGrapheScreen;
 
 public class ColorTextFieldListener implements TextFieldListener {
+	ColorVisualisation colorSample;
+	
 	IGrapheScreen screen = null;
 
-	public ColorTextFieldListener(IGrapheScreen screen) {
+	public ColorTextFieldListener(IGrapheScreen screen, ColorVisualisation colorSample) {
 		this.screen = screen;
+		this.colorSample = colorSample;
 	}
 
 	@Override
@@ -61,5 +65,6 @@ public class ColorTextFieldListener implements TextFieldListener {
 		}
 		System.out.println("KEY AT : " + textField.getCursorPosition()
 				+ ", val : " + (int) key + ", key : " + key);
+		colorSample.setColor(Color.valueOf((text + "000000").substring(0, 6)));
 	}
 }
