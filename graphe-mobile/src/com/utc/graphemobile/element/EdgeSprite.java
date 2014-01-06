@@ -16,7 +16,6 @@ public class EdgeSprite extends Actor {
 	ShapeRenderer shapeRenderer;
 	private Edge edgeModel;
 	private IGrapheScreen screen;
-	private boolean isCurve = true;
 
 	public EdgeSprite(Edge e, ShapeRenderer shapeRenderer, IGrapheScreen mScreen) {
 		this.edgeModel = e;

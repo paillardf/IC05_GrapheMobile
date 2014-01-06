@@ -6,7 +6,6 @@ public class Utils {
 
 	public static float toPixel(float dp) {
 		float px = dp / (Gdx.graphics.getPpiX() / 160f);
-		
 		return px;
 	}
 
@@ -14,5 +13,4 @@ public class Utils {
 		float dp = px * (Gdx.graphics.getPpiX() / 160f);
 		return dp;
 	}
-
 }
