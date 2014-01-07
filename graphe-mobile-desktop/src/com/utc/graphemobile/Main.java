@@ -17,6 +17,7 @@ public class Main {
 		cfg.width = 900;
 		cfg.height = 500;
 		cfg.addIcon("data/ic_launcher.png", Files.FileType.Internal);
+		cfg.title = "Graphe Mobile";
 		graphe = new GrapheMobile(new SpecificInterface() {
 			
 			@Override

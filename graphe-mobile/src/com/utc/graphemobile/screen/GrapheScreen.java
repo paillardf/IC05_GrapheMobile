@@ -15,6 +15,7 @@ import org.gephi.layout.plugin.force.yifanHu.YifanHuLayout;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL10;
@@ -70,13 +71,23 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 		// multiplexer.addProcessor(new
 		// GestureDetector(uiStage.getGestureListener()));
 		Gdx.input.setInputProcessor(multiplexer);
-
-		loadGraphe(Gdx.files.internal("data/test.gexf"));// TODO to REMOVE
+		String path = Gdx.app.getPreferences(getClass().getName()).getString("filepath", null);
+		System.out.println(path);
+		if(path!=null){
+			loadGraphe(Gdx.files.absolute(path));
+		}
+		
 	}
 
 	public void loadGraphe(FileHandle handle) throws URISyntaxException,
 			FileNotFoundException {
 		clearSelection();
+		if(graph!=null){
+			graph.clear();
+		}
+		Preferences pref = Gdx.app.getPreferences(getClass().getName());
+		pref.putString("filepath", handle.path());
+		pref.flush();
 		ImporterGEXF importer = new ImporterGEXF();
 		try {
 			// FileHandle handle = Gdx.files.internal("data/test.gexf");
