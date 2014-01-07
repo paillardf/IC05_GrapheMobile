@@ -21,7 +21,6 @@ along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
 package org.gephi.graph.dhns.edge;
 
 import org.gephi.data.attributes.api.AttributeRow;
-import org.gephi.data.attributes.api.AttributeType;
 //import org.gephi.data.attributes.api.Estimator;
 //import org.gephi.data.attributes.type.DynamicFloat;
 import org.gephi.data.properties.PropertiesColumn;

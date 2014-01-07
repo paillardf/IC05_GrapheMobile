@@ -39,8 +39,6 @@ exception statement from your version. */
 package org.gephi.utils;
 
 import java.awt.color.ColorSpace;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.ColorModel;
 import java.io.Serializable;
 

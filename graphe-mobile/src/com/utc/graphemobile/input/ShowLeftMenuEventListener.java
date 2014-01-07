@@ -21,11 +21,11 @@ public class ShowLeftMenuEventListener extends ActorGestureListener {
 			int button) {
 		if (isLeftMenuHidden == false) {
 			isLeftMenuHidden = true;
-			leftMenu.addAction(Actions.moveTo(-Utils.toDp(LeftMenu.WIDTH), 0,
+			leftMenu.addAction(Actions.moveTo(-Utils.toDp(LeftMenu.WIDTH), leftMenu.getY(),
 					0.7f, Interpolation.fade));
 		} else {
 			isLeftMenuHidden = false;
-			leftMenu.addAction(Actions.moveTo(0, 0, 0.7f, Interpolation.fade));
+			leftMenu.addAction(Actions.moveTo(0, leftMenu.getY(), 0.7f, Interpolation.fade));
 		}
 	}
 }

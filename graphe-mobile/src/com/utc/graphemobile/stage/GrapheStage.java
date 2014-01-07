@@ -24,7 +24,7 @@ public class GrapheStage extends Stage {
 		this.screen = mScreen;
 
 		gestureListener = new GrapheGestureListener(
-				(OrthographicCamera) getCamera());
+				(OrthographicCamera) getCamera(), screen);
 		regionCircle = mScreen.getSkin().getRegion("circle");
 
 		loadObjects();

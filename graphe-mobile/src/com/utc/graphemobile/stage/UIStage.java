@@ -24,9 +24,9 @@ public class UIStage extends Stage {
 
 		rightMenu = new RightMenu(screen);
 		this.addActor(rightMenu);
-		
+
 		about = new About(screen);
-		//this.addActor(about);
+		// this.addActor(about);
 
 		resize();
 	}
@@ -44,15 +44,15 @@ public class UIStage extends Stage {
 	public Skin getSkin() {
 		return screen.getSkin();
 	}
-	
+
 	public LeftMenu getLeftMenu() {
 		return leftMenu;
 	}
-	
+
 	public RightMenu getRightMenu() {
 		return rightMenu;
 	}
-	
+
 	public About getAbout() {
 		return about;
 	}

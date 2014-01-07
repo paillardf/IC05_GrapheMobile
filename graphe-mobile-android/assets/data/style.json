@@ -14,7 +14,7 @@
         		},
                 big-font: {
                 		file: data/hdfont.fnt,
-                		scale: 30
+                		scale: 1
         		}
         },
         com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {

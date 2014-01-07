@@ -29,6 +29,7 @@ public class RightMenu extends Table {
 	TextButton unselect = null;
 	public static final float PADDING = 5;
 	public static final float WIDTH_SCALE = 0.3f;
+	public static final float FIELD_HEIGHT = 40;
 	boolean visible = false;
 
 	/**
@@ -117,7 +118,7 @@ public class RightMenu extends Table {
 					.getLabel());
 			add(nameTF).top().left().pad(Utils.toDp(PADDING))
 				.width(getWidth() - 2 * Utils.toDp(PADDING))
-				.height(getWidth() * 0.3f);
+				.height(Utils.toDp(FIELD_HEIGHT));
 			row();
 		} else if (nameTF != null) {
 			removeActor(nameTF);
@@ -131,7 +132,7 @@ public class RightMenu extends Table {
 			colorSample.setColor(color);
 			add(colorSample).top().left().pad(Utils.toDp(PADDING))
 				.width(getWidth() - 2 * Utils.toDp(PADDING))
-				.height(getWidth() * 0.3f);
+				.height(Utils.toDp(FIELD_HEIGHT));
 			row();
 			// manage the color
 			if (colorTF == null) {
@@ -141,7 +142,7 @@ public class RightMenu extends Table {
 			colorTF.setText(color.toString().substring(0, 6));
 			add(colorTF).top().left().pad(Utils.toDp(PADDING))
 				.width(getWidth() - 2 * Utils.toDp(PADDING))
-				.height(getWidth() * 0.3f);
+				.height(Utils.toDp(FIELD_HEIGHT));
 			row();
 
 			// Manage the unselect button
@@ -153,6 +154,7 @@ public class RightMenu extends Table {
 			}
 			if (colorTF != null) {
 				removeActor(colorTF);
+				colorTF.getOnscreenKeyboard().show(false);
 			}
 			removeActor(unselect);
 		}

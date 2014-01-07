@@ -1,5 +1,6 @@
 package com.utc.graphemobile.input;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.utc.graphemobile.screen.GrapheScreen.MODE;
@@ -15,30 +16,31 @@ public class UIEventListener extends ActorGestureListener {
 	}
 
 	@Override
-	public void touchDown(InputEvent event, float x, float y, int pointer,
+	public void touchUp(InputEvent event, float x, float y, int pointer,
 			int button) {
-		System.out.println(this.getTouchDownTarget().getName());
-		if (this.getTouchDownTarget().getName() == null)
-			return;
-		if (this.getTouchDownTarget().getName().equals("open")) {
+		String targetName = this.getTouchDownTarget().getName();
+		System.out.println(targetName);
+		if (targetName == null) return;
+		if (targetName.equals("open")) {
 			screen.getOsInterface().openFileChooser();
-		} else if (this.getTouchDownTarget().getName().equals("center")) {
+		} else if (targetName.equals("center")) {
 			screen.iniCameraPos();
-		} else if (this.getTouchDownTarget().getName().equals("spatial")) {
+		} else if (targetName.equals("spatial")) {
 			// TODO
-		} else if (this.getTouchDownTarget().getName().equals("label")) {
+		} else if (targetName.equals("label")) {
 			isVisible = !isVisible;
 			screen.showLabel(isVisible);
-		} else if (this.getTouchDownTarget().getName().equals("about")) {
+		} else if (targetName.equals("about")) {
 			screen.showAbout(true);
-		} else if (this.getTouchDownTarget().getName().equals("aboutClose")) {
+		} else if (targetName.equals("aboutClose")) {
 			screen.showAbout(false);
-		} else if (this.getTouchDownTarget().getName().equals("unselect")) {
+		} else if (targetName.equals("unselect")) {
 			screen.clearSelection();
-		} else if (this.getTouchDownTarget().getName().equals("edge")) {
+		} else if (targetName.equals("edge")) {
 			screen.setIsCurve(!screen.isCurve());
-		} else if (this.getTouchDownTarget().getName().equals("edit")) {
-			screen.setMode((screen.getMode() == MODE.EDIT) ? MODE.NORMAL : MODE.EDIT);
+		} else if (targetName.equals("edit")) {
+			screen.setMode((screen.getMode() == MODE.EDIT) ?
+					MODE.NORMAL	: MODE.EDIT);
 		}
 	}
 

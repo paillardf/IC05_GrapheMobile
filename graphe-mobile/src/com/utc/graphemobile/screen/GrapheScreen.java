@@ -67,10 +67,7 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 		Gdx.input.setInputProcessor(multiplexer);
 
 		loadGraphe(Gdx.files.internal("data/test.gexf"));// TODO to REMOVE
-
 	}
-
-
 
 	public void loadGraphe(FileHandle handle) throws URISyntaxException,
 			FileNotFoundException {
@@ -88,7 +85,7 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 		importer.execute(container);
 		graph = importer.process();
 		grapheStage.loadObjects();
-		
+
 		// new Thread(new Runnable() {
 		// @Override
 		// public void run() {
@@ -248,17 +245,19 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 		return isLabelVisible;
 	}
 
+	@Override
 	public void setIsCurve(boolean isCurve) {
 		this.isCurve = isCurve;
 	}
 
+	@Override
 	public boolean isCurve() {
 		return isCurve;
 	}
 
 	@Override
 	public void showAbout(boolean b) {
-		if(b){
+		if (b) {
 			this.getUIStage().addActor(this.getUIStage().getAbout());
 		} else {
 			this.getUIStage().getAbout().remove();
@@ -273,6 +272,6 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 	@Override
 	public SpecificInterface getOsInterface() {
 		return game.getOsInterface();
-		
+
 	}
 }

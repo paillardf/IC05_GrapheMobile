@@ -43,7 +43,7 @@ public interface IGrapheScreen {
 	public void clearSelection();
 
 	public SpecificInterface getOsInterface();
-	
+
 	public GrapheStage getGrapheStage();
 
 	public UIStage getUIStage();
