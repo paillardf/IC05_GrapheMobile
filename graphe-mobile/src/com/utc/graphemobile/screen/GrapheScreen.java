@@ -72,9 +72,16 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 		// GestureDetector(uiStage.getGestureListener()));
 		Gdx.input.setInputProcessor(multiplexer);
 		String path = Gdx.app.getPreferences(getClass().getName()).getString("filepath", null);
-		System.out.println(path);
+
 		if(path!=null){
-			loadGraphe(Gdx.files.absolute(path));
+			try {
+				loadGraphe(Gdx.files.absolute(path));
+			} catch (Exception e) {
+				Preferences pref = Gdx.app.getPreferences(getClass().getName());
+				pref.putString("filepath", null);
+				pref.flush();
+			}
+			
 		}
 		
 	}
