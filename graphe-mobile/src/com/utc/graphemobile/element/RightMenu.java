@@ -9,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.utc.graphemobile.input.ColorTextFieldListener;
 import com.utc.graphemobile.input.NameTextFieldListener;
 import com.utc.graphemobile.input.UIEventListener;
@@ -29,10 +28,11 @@ public class RightMenu extends Table {
 	ColorVisualisation colorSample = null;
 	TextButton unselect = null;
 	TextButton delete = null;
+	private Table table;
+	boolean visible = false;
 	public static final float PADDING = 5;
 	public static final float WIDTH = 200;
 	public static final float FIELD_HEIGHT = 40;
-	boolean visible = false;
 
 	/**
 	 * Constructor of RightMenu
@@ -59,6 +59,8 @@ public class RightMenu extends Table {
 		delete = new TextButton("delete", "Delete", screen.getSkin()
 				.getRegion("delete"), screen.getSkin());
 		delete.addListener(listener);
+		
+		table = new Table();
 		
 		setBackground(getSkin().getDrawable("gray-pixel"));
 		onResize();
@@ -134,30 +136,35 @@ public class RightMenu extends Table {
 		// manage the color
 		colorTF.setText(color.toString().substring(0, 6));
 
-		reset();
-		left().top();
+		reset(); table.reset();
+		left().top(); table.left().top();
 		// Layout
-		add(nameTF).top().left().pad(Utils.toDp(PADDING))
-			.width(getWidth() - 2 * Utils.toDp(PADDING))
-			.height(Utils.toDp(FIELD_HEIGHT));
-		row();
-		add(colorSample).top().left().pad(Utils.toDp(PADDING))
-			.width(getWidth() - 2 * Utils.toDp(PADDING))
-			.height(Utils.toDp(FIELD_HEIGHT));
-		row();
-		add(colorTF).top().left().pad(Utils.toDp(PADDING))
-			.width(getWidth() - 2 * Utils.toDp(PADDING))
-			.height(Utils.toDp(FIELD_HEIGHT));
-		row();
+		table.add(nameTF).top().left().pad(Utils.toDp(PADDING))
+				.width(getWidth() - 2 * Utils.toDp(PADDING))
+				.height(Utils.toDp(FIELD_HEIGHT));
+		table.row();
+		table.add(colorSample).top().left().pad(Utils.toDp(PADDING))
+				.width(getWidth() - 2 * Utils.toDp(PADDING))
+				.height(Utils.toDp(FIELD_HEIGHT));
+		table.row();
+		table.add(colorTF).top().left().pad(Utils.toDp(PADDING))
+				.width(getWidth() - 2 * Utils.toDp(PADDING))
+				.height(Utils.toDp(FIELD_HEIGHT));
+		table.row();
 	
 		// Manage the unselect button
-		add(unselect).pad(Utils.toDp(PADDING));
-		row();
+		table.add(unselect).pad(Utils.toDp(PADDING));
+		table.row();
 		
 		// Manage the delete button
-		add(delete).pad(Utils.toDp(PADDING));
-		row();
+		table.add(delete).pad(Utils.toDp(PADDING));
+		table.row();
+		
+		add(table);
 	}
+	
+	@Override
+	public boolean isVisible() {return visible;}
 
 	private Skin getSkin() {
 		return screen.getSkin();
@@ -190,6 +197,35 @@ public class RightMenu extends Table {
 		Color color = new Color();
 		color.set(r, g, b, alpha);
 		return color;
+	}
+
+	public boolean pan(float x, float y, float deltaX, float deltaY) {
+		if(this.getHeight() > table.getHeight()) return true;
+		table.setY(table.getY() - deltaY);
+		return false;
+	}
+
+	public boolean containsX(float x) {
+		return this.getX() < x && this.getX() + this.getWidth() > x;
+	}
+
+	public boolean containsY(float y) {
+		return this.getY() < y && this.getY() + this.getHeight() > y;
+	}
+
+	public boolean contains(float x, float y) {
+		return containsX(x) && containsY(y);
+	}
+
+	public boolean fling(float velocityX, float velocityY, int button) {
+		if(this.getHeight() > table.getHeight()) return true;
+		if(velocityY > 0) {
+			table.addAction(Actions.moveTo(table.getX(), this.getHeight() - table.getHeight(), (float)(0.4f + Math.log10(velocityY) / 10),
+					Interpolation.fade));
+		} else if(velocityY != 0) {
+			table.addAction(Actions.moveTo(table.getX(), 0, (float)(0.4f + Math.log10(-velocityY) / 10), Interpolation.fade));
+		}
+		return false;
 	}
 
 }

@@ -11,6 +11,7 @@ public class GrapheGestureListener implements GestureListener {
 	private IGrapheScreen screen;
 	private float iniZoomCamera = 0;
 	private boolean isLastPanLeftMenu = false;
+	private boolean isLastPanRightMenu = false;
 
 	public GrapheGestureListener(OrthographicCamera camera, IGrapheScreen screen) {
 		this.camera = camera;
@@ -40,6 +41,8 @@ public class GrapheGestureListener implements GestureListener {
 	public boolean fling(float velocityX, float velocityY, int button) {
 		if (!ShowLeftMenuEventListener.isLeftMenuHidden && isLastPanLeftMenu) {
 			return screen.getUIStage().getLeftMenu().fling(velocityX, velocityY, button);
+		} else if (screen.getUIStage().getRightMenu().isVisible() && isLastPanRightMenu) {
+			return screen.getUIStage().getRightMenu().fling(velocityX, velocityY, button);
 		} 
 		return false;
 	}
@@ -50,6 +53,10 @@ public class GrapheGestureListener implements GestureListener {
 				&& screen.getUIStage().getLeftMenu().containsX(x)) {
 			isLastPanLeftMenu = true;
 			return screen.getUIStage().getLeftMenu().pan(x, y, deltaX, deltaY);
+		} else if (screen.getUIStage().getRightMenu().isVisible()
+				&& screen.getUIStage().getRightMenu().containsX(x)) {
+			isLastPanRightMenu = true;
+			return screen.getUIStage().getRightMenu().pan(x, y, deltaX, deltaY);
 		} else {
 			isLastPanLeftMenu = false;
 			camera.translate(-deltaX * camera.zoom, deltaY * camera.zoom);
