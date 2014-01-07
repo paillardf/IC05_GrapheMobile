@@ -2,6 +2,7 @@ package com.utc.graphemobile;
 
 import javax.swing.JFileChooser;
 
+import com.badlogic.gdx.Files;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.utc.graphemobile.specific.SpecificInterface;
@@ -15,7 +16,7 @@ public class Main {
 		cfg.useGL20 = false;
 		cfg.width = 900;
 		cfg.height = 500;
-		
+		cfg.addIcon("data/ic_launcher.png", Files.FileType.Internal);
 		graphe = new GrapheMobile(new SpecificInterface() {
 			
 			@Override
