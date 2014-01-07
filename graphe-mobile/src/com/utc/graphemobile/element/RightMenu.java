@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.utc.graphemobile.input.ColorTextFieldListener;
 import com.utc.graphemobile.input.NameTextFieldListener;
 import com.utc.graphemobile.input.UIEventListener;
@@ -28,7 +29,7 @@ public class RightMenu extends Table {
 	ColorVisualisation colorSample = null;
 	TextButton unselect = null;
 	public static final float PADDING = 5;
-	public static final float WIDTH_SCALE = 0.3f;
+	public static final float WIDTH = 200;
 	public static final float FIELD_HEIGHT = 40;
 	boolean visible = false;
 
@@ -54,7 +55,7 @@ public class RightMenu extends Table {
 	 * Manage the resize of the menu
 	 */
 	public void onResize() {
-		setWidth(Utils.toDp(Gdx.graphics.getWidth() * WIDTH_SCALE));
+		setWidth(Utils.toDp(WIDTH));
 		setHeight(Gdx.graphics.getHeight());
 
 		setX(Gdx.graphics.getWidth() + (visible ? -getWidth() : 0));
@@ -114,8 +115,10 @@ public class RightMenu extends Table {
 				nameTF = new TextField(" ", getSkin());
 				nameTF.setTextFieldListener(new NameTextFieldListener(screen));
 			}
+			nameTF.getStyle().font.setScale(Utils.toDp(0.5f));
 			nameTF.setText(selectedNodes.get(0).getNodeModel().getNodeData()
 					.getLabel());
+			
 			add(nameTF).top().left().pad(Utils.toDp(PADDING))
 				.width(getWidth() - 2 * Utils.toDp(PADDING))
 				.height(Utils.toDp(FIELD_HEIGHT));

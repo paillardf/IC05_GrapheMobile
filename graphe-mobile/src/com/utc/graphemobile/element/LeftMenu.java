@@ -12,7 +12,7 @@ import com.utc.graphemobile.screen.IGrapheScreen;
 import com.utc.graphemobile.utils.Utils;
 
 public class LeftMenu extends Table {
-	public static final float WIDTH = 280;
+	public static final float WIDTH = 200;
 	public static final float PADDING = 10;
 	public static final float CLOSE_SIZE = 50;
 	private Image img;

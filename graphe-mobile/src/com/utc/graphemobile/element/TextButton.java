@@ -10,8 +10,8 @@ import com.utc.graphemobile.utils.Utils;
 
 public class TextButton extends Group {
 
-	private final int size = 40;
-	private final int margin = 10;
+	private final int size = 20;
+	private final int margin = 5;
 	private TextureRegion tr;
 	private Label l;
 
@@ -19,7 +19,7 @@ public class TextButton extends Group {
 		this.tr = imageTR;
 		this.setName(name);
 		l = new Label(title, s);
-		l.setFontScale(Utils.toDp(0.7f));
+		l.setFontScale(Utils.toDp(0.5f));
 		l.setHeight(Utils.toDp(size + margin));
 		l.setPosition(Utils.toDp(margin + size), 0);
 		l.setTouchable(Touchable.disabled);
