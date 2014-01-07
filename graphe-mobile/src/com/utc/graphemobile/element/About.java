@@ -48,14 +48,19 @@ public class About extends Table{
 		Label floJ = new Label("Florian JEANNE", screen.getSkin());
 		Label floP = new Label("Florian PAILLARD", screen.getSkin());
 		Label bapP = new Label("Baptiste PIRAULT", screen.getSkin());
-		Label ic05 = new Label("Application développée dans le cadre de l'UV IC05 - A13", screen.getSkin());
+		Label thxTo = new Label("- Remerciements -", screen.getSkin());
+		Label fraG = new Label("Franck GHITALLA", screen.getSkin());
+		Label ic05 = new Label("Application développée dans le cadre de l'UV IC05 - Automne 2013", screen.getSkin());
 		Label utc = new Label("UTC : Université de Technologie de Compiègne", screen.getSkin());
 		
-		floJ.setFontScale(0.6f);
-		floP.setFontScale(0.6f);
-		bapP.setFontScale(0.6f);
-		ic05.setFontScale(0.4f);
-		utc.setFontScale(0.4f);
+		graph.setFontScale(Utils.toDp(0.8f));
+		floJ.setFontScale(Utils.toDp(0.4f));
+		floP.setFontScale(Utils.toDp(0.4f));
+		bapP.setFontScale(Utils.toDp(0.4f));
+		thxTo.setFontScale(Utils.toDp(0.5f));
+		fraG.setFontScale(Utils.toDp(0.3f));
+		ic05.setFontScale(Utils.toDp(0.2f));
+		utc.setFontScale(Utils.toDp(0.2f));
 		
 		table.add(graph);
 		table.row();
@@ -64,6 +69,12 @@ public class About extends Table{
 		table.add(floP);
 		table.row();
 		table.add(bapP);
+		table.row();
+		table.add(empty);
+		table.row();
+		table.add(thxTo);
+		table.row();
+		table.add(fraG);
 		table.row();
 		table.add(empty);
 		table.row();
