@@ -4,10 +4,12 @@ import org.gephi.graph.api.Edge;
 import org.gephi.graph.api.Node;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.utc.graphemobile.screen.IGrapheScreen;
 
@@ -17,6 +19,7 @@ public class EdgeSprite extends Actor {
 	private Edge edgeModel;
 	private IGrapheScreen screen;
 
+	
 	public EdgeSprite(Edge e, ShapeRenderer shapeRenderer, IGrapheScreen mScreen) {
 		this.edgeModel = e;
 		this.screen = mScreen;
@@ -26,15 +29,21 @@ public class EdgeSprite extends Actor {
 	public void draw(SpriteBatch batch, float parentAlpha) {
 		Node source = edgeModel.getSource();
 		setPosition(source.getNodeData().x(), source.getNodeData().y());
+		
+		if((!(Boolean)source.getNodeData().getAttributes().getValue("visible"))&&
+				(!(Boolean)edgeModel.getTarget().getNodeData().getAttributes().getValue("visible"))){
+			return;
+		}
 		setColor(edgeModel.getEdgeData().r(), edgeModel.getEdgeData().g(),
 				edgeModel.getEdgeData().b(), edgeModel.getEdgeData().alpha());
+		
 		drawLine(batch);
 	}
 
 	public void drawLine(SpriteBatch batch) {
 		shapeRenderer.setProjectionMatrix(batch.getProjectionMatrix());
 		Gdx.gl10.glLineWidth(edgeModel.getWeight() * 2);
-
+		
 		shapeRenderer.setColor(getColor()); // last argument is alpha channel
 		Node target = edgeModel.getTarget();
 

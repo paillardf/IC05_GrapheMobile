@@ -5,11 +5,13 @@ import java.util.List;
 import org.gephi.graph.api.Node;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -32,6 +34,7 @@ public class NodeSprite extends Actor {
 
 	public NodeSprite(Node n, TextureRegion regionCircle, IGrapheScreen mScreen) {
 		this.nodeModel = n;
+		nodeModel.getNodeData().getAttributes().setValue("visible", true);
 		this.screen = mScreen;
 		this.textureRegion = regionCircle;
 		this.setOrigin(0, 0);
@@ -101,13 +104,34 @@ public class NodeSprite extends Actor {
 		return nodeModel;
 	}
 
+	private final int MARGING = 30;
 	public void draw(SpriteBatch batch, float parentAlpha) {
 		if (selected && screen.getMode() == MODE.NORMAL) {
 			selected = false;
 			clearActions();
 		}
-
+		
+		
+		OrthographicCamera cam = (OrthographicCamera)screen.getGrapheStage().getCamera();
+		float h = cam.viewportHeight*cam.zoom;
+		float w = cam.viewportWidth*cam.zoom;
+		Vector3 pos = cam.position;
+		float x = pos.x - w/2.0f;
+		float y = pos.y - h/2.0f;
+		float maxx = pos.x+w/2.0f;
+		float maxy= pos.y+h/2.0f;
 		setPosition(nodeModel.getNodeData().x(), nodeModel.getNodeData().y());
+		if(getX()+MARGING<=x||getX()-MARGING>maxx||getY()+MARGING<=y||getY()-MARGING>maxy){
+			
+			nodeModel.getNodeData().getAttributes().setValue("visible", false);
+			return;
+		}else{
+			nodeModel.getNodeData().getAttributes().setValue("visible", true);
+		}
+		
+		
+
+		
 		setColor(nodeModel.getNodeData().r(), nodeModel.getNodeData().g(),
 				nodeModel.getNodeData().b(), nodeModel.getNodeData().alpha());
 

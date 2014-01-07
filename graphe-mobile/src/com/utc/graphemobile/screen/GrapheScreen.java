@@ -78,7 +78,7 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 				loadGraphe(Gdx.files.absolute(path));
 			} catch (Exception e) {
 				Preferences pref = Gdx.app.getPreferences(getClass().getName());
-				pref.putString("filepath", null);
+				pref.clear();
 				pref.flush();
 			}
 			
