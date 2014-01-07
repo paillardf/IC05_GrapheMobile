@@ -1,8 +1,8 @@
 package com.utc.graphemobile.input;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
+import com.utc.graphemobile.element.TextButton;
 import com.utc.graphemobile.screen.GrapheScreen.MODE;
 import com.utc.graphemobile.screen.IGrapheScreen;
 
@@ -26,7 +26,7 @@ public class UIEventListener extends ActorGestureListener {
 		} else if (targetName.equals("center")) {
 			screen.iniCameraPos();
 		} else if (targetName.equals("spatial")) {
-			// TODO
+			screen.spatialization();
 		} else if (targetName.equals("label")) {
 			isVisible = !isVisible;
 			screen.showLabel(isVisible);
@@ -38,9 +38,16 @@ public class UIEventListener extends ActorGestureListener {
 			screen.clearSelection();
 		} else if (targetName.equals("edge")) {
 			screen.setIsCurve(!screen.isCurve());
-		} else if (targetName.equals("edit")) {
-			screen.setMode((screen.getMode() == MODE.EDIT) ?
-					MODE.NORMAL	: MODE.EDIT);
+		} else if (this.getTouchDownTarget().getName().equals("edit")) {
+			if(screen.getMode() == MODE.EDIT){
+				((TextButton)this.getTouchDownTarget()).setText("Normal");
+			}else{
+				((TextButton)this.getTouchDownTarget()).setText("Edit");
+				
+			}
+			screen.getSelectedNodes().clear();
+			screen.updateSelectedNodesList();
+			screen.setMode((screen.getMode() == MODE.EDIT) ? MODE.NORMAL : MODE.EDIT);
 		}
 	}
 

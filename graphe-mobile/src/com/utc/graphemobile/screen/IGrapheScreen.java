@@ -47,4 +47,6 @@ public interface IGrapheScreen {
 	public GrapheStage getGrapheStage();
 
 	public UIStage getUIStage();
+
+	public void spatialization();
 }

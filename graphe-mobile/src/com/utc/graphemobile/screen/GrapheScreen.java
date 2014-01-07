@@ -4,10 +4,14 @@ import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.gephi.graph.api.HierarchicalGraph;
 import org.gephi.io.ImportContainerImpl;
 import org.gephi.io.ImporterGEXF;
+import org.gephi.layout.plugin.AutoLayout;
+import org.gephi.layout.plugin.force.StepDisplacement;
+import org.gephi.layout.plugin.force.yifanHu.YifanHuLayout;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
@@ -40,12 +44,13 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 		NORMAL, EDIT
 	}
 
-	private MODE mode = MODE.EDIT;
+	private MODE mode = MODE.NORMAL;
 
 	private HierarchicalGraph graph;
 	private List<NodeSprite> selectedNodes = new ArrayList<NodeSprite>();
 	private boolean isLabelVisible;
 	private boolean isCurve = true;
+	private Thread spatialization;
 
 	public GrapheScreen(GrapheMobile game) throws FileNotFoundException,
 			URISyntaxException {
@@ -85,29 +90,6 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 		importer.execute(container);
 		graph = importer.process();
 		grapheStage.loadObjects();
-
-		// new Thread(new Runnable() {
-		// @Override
-		// public void run() {
-		// AutoLayout autoLayout = new AutoLayout(10, TimeUnit.MINUTES);
-		// autoLayout.setGraphModel(graph.getGraphModel());
-		// YifanHuLayout firstLayout = new YifanHuLayout(new
-		// StepDisplacement(1f));
-		// ForceAtlasLayout secondLayout = new ForceAtlasLayout();
-		// AutoLayout.DynamicProperty adjustBySizeProperty =
-		// AutoLayout.createDynamicProperty("forceAtlas.adjustSizes.name",
-		// Boolean.TRUE, 0.1f);//True after 10% of layout time
-		// AutoLayout.DynamicProperty repulsionProperty =
-		// AutoLayout.createDynamicProperty("forceAtlas.repulsionStrength.name",
-		// new Double(500.), 0f);//500 for the complete period
-		// autoLayout.addLayout(firstLayout, 0.5f);
-		// autoLayout.addLayout(secondLayout, 0.5f, new
-		// AutoLayout.DynamicProperty[]{adjustBySizeProperty,
-		// repulsionProperty});
-		// autoLayout.execute();
-		// }
-		//
-		// }).start();
 
 	}
 
@@ -273,5 +255,32 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 	public SpecificInterface getOsInterface() {
 		return game.getOsInterface();
 
+	}
+
+	@Override
+	public void spatialization() {
+		if (spatialization != null && spatialization.isAlive()) {
+			return;
+		}
+		spatialization = new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				AutoLayout autoLayout = new AutoLayout(2, TimeUnit.SECONDS);
+				autoLayout.setGraphModel(graph.getGraphModel());
+				YifanHuLayout firstLayout = new YifanHuLayout(
+						new StepDisplacement(1f));
+				// ForceAtlasLayout secondLayout = new ForceAtlasLayout();
+				// secondLayout.resetPropertiesValues();
+				// secondLayout.setAdjustSizes(true);
+				// secondLayout.setOutboundAttractionDistribution(true);
+				// secondLayout.setRepulsionStrength(new Double(500000000));
+				autoLayout.addLayout(firstLayout, 1);
+				// autoLayout.addLayout(secondLayout, 0.5f);
+				autoLayout.execute();
+			}
+
+		});
+		spatialization.start();
 	}
 }
