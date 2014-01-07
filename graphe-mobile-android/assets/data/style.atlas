@@ -100,3 +100,10 @@ seeMore
   orig: 64, 64
   offset: 0, 0
   index: -1
+delete
+  rotate: false
+  xy: 332, 68
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1

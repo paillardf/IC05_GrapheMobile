@@ -23,6 +23,11 @@ public class NameTextFieldListener implements TextFieldListener {
 			if (selectedNodes.size() == 1) {
 				selectedNodes.get(0).getNodeModel().getNodeData()
 						.setLabel(textField.getText());
+			} else if(selectedNodes.size() >= 1) {
+				for(int i = 0; i < selectedNodes.size(); i++) {
+					selectedNodes.get(i).getNodeModel().getNodeData()
+						.setLabel(textField.getText() + "(" + (i + 1) + ")");
+				}
 			}
 		}
 		// Ctrl + a

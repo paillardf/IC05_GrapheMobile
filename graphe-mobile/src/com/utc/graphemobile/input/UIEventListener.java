@@ -36,6 +36,8 @@ public class UIEventListener extends ActorGestureListener {
 			screen.showAbout(false);
 		} else if (targetName.equals("unselect")) {
 			screen.clearSelection();
+		} else if (targetName.equals("delete")) {
+			screen.deleteSelection();
 		} else if (targetName.equals("edge")) {
 			screen.setIsCurve(!screen.isCurve());
 		} else if (this.getTouchDownTarget().getName().equals("edit")) {
@@ -50,5 +52,4 @@ public class UIEventListener extends ActorGestureListener {
 			screen.setMode((screen.getMode() == MODE.EDIT) ? MODE.NORMAL : MODE.EDIT);
 		}
 	}
-
 }

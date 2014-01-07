@@ -28,6 +28,7 @@ public class RightMenu extends Table {
 	TextField colorTF = null;
 	ColorVisualisation colorSample = null;
 	TextButton unselect = null;
+	TextButton delete = null;
 	public static final float PADDING = 5;
 	public static final float WIDTH = 200;
 	public static final float FIELD_HEIGHT = 40;
@@ -43,10 +44,22 @@ public class RightMenu extends Table {
 		this.screen = screen;
 
 		UIEventListener listener = new UIEventListener(screen);
+
+		nameTF = new TextField(" ", getSkin());
+		nameTF.setTextFieldListener(new NameTextFieldListener(screen));
+		
+		colorSample = new ColorVisualisation(getSkin().getRegion("white-pixel"));
+		colorTF = new TextField(" ", getSkin());
+		colorTF.setTextFieldListener(new ColorTextFieldListener(screen, colorSample));
+
 		unselect = new TextButton("unselect", "Unselect", screen.getSkin()
 				.getRegion("close"), screen.getSkin());
 		unselect.addListener(listener);
-
+		
+		delete = new TextButton("delete", "Delete", screen.getSkin()
+				.getRegion("delete"), screen.getSkin());
+		delete.addListener(listener);
+		
 		setBackground(getSkin().getDrawable("gray-pixel"));
 		onResize();
 	}
@@ -63,7 +76,7 @@ public class RightMenu extends Table {
 		update();
 	}
 
-	/***
+	/**
 	 * Allow the menu to be refresh
 	 */
 	public void refresh() {
@@ -76,7 +89,7 @@ public class RightMenu extends Table {
 	}
 
 	/**
-	 * Hide the menu by moving it to the left
+	 * Show the menu by moving it to the left
 	 */
 	private void show() {
 		if (visible == false) {
@@ -105,62 +118,45 @@ public class RightMenu extends Table {
 	 * Update display of the menu
 	 */
 	private void update() {
-		reset();
-		left().top();
 		List<NodeSprite> selectedNodes = screen.getSelectedNodes();
+		if (selectedNodes.size() < 0) return;
 
 		// Manage the name
-		if (visible && selectedNodes.size() == 1) {
-			if (nameTF == null) {
-				nameTF = new TextField(" ", getSkin());
-				nameTF.setTextFieldListener(new NameTextFieldListener(screen));
-			}
-			nameTF.getStyle().font.setScale(Utils.toDp(0.5f));
+		nameTF.getStyle().font.setScale(Utils.toDp(0.5f));
+		if (selectedNodes.size() == 1) {
 			nameTF.setText(selectedNodes.get(0).getNodeModel().getNodeData()
 					.getLabel());
-			
-			add(nameTF).top().left().pad(Utils.toDp(PADDING))
-				.width(getWidth() - 2 * Utils.toDp(PADDING))
-				.height(Utils.toDp(FIELD_HEIGHT));
-			row();
-		} else if (nameTF != null) {
-			removeActor(nameTF);
-		}
-
-		if (visible && selectedNodes.size() >= 1) {
-			Color color = getColorToEdit(selectedNodes);
-			if(colorSample == null){
-				colorSample = new ColorVisualisation(getSkin().getRegion("white-pixel"));
-			}
-			colorSample.setColor(color);
-			add(colorSample).top().left().pad(Utils.toDp(PADDING))
-				.width(getWidth() - 2 * Utils.toDp(PADDING))
-				.height(Utils.toDp(FIELD_HEIGHT));
-			row();
-			// manage the color
-			if (colorTF == null) {
-				colorTF = new TextField(" ", getSkin());
-				colorTF.setTextFieldListener(new ColorTextFieldListener(screen, colorSample));
-			}
-			colorTF.setText(color.toString().substring(0, 6));
-			add(colorTF).top().left().pad(Utils.toDp(PADDING))
-				.width(getWidth() - 2 * Utils.toDp(PADDING))
-				.height(Utils.toDp(FIELD_HEIGHT));
-			row();
-
-			// Manage the unselect button
-			add(unselect).pad(Utils.toDp(PADDING));
-			row();
 		} else {
-			if (colorSample != null) {
-				removeActor(colorSample);
-			}
-			if (colorTF != null) {
-				removeActor(colorTF);
-				colorTF.getOnscreenKeyboard().show(false);
-			}
-			removeActor(unselect);
+			nameTF.setText("name");
 		}
+		Color color = getColorToEdit(selectedNodes);
+		colorSample.setColor(color);
+		// manage the color
+		colorTF.setText(color.toString().substring(0, 6));
+
+		reset();
+		left().top();
+		// Layout
+		add(nameTF).top().left().pad(Utils.toDp(PADDING))
+			.width(getWidth() - 2 * Utils.toDp(PADDING))
+			.height(Utils.toDp(FIELD_HEIGHT));
+		row();
+		add(colorSample).top().left().pad(Utils.toDp(PADDING))
+			.width(getWidth() - 2 * Utils.toDp(PADDING))
+			.height(Utils.toDp(FIELD_HEIGHT));
+		row();
+		add(colorTF).top().left().pad(Utils.toDp(PADDING))
+			.width(getWidth() - 2 * Utils.toDp(PADDING))
+			.height(Utils.toDp(FIELD_HEIGHT));
+		row();
+	
+		// Manage the unselect button
+		add(unselect).pad(Utils.toDp(PADDING));
+		row();
+		
+		// Manage the delete button
+		add(delete).pad(Utils.toDp(PADDING));
+		row();
 	}
 
 	private Skin getSkin() {

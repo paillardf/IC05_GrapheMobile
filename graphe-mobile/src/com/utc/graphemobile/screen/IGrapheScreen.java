@@ -49,4 +49,6 @@ public interface IGrapheScreen {
 	public UIStage getUIStage();
 
 	public void spatialization();
+
+	public void deleteSelection();
 }

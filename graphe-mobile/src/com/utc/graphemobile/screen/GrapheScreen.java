@@ -301,4 +301,9 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 		});
 		spatialization.start();
 	}
+
+	@Override
+	public void deleteSelection() {
+		// TODO : Florian P.
+	}
 }
