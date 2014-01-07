@@ -27,7 +27,7 @@ public class LeftMenu extends Table {
 		this.top().left();
 		table.top().left();
 
-		TextureRegion deleteTR = screen.getSkin().getRegion("see-more");
+		TextureRegion deleteTR = screen.getSkin().getRegion("seeMore");
 		img = new Image(deleteTR);
 
 		img.setHeight(Utils.toDp(CLOSE_SIZE));

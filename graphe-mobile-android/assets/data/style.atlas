@@ -93,7 +93,7 @@ circle
   orig: 200, 200
   offset: 0, 0
   index: -1
-see-more
+seeMore
   rotate: false
   xy: 332, 2
   size: 64, 64
