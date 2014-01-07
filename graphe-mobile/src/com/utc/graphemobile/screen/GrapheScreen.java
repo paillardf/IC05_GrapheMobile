@@ -4,14 +4,10 @@ import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.gephi.graph.api.HierarchicalGraph;
 import org.gephi.io.ImportContainerImpl;
 import org.gephi.io.ImporterGEXF;
-import org.gephi.layout.plugin.AutoLayout;
-import org.gephi.layout.plugin.force.StepDisplacement;
-import org.gephi.layout.plugin.force.yifanHu.YifanHuLayout;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
@@ -27,7 +23,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 import com.utc.graphemobile.GrapheMobile;
 import com.utc.graphemobile.element.NodeSprite;
-import com.utc.graphemobile.element.RightMenuSpatialization;
 import com.utc.graphemobile.specific.SpecificInterface;
 import com.utc.graphemobile.stage.GrapheStage;
 import com.utc.graphemobile.stage.UIStage;
@@ -303,7 +298,6 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 		spatialization.start();*/
 	
 		this.uiStage.getRightMenuSpatialization().show();
-		
 	}
 
 	@Override
