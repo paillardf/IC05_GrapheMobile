@@ -27,6 +27,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 import com.utc.graphemobile.GrapheMobile;
 import com.utc.graphemobile.element.NodeSprite;
+import com.utc.graphemobile.element.RightMenuSpatialization;
 import com.utc.graphemobile.specific.SpecificInterface;
 import com.utc.graphemobile.stage.GrapheStage;
 import com.utc.graphemobile.stage.UIStage;
@@ -51,7 +52,6 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 	private List<NodeSprite> selectedNodes = new ArrayList<NodeSprite>();
 	private boolean isLabelVisible;
 	private boolean isCurve = true;
-	private Thread spatialization;
 
 	public GrapheScreen(GrapheMobile game) throws FileNotFoundException,
 			URISyntaxException {
@@ -277,6 +277,7 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 
 	@Override
 	public void spatialization() {
+		/*
 		if (spatialization != null && spatialization.isAlive()) {
 			return;
 		}
@@ -299,7 +300,10 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 			}
 
 		});
-		spatialization.start();
+		spatialization.start();*/
+	
+		this.uiStage.getRightMenuSpatialization().show();
+		
 	}
 
 	@Override

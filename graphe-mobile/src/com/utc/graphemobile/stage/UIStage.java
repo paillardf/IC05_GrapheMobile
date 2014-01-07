@@ -4,7 +4,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.utc.graphemobile.element.About;
 import com.utc.graphemobile.element.LeftMenu;
-import com.utc.graphemobile.element.RightMenu;
+import com.utc.graphemobile.element.RightMenuEdit;
+import com.utc.graphemobile.element.RightMenuSpatialization;
 import com.utc.graphemobile.screen.IGrapheScreen;
 
 public class UIStage extends Stage {
@@ -12,7 +13,8 @@ public class UIStage extends Stage {
 	public IGrapheScreen screen;
 
 	private LeftMenu leftMenu;
-	private RightMenu rightMenu;
+	private RightMenuEdit rightMenuEdit;
+	private RightMenuSpatialization rightMenuSpa;
 	private About about;
 
 	public UIStage(IGrapheScreen screen) {
@@ -22,8 +24,11 @@ public class UIStage extends Stage {
 		leftMenu = new LeftMenu(screen);
 		this.addActor(leftMenu);
 
-		rightMenu = new RightMenu(screen);
-		this.addActor(rightMenu);
+		rightMenuEdit = new RightMenuEdit(screen);
+		this.addActor(rightMenuEdit);
+		
+		rightMenuSpa = new RightMenuSpatialization(screen);
+		this.addActor(rightMenuSpa);
 
 		about = new About(screen);
 		// this.addActor(about);
@@ -33,12 +38,12 @@ public class UIStage extends Stage {
 
 	public void resize() {
 		leftMenu.onResize();
-		rightMenu.onResize();
+		rightMenuEdit.onResize();
 		about.onResize();
 	}
 
 	public void refresh() {
-		rightMenu.refresh();
+		rightMenuEdit.refresh();
 	}
 
 	public Skin getSkin() {
@@ -49,8 +54,12 @@ public class UIStage extends Stage {
 		return leftMenu;
 	}
 
-	public RightMenu getRightMenu() {
-		return rightMenu;
+	public RightMenuEdit getRightMenuEdit() {
+		return rightMenuEdit;
+	}
+	
+	public RightMenuSpatialization getRightMenuSpatialization() {
+		return rightMenuSpa;
 	}
 
 	public About getAbout() {

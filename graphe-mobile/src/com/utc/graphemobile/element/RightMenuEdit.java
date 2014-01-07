@@ -20,7 +20,7 @@ import com.utc.graphemobile.utils.Utils;
  * 
  * Content depends of the current nodes selection
  */
-public class RightMenu extends Table {
+public class RightMenuEdit extends Table {
 
 	IGrapheScreen screen = null;
 	TextField nameTF = null;
@@ -40,7 +40,7 @@ public class RightMenu extends Table {
 	 * @param screen
 	 *            The GrapeScreen
 	 */
-	public RightMenu(IGrapheScreen screen) {
+	public RightMenuEdit(IGrapheScreen screen) {
 		this.screen = screen;
 
 		UIEventListener listener = new UIEventListener(screen);
