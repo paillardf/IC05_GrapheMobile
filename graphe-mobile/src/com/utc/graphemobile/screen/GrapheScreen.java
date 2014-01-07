@@ -75,7 +75,7 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 
 		if(path!=null){
 			try {
-				loadGraphe(Gdx.files.absolute(path));
+				loadGraphe(Gdx.files.absolute(path)); // TODO : async loading
 			} catch (Exception e) {
 				Preferences pref = Gdx.app.getPreferences(getClass().getName());
 				pref.clear();

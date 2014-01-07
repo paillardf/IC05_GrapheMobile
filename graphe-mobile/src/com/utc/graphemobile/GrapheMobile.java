@@ -6,13 +6,13 @@ import java.net.URISyntaxException;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.utc.graphemobile.screen.GrapheScreen;
+import com.utc.graphemobile.screen.SplashScreen;
 import com.utc.graphemobile.specific.SpecificInterface;
 
 public class GrapheMobile extends Game {
-	private BitmapFont font;
 	private SpecificInterface mInterface;
+	private GrapheScreen screen;
 
 	public GrapheMobile(SpecificInterface mInterface) {
 		this.mInterface = mInterface;
@@ -20,24 +20,19 @@ public class GrapheMobile extends Game {
 
 	@Override
 	public void create() {
-
-		// Use LibGDX's default Arial font.
-		font = new BitmapFont();
-
+		this.setScreen(new SplashScreen(this));
 		try {
-			this.setScreen(new GrapheScreen(this));
+			screen = new GrapheScreen(this);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	@Override
 	public void dispose() {
 		super.dispose();
-		font.dispose();
 	}
 
 	@Override
@@ -68,11 +63,13 @@ public class GrapheMobile extends Game {
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	public SpecificInterface getOsInterface() {
 		return mInterface;
-		
+	}
+
+	public void ShowGrapheScreen() {
+		this.setScreen(screen);
 	}
 }
