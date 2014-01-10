@@ -5,10 +5,12 @@ import java.util.List;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.utc.graphemobile.input.ColorTextFieldListener;
 import com.utc.graphemobile.input.NameTextFieldListener;
 import com.utc.graphemobile.input.UIEventListener;
@@ -40,8 +42,8 @@ public class RightMenuEdit extends Table {
 	 * @param screen
 	 *            The GrapeScreen
 	 */
-	public RightMenuEdit(IGrapheScreen screen) {
-		this.screen = screen;
+	public RightMenuEdit(IGrapheScreen mScreen) {
+		this.screen = mScreen;
 
 		UIEventListener listener = new UIEventListener(screen);
 
@@ -49,6 +51,18 @@ public class RightMenuEdit extends Table {
 		nameTF.setTextFieldListener(new NameTextFieldListener(screen));
 		
 		colorSample = new ColorVisualisation(getSkin().getRegion("white-pixel"));
+		colorSample.addListener(new ClickListener(){
+
+			@Override
+			public void touchUp(InputEvent event, float x, float y,
+					int pointer, int button) {
+				super.touchUp(event, x, y, pointer, button);
+				if(screen.getSelectedNodes().size() == 1) {
+					screen.selecteColor(screen.getSelectedNodes().get(0).getColor());
+				}
+			}
+
+		});
 		colorTF = new TextField(" ", getSkin());
 		colorTF.setTextFieldListener(new ColorTextFieldListener(screen, colorSample));
 

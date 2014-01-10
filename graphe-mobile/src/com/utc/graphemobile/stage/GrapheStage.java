@@ -7,7 +7,9 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.Array;
 import com.utc.graphemobile.element.EdgeSprite;
 import com.utc.graphemobile.element.NodeSprite;
 import com.utc.graphemobile.input.GrapheGestureListener;
@@ -65,5 +67,15 @@ public class GrapheStage extends Stage {
 	@Override
 	public void dispose() {
 		super.dispose();
+	}
+	
+	public Array<NodeSprite> getNodeSprites() {
+		Array<NodeSprite> nodeSprites = new Array<NodeSprite>();
+		for(Actor actor : this.getActors()) {
+			if(actor.getClass() == NodeSprite.class) {
+				nodeSprites.add((NodeSprite)actor);
+			}
+		}
+		return nodeSprites;
 	}
 }

@@ -14,6 +14,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.GL11;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -303,5 +304,17 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 	@Override
 	public void deleteSelection() {
 		// TODO : Florian P.
+	}
+
+	@Override
+	public void selecteColor(Color color) {
+		selectedNodes.clear();
+		for (NodeSprite nodeSprite : grapheStage.getNodeSprites()) {
+			if(nodeSprite.getColor().equals(color)) {
+				selectedNodes.add(nodeSprite);
+			}
+			nodeSprite.setSelected(nodeSprite.getColor().equals(color));
+		}
+		updateSelectedNodesList();
 	}
 }

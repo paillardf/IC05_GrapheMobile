@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.gephi.graph.api.HierarchicalGraph;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.utc.graphemobile.element.NodeSprite;
@@ -51,4 +52,6 @@ public interface IGrapheScreen {
 	public void spatialization();
 
 	public void deleteSelection();
+
+	public void selecteColor(Color color);
 }
