@@ -67,9 +67,10 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 		// multiplexer.addProcessor(new
 		// GestureDetector(uiStage.getGestureListener()));
 		Gdx.input.setInputProcessor(multiplexer);
-		String path = Gdx.app.getPreferences(getClass().getName()).getString("filepath", null);
+		String path = Gdx.app.getPreferences(getClass().getName()).getString(
+				"filepath", null);
 
-		if(path!=null){
+		if (path != null) {
 			try {
 				loadGraphe(Gdx.files.absolute(path)); // TODO : async loading
 			} catch (Exception e) {
@@ -77,15 +78,15 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 				pref.clear();
 				pref.flush();
 			}
-			
+
 		}
-		
+
 	}
 
 	public void loadGraphe(FileHandle handle) throws URISyntaxException,
 			FileNotFoundException {
 		clearSelection();
-		if(graph!=null){
+		if (graph != null) {
 			graph.clear();
 		}
 		Preferences pref = Gdx.app.getPreferences(getClass().getName());
@@ -273,32 +274,11 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 
 	@Override
 	public void spatialization() {
-		/*
-		if (spatialization != null && spatialization.isAlive()) {
-			return;
+		if (this.uiStage.getRightMenuSpatialization().getIsVisible()) {
+			this.uiStage.getRightMenuSpatialization().hide();
+		} else {
+			this.uiStage.getRightMenuSpatialization().show();
 		}
-		spatialization = new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				AutoLayout autoLayout = new AutoLayout(2, TimeUnit.SECONDS);
-				autoLayout.setGraphModel(graph.getGraphModel());
-				YifanHuLayout firstLayout = new YifanHuLayout(
-						new StepDisplacement(1f));
-				// ForceAtlasLayout secondLayout = new ForceAtlasLayout();
-				// secondLayout.resetPropertiesValues();
-				// secondLayout.setAdjustSizes(true);
-				// secondLayout.setOutboundAttractionDistribution(true);
-				// secondLayout.setRepulsionStrength(new Double(500000000));
-				autoLayout.addLayout(firstLayout, 1);
-				// autoLayout.addLayout(secondLayout, 0.5f);
-				autoLayout.execute();
-			}
-
-		});
-		spatialization.start();*/
-	
-		this.uiStage.getRightMenuSpatialization().show();
 	}
 
 	@Override
@@ -310,7 +290,7 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 	public void selecteColor(Color color) {
 		selectedNodes.clear();
 		for (NodeSprite nodeSprite : grapheStage.getNodeSprites()) {
-			if(nodeSprite.getColor().equals(color)) {
+			if (nodeSprite.getColor().equals(color)) {
 				selectedNodes.add(nodeSprite);
 			}
 			nodeSprite.setSelected(nodeSprite.getColor().equals(color));

@@ -58,7 +58,7 @@ public class RightMenuSpatialization extends Table {
 		if (visible == false) {
 			visible = true;
 			// setX(getX() - getWidth());
-			addAction(Actions.moveTo(getX() - getWidth(), 0, 0.7f,
+			addAction(Actions.moveTo(Gdx.graphics.getWidth() - getWidth(), 0, 0.7f,
 					Interpolation.fade));
 		}
 		update();
@@ -71,11 +71,13 @@ public class RightMenuSpatialization extends Table {
 		if (visible == true) {
 			visible = false;
 			// setX(getX() + getWidth());
-			addAction(Actions.moveTo(getX() + getWidth(), 0, 0.7f,
+			addAction(Actions.moveTo(Gdx.graphics.getWidth(), 0, 0.7f,
 					Interpolation.fade));
 		}
 		update();
 	}
+	
+	public boolean getIsVisible() {return visible;}
 
 	/**
 	 * Update display of the menu

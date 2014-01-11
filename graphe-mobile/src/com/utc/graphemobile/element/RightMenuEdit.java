@@ -177,8 +177,7 @@ public class RightMenuEdit extends Table {
 		add(table);
 	}
 	
-	@Override
-	public boolean isVisible() {return visible;}
+	public boolean getIsVisible() {return visible;}
 
 	private Skin getSkin() {
 		return screen.getSkin();
