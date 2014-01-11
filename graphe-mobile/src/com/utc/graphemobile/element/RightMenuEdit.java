@@ -126,6 +126,7 @@ public class RightMenuEdit extends Table {
 			// setX(getX() + getWidth());
 			addAction(Actions.moveTo(getX() + getWidth(), 0, 0.7f,
 					Interpolation.fade));
+			Gdx.input.setOnscreenKeyboardVisible(false);
 		}
 		update();
 	}
