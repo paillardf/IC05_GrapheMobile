@@ -69,7 +69,7 @@ public class StartButtonListener extends ActorGestureListener {
 
 				@Override
 				public void run() {
-					AutoLayout autoLayout = new AutoLayout(2, TimeUnit.SECONDS);
+					AutoLayout autoLayout = new AutoLayout(20, TimeUnit.SECONDS);
 					autoLayout.setGraphModel(screen.getGraph().getGraphModel());
 					autoLayout.addLayout(layout, 1.0f);
 					autoLayout.execute();

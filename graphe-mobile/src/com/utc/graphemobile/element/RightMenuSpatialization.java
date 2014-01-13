@@ -1,6 +1,8 @@
 package com.utc.graphemobile.element;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
@@ -20,6 +22,7 @@ public class RightMenuSpatialization extends Table {
 	private Thread spatialization;
 	private IGrapheScreen screen = null;
 	private TextButton startButton = null;
+	private TextButton stopButton = null;
 	private List list = null;
 
 	public static final float PADDING = 5;
@@ -85,13 +88,6 @@ public class RightMenuSpatialization extends Table {
 	private void update() {
 		reset();
 		left().top();
-		startButton = new TextButton("start", "Start", getSkin().getRegion(
-				"gray-pixel"), getSkin());
-		startButton.addListener(new StartButtonListener(screen));
-		add(startButton).pad(Utils.toDp(PADDING)).left()
-				.width(Utils.toDp(WIDTH - PADDING * 2));
-
-		this.row();
 
 		String[] listEntries = { "Abstract Force", "FruchtermanReingold",
 				"MultiLevel", "Random", "Rotate", "Scale", "Yifan Hu" };
@@ -99,6 +95,23 @@ public class RightMenuSpatialization extends Table {
 		list = new List(listEntries, getSkin());
 		list.getStyle().font.setScale(Utils.toDp(0.5f));
 		add(list).pad(Utils.toDp(PADDING)).left()
+				.width(Utils.toDp(WIDTH - PADDING * 2));
+		
+		this.row();
+		
+		
+		startButton = new TextButton("start", "Start", getSkin().getRegion(
+				"gray-pixel"), getSkin());
+		startButton.addListener(new StartButtonListener(screen));
+		add(startButton).pad(Utils.toDp(PADDING)).padTop(Utils.toDp(3*PADDING)).left()
+				.width(Utils.toDp(WIDTH - PADDING * 2));
+		
+		this.row();
+		
+		stopButton = new TextButton("stop", "Stop", getSkin().getRegion(
+				"gray-pixel"), getSkin());
+		stopButton.addListener(new StartButtonListener(screen));
+		add(stopButton).pad(Utils.toDp(PADDING)).padTop(Utils.toDp(3*PADDING)).left()
 				.width(Utils.toDp(WIDTH - PADDING * 2));
 	}
 
