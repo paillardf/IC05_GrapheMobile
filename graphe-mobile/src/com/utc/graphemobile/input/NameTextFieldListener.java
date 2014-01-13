@@ -34,9 +34,5 @@ public class NameTextFieldListener implements TextFieldListener {
 		else if (key == 1) {
 			textField.selectAll();
 		}
-		else{
-			System.out.println("Other at : " + textField.getCursorPosition()
-					+ ", val : " + (int) key + ", key : " + key);
-		}
 	}
 }

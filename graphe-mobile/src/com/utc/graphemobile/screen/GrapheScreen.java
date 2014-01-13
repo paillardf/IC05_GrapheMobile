@@ -4,20 +4,17 @@ import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.gephi.graph.api.HierarchicalGraph;
 import org.gephi.io.ImportContainerImpl;
 import org.gephi.io.ImporterGEXF;
-import org.gephi.layout.plugin.AutoLayout;
-import org.gephi.layout.plugin.force.StepDisplacement;
-import org.gephi.layout.plugin.force.yifanHu.YifanHuLayout;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.GL11;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -27,7 +24,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 import com.utc.graphemobile.GrapheMobile;
 import com.utc.graphemobile.element.NodeSprite;
-import com.utc.graphemobile.element.RightMenuSpatialization;
 import com.utc.graphemobile.specific.SpecificInterface;
 import com.utc.graphemobile.stage.GrapheStage;
 import com.utc.graphemobile.stage.UIStage;
@@ -71,9 +67,10 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 		// multiplexer.addProcessor(new
 		// GestureDetector(uiStage.getGestureListener()));
 		Gdx.input.setInputProcessor(multiplexer);
-		String path = Gdx.app.getPreferences(getClass().getName()).getString("filepath", null);
+		String path = Gdx.app.getPreferences(getClass().getName()).getString(
+				"filepath", null);
 
-		if(path!=null){
+		if (path != null) {
 			try {
 				loadGraphe(Gdx.files.absolute(path)); // TODO : async loading
 			} catch (Exception e) {
@@ -81,15 +78,15 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 				pref.clear();
 				pref.flush();
 			}
-			
+
 		}
-		
+
 	}
 
 	public void loadGraphe(FileHandle handle) throws URISyntaxException,
 			FileNotFoundException {
 		clearSelection();
-		if(graph!=null){
+		if (graph != null) {
 			graph.clear();
 		}
 		Preferences pref = Gdx.app.getPreferences(getClass().getName());
@@ -277,37 +274,27 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 
 	@Override
 	public void spatialization() {
-		/*
-		if (spatialization != null && spatialization.isAlive()) {
-			return;
+		if (this.uiStage.getRightMenuSpatialization().getIsVisible()) {
+			this.uiStage.getRightMenuSpatialization().hide();
+		} else {
+			this.uiStage.getRightMenuSpatialization().show();
 		}
-		spatialization = new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				AutoLayout autoLayout = new AutoLayout(2, TimeUnit.SECONDS);
-				autoLayout.setGraphModel(graph.getGraphModel());
-				YifanHuLayout firstLayout = new YifanHuLayout(
-						new StepDisplacement(1f));
-				// ForceAtlasLayout secondLayout = new ForceAtlasLayout();
-				// secondLayout.resetPropertiesValues();
-				// secondLayout.setAdjustSizes(true);
-				// secondLayout.setOutboundAttractionDistribution(true);
-				// secondLayout.setRepulsionStrength(new Double(500000000));
-				autoLayout.addLayout(firstLayout, 1);
-				// autoLayout.addLayout(secondLayout, 0.5f);
-				autoLayout.execute();
-			}
-
-		});
-		spatialization.start();*/
-	
-		this.uiStage.getRightMenuSpatialization().show();
-		
 	}
 
 	@Override
 	public void deleteSelection() {
 		// TODO : Florian P.
+	}
+
+	@Override
+	public void selecteColor(Color color) {
+		selectedNodes.clear();
+		for (NodeSprite nodeSprite : grapheStage.getNodeSprites()) {
+			if (nodeSprite.getColor().equals(color)) {
+				selectedNodes.add(nodeSprite);
+			}
+			nodeSprite.setSelected(nodeSprite.getColor().equals(color));
+		}
+		updateSelectedNodesList();
 	}
 }

@@ -30,10 +30,7 @@ public class ColorTextFieldListener implements TextFieldListener {
 			}
 			Color color = Color.valueOf(text);
 			for (NodeSprite nodeSprite : screen.getSelectedNodes()) {
-				nodeSprite.getNodeModel().getNodeData().setR(color.r);
-				nodeSprite.getNodeModel().getNodeData().setG(color.g);
-				nodeSprite.getNodeModel().getNodeData().setB(color.b);
-				nodeSprite.getNodeModel().getNodeData().setAlpha(color.a);
+				nodeSprite.setColor(color);
 			}
 		}
 		// Ctrl + a
@@ -41,10 +38,7 @@ public class ColorTextFieldListener implements TextFieldListener {
 			textField.selectAll();
 		}
 		// Return
-		else if (key == 8) {
-			System.out.println("Return at : " + textField.getCursorPosition());
-			// TODO : Try on smartphones ...
-		}
+		else if (key == 8) {}
 		// Casual letter
 		else if ((key >= 97 && key <= 102) || (key >= 65 && key <= 70)
 				|| (key >= 48 && key <= 57)) {
@@ -56,15 +50,11 @@ public class ColorTextFieldListener implements TextFieldListener {
 		}
 		// Other letter
 		else if (key != 0) {
-			System.out.println("Other at : " + textField.getCursorPosition()
-					+ ", val : " + (int) key + ", key : " + key);
 			text = text.replace(String.valueOf(key), "");
 			textField.setText(text);
 			if (textField.getCursorPosition() != cursorPosition)
 				textField.setCursorPosition(cursorPosition - 1);
 		}
-		System.out.println("KEY AT : " + textField.getCursorPosition()
-				+ ", val : " + (int) key + ", key : " + key);
 		colorSample.setColor(Color.valueOf((text + "000000").substring(0, 6)));
 	}
 }

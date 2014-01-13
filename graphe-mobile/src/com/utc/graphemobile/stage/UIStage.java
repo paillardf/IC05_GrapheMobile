@@ -39,6 +39,7 @@ public class UIStage extends Stage {
 	public void resize() {
 		leftMenu.onResize();
 		rightMenuEdit.onResize();
+		rightMenuSpa.onResize();
 		about.onResize();
 	}
 

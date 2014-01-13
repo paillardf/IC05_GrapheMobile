@@ -105,35 +105,31 @@ public class NodeSprite extends Actor {
 	}
 
 	private final int MARGING = 30;
+
 	public void draw(SpriteBatch batch, float parentAlpha) {
 		if (selected && screen.getMode() == MODE.NORMAL) {
 			selected = false;
 			clearActions();
 		}
-		
-		
-		OrthographicCamera cam = (OrthographicCamera)screen.getGrapheStage().getCamera();
-		float h = cam.viewportHeight*cam.zoom;
-		float w = cam.viewportWidth*cam.zoom;
+
+		OrthographicCamera cam = (OrthographicCamera) screen.getGrapheStage()
+				.getCamera();
+		float h = cam.viewportHeight * cam.zoom;
+		float w = cam.viewportWidth * cam.zoom;
 		Vector3 pos = cam.position;
-		float x = pos.x - w/2.0f;
-		float y = pos.y - h/2.0f;
-		float maxx = pos.x+w/2.0f;
-		float maxy= pos.y+h/2.0f;
+		float x = pos.x - w / 2.0f;
+		float y = pos.y - h / 2.0f;
+		float maxx = pos.x + w / 2.0f;
+		float maxy = pos.y + h / 2.0f;
 		setPosition(nodeModel.getNodeData().x(), nodeModel.getNodeData().y());
-		if(getX()+MARGING<=x||getX()-MARGING>maxx||getY()+MARGING<=y||getY()-MARGING>maxy){
-			
+		if (getX() + MARGING <= x || getX() - MARGING > maxx
+				|| getY() + MARGING <= y || getY() - MARGING > maxy) {
+
 			nodeModel.getNodeData().getAttributes().setValue("visible", false);
 			return;
-		}else{
+		} else {
 			nodeModel.getNodeData().getAttributes().setValue("visible", true);
 		}
-		
-		
-
-		
-		setColor(nodeModel.getNodeData().r(), nodeModel.getNodeData().g(),
-				nodeModel.getNodeData().b(), nodeModel.getNodeData().alpha());
 
 		drawCircle(batch);
 		if (screen.isLabelVisible()) {
@@ -190,5 +186,20 @@ public class NodeSprite extends Actor {
 
 	public float getRadius() {
 		return nodeModel.getNodeData().getRadius();
+	}
+
+	@Override
+	public Color getColor() {
+		return new Color(this.getNodeModel().getNodeData().r(), this
+				.getNodeModel().getNodeData().g(), this.getNodeModel()
+				.getNodeData().b(), this.getNodeModel().getNodeData().alpha());
+	}
+
+	@Override
+	public void setColor(Color color) {
+		this.getNodeModel().getNodeData().setR(color.r);
+		this.getNodeModel().getNodeData().setG(color.g);
+		this.getNodeModel().getNodeData().setB(color.b);
+		this.getNodeModel().getNodeData().setAlpha(color.a);
 	}
 }
