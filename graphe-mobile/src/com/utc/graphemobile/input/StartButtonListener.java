@@ -3,27 +3,19 @@ package com.utc.graphemobile.input;
 import java.util.concurrent.TimeUnit;
 
 import org.gephi.layout.plugin.AutoLayout;
-import org.gephi.layout.plugin.force.ForceVector;
 import org.gephi.layout.plugin.force.StepDisplacement;
-import org.gephi.layout.plugin.force.quadtree.BarnesHut;
 import org.gephi.layout.plugin.force.yifanHu.YifanHuLayout;
-import org.gephi.layout.plugin.force.yifanHu.YifanHuProportional;
 import org.gephi.layout.plugin.forceAtlas.ForceAtlasLayout;
 import org.gephi.layout.plugin.fruchterman.FruchtermanReingold;
-import org.gephi.layout.plugin.labelAdjust.LabelAdjust;
 import org.gephi.layout.plugin.multilevel.MaximalMatchingCoarsening;
 import org.gephi.layout.plugin.multilevel.MultiLevelLayout;
-import org.gephi.layout.plugin.random.Random;
 import org.gephi.layout.plugin.random.RandomLayout;
 import org.gephi.layout.plugin.rotate.RotateLayout;
-import org.gephi.layout.plugin.scale.ScaleLayout;
 import org.gephi.layout.spi.Layout;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
-import com.utc.graphemobile.element.TextButton;
-import com.utc.graphemobile.screen.GrapheScreen.MODE;
 import com.utc.graphemobile.screen.IGrapheScreen;
 
 public class StartButtonListener extends ActorGestureListener {
@@ -78,7 +70,13 @@ public class StartButtonListener extends ActorGestureListener {
 			});
 			screen.getUIStage().getRightMenuSpatialization().setSpatialization(spatialization);
 			getSpatialization().start();
-		} 
+		} else if (targetName.equals("stop")) {
+			if(getSpatialization() == null){
+				return;
+			}
+			getSpatialization().stop();
+			screen.getUIStage().getRightMenuSpatialization().setSpatialization(null);
+		}
 	}
 	
 	private Thread getSpatialization() {

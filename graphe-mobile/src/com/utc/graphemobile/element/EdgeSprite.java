@@ -14,7 +14,7 @@ import com.utc.graphemobile.screen.IGrapheScreen;
 public class EdgeSprite extends Actor {
 
 	ShapeRenderer shapeRenderer;
-	private Edge edgeModel;
+	public Edge edgeModel;
 	private IGrapheScreen screen;
 
 	

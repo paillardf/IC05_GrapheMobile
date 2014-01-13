@@ -5,7 +5,9 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.gephi.graph.api.Edge;
 import org.gephi.graph.api.HierarchicalGraph;
+import org.gephi.graph.api.Node;
 import org.gephi.io.ImportContainerImpl;
 import org.gephi.io.ImporterGEXF;
 
@@ -20,9 +22,11 @@ import com.badlogic.gdx.graphics.GL11;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.input.GestureDetector;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 import com.utc.graphemobile.GrapheMobile;
+import com.utc.graphemobile.element.EdgeSprite;
 import com.utc.graphemobile.element.NodeSprite;
 import com.utc.graphemobile.specific.SpecificInterface;
 import com.utc.graphemobile.stage.GrapheStage;
@@ -67,17 +71,26 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 		// multiplexer.addProcessor(new
 		// GestureDetector(uiStage.getGestureListener()));
 		Gdx.input.setInputProcessor(multiplexer);
-		String path = Gdx.app.getPreferences(getClass().getName()).getString(
+		final String path = Gdx.app.getPreferences(getClass().getName()).getString(
 				"filepath", null);
 
 		if (path != null) {
-			try {
-				loadGraphe(Gdx.files.absolute(path)); // TODO : async loading
-			} catch (Exception e) {
-				Preferences pref = Gdx.app.getPreferences(getClass().getName());
-				pref.clear();
-				pref.flush();
-			}
+			new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					try {
+						
+						loadGraphe(Gdx.files.absolute(path));
+					} catch (Exception e) {
+						Preferences pref = Gdx.app.getPreferences(getClass().getName());
+						pref.clear();
+						pref.flush();
+					}
+					
+				}
+			}).run();
+			
 
 		}
 
@@ -283,7 +296,28 @@ public class GrapheScreen implements Screen, IGrapheScreen {
 
 	@Override
 	public void deleteSelection() {
-		// TODO : Florian P.
+		for (NodeSprite nodeSprite : selectedNodes) {
+			Node n = nodeSprite.getNodeModel();
+
+			for (Edge e : graph.getEdges(n)) {
+				for (Actor a : grapheStage.getActors()) {
+					if (a instanceof EdgeSprite) {
+						EdgeSprite eSprite = (EdgeSprite) a;
+						if (eSprite.edgeModel.equals(e)) {
+							grapheStage.getActors().removeValue(eSprite, true);
+							break;
+						}
+					}
+				}
+				graph.removeEdge(e);
+			}
+
+			grapheStage.getActors().removeValue(nodeSprite, true);
+			graph.removeNode(n);
+		}
+
+		clearSelection();
+
 	}
 
 	@Override
