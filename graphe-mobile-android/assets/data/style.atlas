@@ -107,3 +107,17 @@ delete
   orig: 64, 64
   offset: 0, 0
   index: -1
+play
+  rotate: false
+  xy: 400, 2
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+stop
+  rotate: false
+  xy: 400, 68
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
