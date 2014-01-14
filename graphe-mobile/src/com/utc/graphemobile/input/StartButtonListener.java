@@ -22,7 +22,6 @@ public class StartButtonListener extends ActorGestureListener {
 
 	private IGrapheScreen screen;
 	private Layout layout;
-	private boolean isVisible = false;
 
 	public StartButtonListener(IGrapheScreen mScreen) {
 		this.screen = mScreen;
@@ -33,7 +32,10 @@ public class StartButtonListener extends ActorGestureListener {
 			int button) {
 		String targetName = this.getTouchDownTarget().getName();
 		System.out.println(targetName);
-		if (targetName == null) return;
+		if (targetName == null || screen.getGraph() == null) {
+			System.out.println("NULL");
+			return;
+		}
 		if (targetName.equals("start")) {
 			if (getSpatialization() != null && getSpatialization().isAlive()) {
 				return;
@@ -61,7 +63,7 @@ public class StartButtonListener extends ActorGestureListener {
 
 				@Override
 				public void run() {
-					AutoLayout autoLayout = new AutoLayout(20, TimeUnit.SECONDS);
+					AutoLayout autoLayout = new AutoLayout(60, TimeUnit.SECONDS);
 					autoLayout.setGraphModel(screen.getGraph().getGraphModel());
 					autoLayout.addLayout(layout, 1.0f);
 					autoLayout.execute();

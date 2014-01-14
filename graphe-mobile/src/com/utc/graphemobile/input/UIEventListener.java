@@ -34,6 +34,8 @@ public class UIEventListener extends ActorGestureListener {
 			screen.showAbout(true);
 		} else if (targetName.equals("aboutClose")) {
 			screen.showAbout(false);
+		} else if (targetName.equals("closeRS")) {
+			screen.getUIStage().getRightMenuSpatialization().hide();
 		} else if (targetName.equals("unselect")) {
 			screen.clearSelection();
 		} else if (targetName.equals("delete")) {
