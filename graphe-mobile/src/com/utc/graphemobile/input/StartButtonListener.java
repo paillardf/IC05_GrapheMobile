@@ -32,13 +32,17 @@ public class StartButtonListener extends ActorGestureListener {
 			int button) {
 		String targetName = this.getTouchDownTarget().getName();
 		System.out.println(targetName);
-
+		
+		
 		if (targetName == null || screen.getGraph() == null) {
 			System.out.println("NULL");
 			return;
 		}
-
-		if (targetName.equals("start")) {
+		System.out.println("closeRS: "+targetName);
+		if(targetName.equals("closeRS")){
+			System.out.println("ok");
+			screen.getUIStage().getRightMenuSpatialization().hide();
+		}else if (targetName.equals("start")) {
 			if (getSpatialization() != null && getSpatialization().isAlive()) {
 				return;
 			}

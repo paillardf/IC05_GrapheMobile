@@ -1,8 +1,6 @@
 package com.utc.graphemobile.element;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
@@ -123,10 +121,9 @@ public class RightMenuSpatialization extends Table {
 		
 		this.row();
 		
-		UIEventListener listener = new UIEventListener(screen);
 		closeButton = new TextButton("closeRS", "Close", getSkin().getRegion(
 				"gray-pixel"), getSkin());
-		closeButton.addListener(listener);
+		closeButton.addListener(new StartButtonListener(screen));
 		add(closeButton).pad(Utils.toDp(PADDING)).padTop(Utils.toDp(3*PADDING)).left()
 		.width(Utils.toDp(WIDTH - PADDING * 2));
 	}
