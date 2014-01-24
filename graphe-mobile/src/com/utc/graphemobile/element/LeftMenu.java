@@ -51,7 +51,7 @@ public class LeftMenu extends Table {
 				.width(Utils.toDp(WIDTH - PADDING * 2));
 		table.row();
 
-		bt = new TextButton("spatial", "Spatialisation", screen.getSkin()
+		bt = new TextButton("spatial", "Spatialization", screen.getSkin()
 				.getRegion("spatial"), screen.getSkin());
 		bt.addListener(listener);
 		table.add(bt).pad(Utils.toDp(PADDING)).left()
